@@ -1,5 +1,11 @@
 # Bandra Street — Complete React + TypeScript + Tailwind CSS Project
 
+## Live Site
+
+[Open Bandra Street](https://prernaingale501-bit.github.io/bandrastreet/)
+
+The site deploys to GitHub Pages from the `main` branch.
+
 ## Local Setup
 ```bash
 npm install
