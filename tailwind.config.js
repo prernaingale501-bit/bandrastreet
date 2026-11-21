@@ -5,12 +5,16 @@ export default {
     extend: {
       colors: {
         brand: {
-          bg: '#FFFFFF',
-          surface: '#F8F6F2',
-          ink: '#171717',
-          muted: '#777777',
-          accent: '#B89B72',
-          border: '#EAEAEA',
+          primary: '#2F4238',
+          'primary-hover': '#3E584B',
+          accent: '#A77D5A',
+          bg: '#F4F1EA',
+          surface: '#FFFCF7',
+          secondary: '#E7DED2',
+          ink: '#282720',
+          muted: '#706B62',
+          border: '#E3DACE',
+          white: '#FFFFFF',
         },
       },
     },

@@ -1096,7 +1096,7 @@ export default function App() {
     <div className="space-y-7">
       {/* Category */}
       <div>
-        <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-[#777777] mb-3">
+        <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-brand-muted mb-3">
           Category
         </p>
         <div className="space-y-2">
@@ -1106,8 +1106,8 @@ export default function App() {
               onClick={() => setFilterCategory(c)}
               className={`block w-full text-left font-sans-ed text-[11px] uppercase tracking-[0.12em] py-1 transition-colors ${
                 filterCategory === c
-                  ? 'text-[#B89B72] font-semibold'
-                  : 'text-[#171717] hover:text-[#777777]'
+                  ? 'text-brand-primary font-semibold'
+                  : 'text-brand-ink hover:text-brand-muted'
               }`}
             >
               {c}
@@ -1118,7 +1118,7 @@ export default function App() {
 
       {/* Brand */}
       <div>
-        <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-[#777777] mb-3">
+        <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-brand-muted mb-3">
           Atelier / Brand
         </p>
         <div className="space-y-2">
@@ -1128,8 +1128,8 @@ export default function App() {
               onClick={() => setFilterBrand(filterBrand === b.name ? null : b.name)}
               className={`block w-full text-left font-sans-ed text-[11px] uppercase tracking-[0.1em] py-1 transition-colors ${
                 filterBrand === b.name
-                  ? 'text-[#B89B72] font-semibold'
-                  : 'text-[#171717] hover:text-[#777777]'
+                  ? 'text-brand-primary font-semibold'
+                  : 'text-brand-ink hover:text-brand-muted'
               }`}
             >
               {b.name}
@@ -1140,7 +1140,7 @@ export default function App() {
 
       {/* Size Pills */}
       <div>
-        <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-[#777777] mb-3">
+        <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-brand-muted mb-3">
           Size
         </p>
         <div className="flex flex-wrap gap-1.5">
@@ -1150,8 +1150,8 @@ export default function App() {
               onClick={() => setFilterSize(filterSize === sz ? null : sz)}
               className={`px-3 py-1.5 font-sans-ed text-[10px] uppercase tracking-[0.1em] border transition-colors ${
                 filterSize === sz
-                  ? 'bg-[#171717] text-[#FFFFFF] border-[#171717]'
-                  : 'border-[#EAEAEA] text-[#171717] hover:border-[#171717]'
+                  ? 'bg-brand-primary text-brand-white border-brand-primary'
+                  : 'border-brand-border text-brand-ink hover:border-brand-primary-hover'
               }`}
             >
               {sz}
@@ -1162,7 +1162,7 @@ export default function App() {
 
       {/* Color Swatches */}
       <div>
-        <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-[#777777] mb-3">
+        <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-brand-muted mb-3">
           Color {filterColor ? `— ${filterColor}` : ''}
         </p>
         <div className="flex flex-wrap gap-2.5">
@@ -1173,8 +1173,8 @@ export default function App() {
               title={c.name}
               className={`w-6 h-6 border transition-transform ${
                 filterColor === c.name
-                  ? 'border-[#B89B72] ring-1 ring-[#B89B72] ring-offset-2 ring-offset-[#FFFFFF]'
-                  : 'border-[#EAEAEA]'
+                  ? 'border-brand-accent ring-1 ring-brand-accent ring-offset-2 ring-offset-brand-surface'
+                  : 'border-brand-border'
               }`}
               style={{ backgroundColor: c.hex }}
             />
@@ -1184,9 +1184,9 @@ export default function App() {
 
       {/* Price Slider */}
       <div>
-        <div className="flex justify-between font-sans-ed text-[11px] uppercase tracking-[0.12em] text-[#777777] mb-3">
+        <div className="flex justify-between font-sans-ed text-[11px] uppercase tracking-[0.12em] text-brand-muted mb-3">
           <span>Max Price</span>
-          <span className="text-[#171717]">{formatINR(maxPrice)}</span>
+          <span className="text-brand-ink">{formatINR(maxPrice)}</span>
         </div>
         <input
           type="range"
@@ -1195,13 +1195,13 @@ export default function App() {
           step={2500}
           value={maxPrice}
           onChange={(e) => setMaxPrice(Number(e.target.value))}
-          className="w-full accent-[#171717] cursor-pointer"
+          className="w-full accent-brand-primary cursor-pointer"
         />
       </div>
 
       <button
         onClick={resetAllFilters}
-        className="w-full py-2.5 border border-[#171717] font-sans-ed text-[11px] uppercase tracking-[0.12em] hover:bg-[#171717] hover:text-[#FFFFFF] transition-colors"
+        className="w-full py-2.5 border border-brand-primary font-sans-ed text-[11px] uppercase tracking-[0.12em] hover:bg-brand-primary-hover hover:text-brand-ink transition-colors"
       >
         Reset All Filters
       </button>
@@ -1213,7 +1213,7 @@ export default function App() {
   // ============================================================================
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] text-[#171717] selection:bg-[#171717] selection:text-[#FFFFFF] flex flex-col pb-16 md:pb-0">
+    <div className="min-h-screen bg-brand-bg text-brand-ink selection:bg-brand-primary selection:text-brand-white flex flex-col pb-16 md:pb-0">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
         .font-serif-ed { font-family: 'Cormorant Garamond', Georgia, serif; }
@@ -1237,10 +1237,10 @@ export default function App() {
       {/* ==================================================================== */}
       {/* 1. SLIM ANNOUNCEMENT BAR                                             */}
       {/* ==================================================================== */}
-      <div className="bg-[#171717] text-[#FFFFFF] py-2 px-4 text-center">
+      <div className="bg-brand-primary text-brand-white py-2 px-4 text-center">
         <p className="font-sans-ed text-[10px] sm:text-[11px] uppercase tracking-[0.16em]">
           Complimentary Express Shipping Over ₹25,000 · Use Code{' '}
-          <span className="text-[#B89B72] font-semibold">WELCOME15</span> for 15% Off
+          <span className="text-brand-secondary font-semibold">WELCOME15</span> for 15% Off
         </p>
       </div>
 
@@ -1248,7 +1248,7 @@ export default function App() {
       {/* 2. PREMIUM STICKY HEADER & MEGA-MENU                                 */}
       {/* ==================================================================== */}
       <header
-        className="sticky top-0 z-40 bg-[#FFFFFF]/92 backdrop-blur-md border-b border-[#EAEAEA]"
+        className="sticky top-0 z-40 bg-brand-primary backdrop-blur-md border-b border-brand-primary-hover"
         onMouseLeave={() => setMegaMenuCat(null)}
       >
         <div className="max-w-[1600px] mx-auto px-4 sm:px-8 h-16 flex items-center justify-between">
@@ -1261,8 +1261,8 @@ export default function App() {
                 onClick={() => navigateToShop(cat)}
                 className={`py-5 border-b-2 transition-colors ${
                   view === 'shop' && filterCategory === cat
-                    ? 'border-[#B89B72] text-[#171717]'
-                    : 'border-transparent text-[#171717] hover:text-[#777777]'
+                    ? 'border-brand-accent text-brand-white'
+                    : 'border-transparent text-brand-white hover:text-brand-secondary'
                 }`}
               >
                 {cat}
@@ -1276,8 +1276,8 @@ export default function App() {
               }}
               className={`py-5 border-b-2 transition-colors ${
                 view === 'lookbook'
-                  ? 'border-[#B89B72] text-[#171717]'
-                  : 'border-transparent text-[#171717] hover:text-[#777777]'
+                  ? 'border-brand-accent text-brand-white'
+                  : 'border-transparent text-brand-white hover:text-brand-secondary'
               }`}
             >
               Lookbook
@@ -1286,7 +1286,7 @@ export default function App() {
 
           {/* Mobile Menu Trigger */}
           <button
-            className="lg:hidden p-2 -ml-2 text-[#171717]"
+            className="lg:hidden p-2 -ml-2 text-brand-white"
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Open menu"
           >
@@ -1296,7 +1296,7 @@ export default function App() {
           {/* Center: Brand Wordmark */}
           <button
             onClick={navigateHome}
-            className="font-serif-ed text-2xl sm:text-[27px] tracking-[0.16em] uppercase font-normal text-[#171717] whitespace-nowrap"
+            className="font-serif-ed text-2xl sm:text-[27px] tracking-[0.16em] uppercase font-normal text-brand-white whitespace-nowrap"
           >
             BANDRA STREET
           </button>
@@ -1305,7 +1305,7 @@ export default function App() {
           <div className="flex items-center gap-4 sm:gap-6">
             <button
               onClick={() => setSearchOpen((v) => !v)}
-              className="flex items-center gap-1.5 text-[#171717] hover:text-[#B89B72] transition-colors"
+              className="flex items-center gap-1.5 text-brand-white hover:text-brand-secondary transition-colors"
               aria-label="Search"
             >
               <Search className="w-[18px] h-[18px] stroke-[1.5]" />
@@ -1316,7 +1316,7 @@ export default function App() {
 
             <button
               onClick={() => setAccountOpen(true)}
-              className="hidden sm:block text-[#171717] hover:text-[#B89B72] transition-colors"
+              className="hidden sm:block text-brand-white hover:text-brand-secondary transition-colors"
               aria-label="Account"
             >
               <User className="w-[18px] h-[18px] stroke-[1.5]" />
@@ -1324,12 +1324,12 @@ export default function App() {
 
             <button
               onClick={() => setWishlistOpen(true)}
-              className="relative text-[#171717] hover:text-[#B89B72] transition-colors"
+              className="relative text-brand-white hover:text-brand-secondary transition-colors"
               aria-label="Wishlist"
             >
               <Heart className="w-[18px] h-[18px] stroke-[1.5]" />
               {wishlist.length > 0 && (
-                <span className="absolute -top-1.5 -right-2 min-w-[16px] h-[16px] px-1 bg-[#B89B72] text-[#FFFFFF] font-sans-ed text-[9px] flex items-center justify-center">
+                <span className="absolute -top-1.5 -right-2 min-w-[16px] h-[16px] px-1 bg-brand-primary text-brand-white font-sans-ed text-[9px] flex items-center justify-center">
                   {wishlist.length}
                 </span>
               )}
@@ -1337,7 +1337,7 @@ export default function App() {
 
             <button
               onClick={() => setBagOpen(true)}
-              className="relative flex items-center gap-1.5 text-[#171717] hover:text-[#B89B72] transition-colors"
+              className="relative flex items-center gap-1.5 text-brand-white hover:text-brand-secondary transition-colors"
               aria-label="Shopping Bag"
             >
               <ShoppingBag className="w-[18px] h-[18px] stroke-[1.5]" />
@@ -1350,17 +1350,17 @@ export default function App() {
 
         {/* Hover Mega-Menu */}
         {megaMenuCat && (
-          <div className="hidden lg:block absolute left-0 right-0 top-16 bg-[#FFFFFF] border-b border-[#EAEAEA] shadow-sm">
+          <div className="hidden lg:block absolute left-0 right-0 top-16 bg-brand-surface border-b border-brand-border shadow-sm">
             <div className="max-w-[1600px] mx-auto px-8 py-8 grid grid-cols-12 gap-8">
               <div className="col-span-3 space-y-4">
-                <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-[#777777]">
+                <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-brand-muted">
                   {megaMenuCat} — Featured
                 </p>
                 <ul className="space-y-2.5 font-serif-ed text-xl">
                   <li>
                     <button
                       onClick={() => navigateToShop(megaMenuCat)}
-                      className="hover:text-[#B89B72] transition-colors"
+                      className="hover:text-brand-primary transition-colors"
                     >
                       Autumn / Winter ’26
                     </button>
@@ -1368,7 +1368,7 @@ export default function App() {
                   <li>
                     <button
                       onClick={() => navigateToShop(megaMenuCat)}
-                      className="hover:text-[#B89B72] transition-colors"
+                      className="hover:text-brand-primary transition-colors"
                     >
                       Atelier Cashmere &amp; Wool
                     </button>
@@ -1376,7 +1376,7 @@ export default function App() {
                   <li>
                     <button
                       onClick={() => navigateToShop(megaMenuCat)}
-                      className="hover:text-[#B89B72] transition-colors"
+                      className="hover:text-brand-primary transition-colors"
                     >
                       Architectural Tailoring
                     </button>
@@ -1384,7 +1384,7 @@ export default function App() {
                   <li>
                     <button
                       onClick={() => navigateToShop('All')}
-                      className="hover:text-[#B89B72] transition-colors"
+                      className="hover:text-brand-primary transition-colors"
                     >
                       View Full Marketplace
                     </button>
@@ -1400,9 +1400,9 @@ export default function App() {
                     <button
                       key={p.id}
                       onClick={() => navigateToProduct(p.id)}
-                      className="group text-left flex gap-4 items-center border border-[#EAEAEA] p-3 hover:border-[#171717] transition-colors"
+                      className="group text-left flex gap-4 items-center border border-brand-border p-3 hover:border-brand-primary-hover transition-colors"
                     >
-                      <div className="w-20 aspect-[3/4] overflow-hidden bg-[#F8F6F2] shrink-0">
+                      <div className="w-20 aspect-[3/4] overflow-hidden bg-brand-bg shrink-0">
                         <img
                           src={p.colors[0].images[0]}
                           alt={p.title}
@@ -1410,13 +1410,13 @@ export default function App() {
                         />
                       </div>
                       <div>
-                        <p className="font-sans-ed text-[9px] uppercase tracking-[0.14em] text-[#B89B72]">
+                        <p className="font-sans-ed text-[9px] uppercase tracking-[0.14em] text-brand-primary">
                           {p.brand}
                         </p>
-                        <p className="font-sans-ed text-[11px] uppercase tracking-[0.1em] text-[#171717] mt-0.5">
+                        <p className="font-sans-ed text-[11px] uppercase tracking-[0.1em] text-brand-ink mt-0.5">
                           {p.title}
                         </p>
-                        <p className="font-sans-ed text-[11px] text-[#777777] mt-1">
+                        <p className="font-sans-ed text-[11px] text-brand-muted mt-1">
                           {formatINR(p.price)}
                         </p>
                       </div>
@@ -1429,22 +1429,22 @@ export default function App() {
 
         {/* Live Search Overlay */}
         {searchOpen && (
-          <div className="border-t border-[#EAEAEA] bg-[#FFFFFF]">
+          <div className="border-t border-brand-border bg-brand-surface">
             <div className="max-w-[1600px] mx-auto px-4 sm:px-8 py-6">
-              <div className="flex items-center gap-4 border-b border-[#171717] pb-3">
-                <Search className="w-4 h-4 text-[#777777]" />
+              <div className="flex items-center gap-4 border-b border-brand-primary pb-3">
+                <Search className="w-4 h-4 text-brand-muted" />
                 <input
                   type="text"
                   autoFocus
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="SEARCH BRANDS, CASHMERE, SILK, TRENCH, LOAFERS..."
-                  className="w-full bg-transparent font-sans-ed text-[12px] uppercase tracking-[0.12em] focus:outline-none placeholder:text-[#777777]"
+                  className="w-full bg-transparent font-sans-ed text-[12px] uppercase tracking-[0.12em] focus:outline-none placeholder:text-brand-muted"
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-[#777777] hover:text-[#171717]"
+                    className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-brand-muted hover:text-brand-primary"
                   >
                     Clear
                   </button>
@@ -1460,20 +1460,20 @@ export default function App() {
                     onClick={() => navigateToProduct(p.id)}
                     className="text-left group"
                   >
-                    <div className="aspect-[3/4] bg-[#F8F6F2] overflow-hidden mb-2 border border-[#EAEAEA]">
+                    <div className="aspect-[3/4] bg-brand-bg overflow-hidden mb-2 border border-brand-border">
                       <img
                         src={p.colors[0].images[0]}
                         alt={p.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <p className="font-sans-ed text-[9px] uppercase tracking-[0.12em] text-[#B89B72]">
+                    <p className="font-sans-ed text-[9px] uppercase tracking-[0.12em] text-brand-primary">
                       {p.brand}
                     </p>
                     <p className="font-sans-ed text-[11px] uppercase tracking-[0.1em] truncate">
                       {p.title}
                     </p>
-                    <p className="font-sans-ed text-[11px] text-[#777777]">
+                    <p className="font-sans-ed text-[11px] text-brand-muted">
                       {formatINR(p.price)}
                     </p>
                   </button>
@@ -1494,15 +1494,15 @@ export default function App() {
         {view === 'home' && (
           <div>
             {/* 3. Large Full-Width Editorial Fashion Hero */}
-            <section className="relative h-[82vh] min-h-[520px] w-full overflow-hidden border-b border-[#EAEAEA]">
+            <section className="relative h-[82vh] min-h-[520px] w-full overflow-hidden border-b border-brand-border">
               <img
                 src={IMG_HERO}
                 alt="Bandra Street Autumn Winter 26 Campaign"
                 className="absolute inset-0 w-full h-full object-cover object-center animate-hero-zoom"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/70 via-[#171717]/15 to-transparent" />
-              <div className="relative z-10 h-full max-w-[1600px] mx-auto px-6 sm:px-12 pb-14 sm:pb-20 flex flex-col justify-end items-start text-[#FFFFFF]">
-                <p className="font-sans-ed text-[11px] uppercase tracking-[0.18em] mb-3 text-[#B89B72]">
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/70 via-brand-primary/15 to-transparent" />
+              <div className="relative z-10 h-full max-w-[1600px] mx-auto px-6 sm:px-12 pb-14 sm:pb-20 flex flex-col justify-end items-start text-brand-white">
+                <p className="font-sans-ed text-[11px] uppercase tracking-[0.18em] mb-3 text-brand-secondary">
                   Autumn / Winter ’26 — Global Luxury Marketplace
                 </p>
                 <h1 className="font-serif-ed text-4xl sm:text-6xl lg:text-7xl font-light tracking-[-0.02em] leading-[1.02] max-w-3xl mb-7">
@@ -1511,13 +1511,13 @@ export default function App() {
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={() => navigateToShop('All')}
-                    className="border border-[#FFFFFF] bg-[#171717]/40 backdrop-blur-sm hover:bg-[#FFFFFF] hover:text-[#171717] transition-colors duration-300 px-8 py-4 font-sans-ed text-[11px] uppercase tracking-[0.14em]"
+                    className="border border-brand-white bg-brand-primary/40 backdrop-blur-sm hover:bg-brand-surface hover:text-brand-primary transition-colors duration-300 px-8 py-4 font-sans-ed text-[11px] uppercase tracking-[0.14em]"
                   >
                     Explore Autumn/Winter '26
                   </button>
                   <button
                     onClick={() => setView('lookbook')}
-                    className="border border-[#FFFFFF]/60 hover:border-[#B89B72] hover:text-[#B89B72] transition-colors duration-300 px-8 py-4 font-sans-ed text-[11px] uppercase tracking-[0.14em]"
+                    className="border border-brand-white/60 hover:border-brand-accent hover:text-brand-secondary transition-colors duration-300 px-8 py-4 font-sans-ed text-[11px] uppercase tracking-[0.14em]"
                   >
                     View Lookbook
                   </button>
@@ -1529,7 +1529,7 @@ export default function App() {
             <section className="max-w-[1600px] mx-auto px-4 sm:px-8 py-14 sm:py-20">
               <div className="flex items-end justify-between mb-8">
                 <div>
-                  <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-[#777777] mb-1">
+                  <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-brand-muted mb-1">
                     Shop By Department
                   </p>
                   <h2 className="font-serif-ed text-3xl sm:text-4xl font-light">
@@ -1542,17 +1542,17 @@ export default function App() {
                   <button
                     key={cat.title}
                     onClick={() => navigateToShop(cat.filter)}
-                    className="group relative aspect-[3/4] overflow-hidden border border-[#EAEAEA] text-left bg-[#F8F6F2]"
+                    className="group relative aspect-[3/4] overflow-hidden border border-brand-border text-left bg-brand-bg"
                   >
                     <img
                       src={cat.img}
                       alt={cat.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/75 via-transparent to-transparent" />
-                    <div className="absolute bottom-0 inset-x-0 p-4 sm:p-6 text-[#FFFFFF]">
+                    <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/75 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 inset-x-0 p-4 sm:p-6 text-brand-white">
                       <h3 className="font-serif-ed text-2xl sm:text-3xl font-light">{cat.title}</h3>
-                      <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-[#FFFFFF]/80 mt-1 flex items-center gap-1.5">
+                      <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-brand-white/80 mt-1 flex items-center gap-1.5">
                         {cat.subtitle} <ArrowRight className="w-3 h-3" />
                       </p>
                     </div>
@@ -1562,11 +1562,11 @@ export default function App() {
             </section>
 
             {/* 5. Trending Products Section */}
-            <section className="bg-[#F8F6F2] border-y border-[#EAEAEA]">
+            <section className="bg-brand-bg border-y border-brand-border">
               <div className="max-w-[1600px] mx-auto px-4 sm:px-8 py-14 sm:py-20">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
                   <div>
-                    <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-[#B89B72] mb-1">
+                    <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-brand-primary mb-1">
                       Most Coveted
                     </p>
                     <h2 className="font-serif-ed text-3xl sm:text-5xl font-light">
@@ -1575,7 +1575,7 @@ export default function App() {
                   </div>
                   <button
                     onClick={() => navigateToShop('All')}
-                    className="inline-flex items-center gap-2 font-sans-ed text-[11px] uppercase tracking-[0.12em] border-b border-[#171717] pb-1 hover:text-[#B89B72] hover:border-[#B89B72] self-start sm:self-auto"
+                    className="inline-flex items-center gap-2 font-sans-ed text-[11px] uppercase tracking-[0.12em] border-b border-brand-primary pb-1 hover:text-brand-primary hover:border-brand-accent self-start sm:self-auto"
                   >
                     Shop All Trending <ArrowRight className="w-3.5 h-3.5" />
                   </button>
@@ -1600,14 +1600,14 @@ export default function App() {
 
             {/* 6. New Arrivals & Best Sellers (Tabbed Section) */}
             <section className="max-w-[1600px] mx-auto px-4 sm:px-8 py-14 sm:py-20">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-4 border-b border-[#EAEAEA]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-4 border-b border-brand-border">
                 <div className="flex items-center gap-8">
                   <button
                     onClick={() => setHomeTab('new')}
                     className={`font-serif-ed text-2xl sm:text-4xl font-light pb-2 border-b-2 transition-colors ${
                       homeTab === 'new'
-                        ? 'border-[#B89B72] text-[#171717]'
-                        : 'border-transparent text-[#777777] hover:text-[#171717]'
+                        ? 'border-brand-accent text-brand-ink'
+                        : 'border-transparent text-brand-muted hover:text-brand-primary'
                     }`}
                   >
                     New Arrivals
@@ -1616,8 +1616,8 @@ export default function App() {
                     onClick={() => setHomeTab('bestsellers')}
                     className={`font-serif-ed text-2xl sm:text-4xl font-light pb-2 border-b-2 transition-colors ${
                       homeTab === 'bestsellers'
-                        ? 'border-[#B89B72] text-[#171717]'
-                        : 'border-transparent text-[#777777] hover:text-[#171717]'
+                        ? 'border-brand-accent text-brand-ink'
+                        : 'border-transparent text-brand-muted hover:text-brand-primary'
                     }`}
                   >
                     Best Sellers
@@ -1625,7 +1625,7 @@ export default function App() {
                 </div>
                 <button
                   onClick={() => navigateToShop(homeTab === 'new' ? 'New Arrivals' : 'All')}
-                  className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-[#777777] hover:text-[#171717] flex items-center gap-1.5"
+                  className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-brand-muted hover:text-brand-primary flex items-center gap-1.5"
                 >
                   Explore Full Edit <ArrowRight className="w-3.5 h-3.5" />
                 </button>
@@ -1648,18 +1648,18 @@ export default function App() {
             </section>
 
             {/* 7. Promotional Campaign Banners + Interactive Shop-the-Look */}
-            <section className="bg-[#F8F6F2] border-y border-[#EAEAEA]">
+            <section className="bg-brand-bg border-y border-brand-border">
               <div className="max-w-[1600px] mx-auto px-4 sm:px-8 py-14 sm:py-20 space-y-14">
                 {/* Promotional Split Campaign */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="relative aspect-[16/10] overflow-hidden border border-[#EAEAEA] bg-[#171717] text-[#FFFFFF] flex items-end p-8">
+                  <div className="relative aspect-[16/10] overflow-hidden border border-brand-border bg-brand-primary text-brand-white flex items-end p-8">
                     <img
                       src={IMG_W_DRESS}
                       alt="Atelier Archive Sale"
                       className="absolute inset-0 w-full h-full object-cover opacity-70"
                     />
                     <div className="relative z-10 max-w-md">
-                      <span className="inline-block px-2.5 py-1 bg-[#B89B72] text-[#FFFFFF] font-sans-ed text-[10px] uppercase tracking-[0.14em] mb-3">
+                      <span className="inline-block px-2.5 py-1 bg-brand-primary text-brand-white font-sans-ed text-[10px] uppercase tracking-[0.14em] mb-3">
                         Private Archive Offer
                       </span>
                       <h3 className="font-serif-ed text-3xl sm:text-4xl font-light mb-3">
@@ -1667,21 +1667,21 @@ export default function App() {
                       </h3>
                       <button
                         onClick={() => navigateToShop('Women')}
-                        className="px-6 py-3 bg-[#FFFFFF] text-[#171717] font-sans-ed text-[11px] uppercase tracking-[0.12em] hover:bg-[#B89B72] hover:text-[#FFFFFF] transition-colors"
+                        className="px-6 py-3 bg-brand-surface text-brand-ink font-sans-ed text-[11px] uppercase tracking-[0.12em] hover:bg-brand-primary-hover hover:text-brand-ink transition-colors"
                       >
                         Shop Women's Edit
                       </button>
                     </div>
                   </div>
 
-                  <div className="relative aspect-[16/10] overflow-hidden border border-[#EAEAEA] bg-[#171717] text-[#FFFFFF] flex items-end p-8">
+                  <div className="relative aspect-[16/10] overflow-hidden border border-brand-border bg-brand-primary text-brand-white flex items-end p-8">
                     <img
                       src={IMG_ACC_SCARF}
                       alt="Complimentary Gift Packaging"
                       className="absolute inset-0 w-full h-full object-cover opacity-70"
                     />
                     <div className="relative z-10 max-w-md">
-                      <span className="inline-block px-2.5 py-1 bg-[#171717] border border-[#FFFFFF]/40 text-[#FFFFFF] font-sans-ed text-[10px] uppercase tracking-[0.14em] mb-3">
+                      <span className="inline-block px-2.5 py-1 bg-brand-primary border border-brand-white/40 text-brand-white font-sans-ed text-[10px] uppercase tracking-[0.14em] mb-3">
                         New Season Privilege
                       </span>
                       <h3 className="font-serif-ed text-3xl sm:text-4xl font-light mb-3">
@@ -1689,7 +1689,7 @@ export default function App() {
                       </h3>
                       <button
                         onClick={() => navigateToShop('Accessories')}
-                        className="px-6 py-3 bg-[#FFFFFF] text-[#171717] font-sans-ed text-[11px] uppercase tracking-[0.12em] hover:bg-[#B89B72] hover:text-[#FFFFFF] transition-colors"
+                        className="px-6 py-3 bg-brand-surface text-brand-ink font-sans-ed text-[11px] uppercase tracking-[0.12em] hover:bg-brand-primary-hover hover:text-brand-ink transition-colors"
                       >
                         Explore Accessories
                       </button>
@@ -1700,17 +1700,17 @@ export default function App() {
                 {/* Interactive Shop the Look Editorial Banner */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-4">
                   <div className="lg:col-span-4 space-y-5">
-                    <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-[#B89B72]">
+                    <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-brand-primary">
                       Interactive Editorial
                     </p>
                     <h2 className="font-serif-ed text-3xl sm:text-5xl font-light leading-[1.08]">
                       Shop the Look: Studio Study No. 08
                     </h2>
-                    <p className="text-[14px] leading-relaxed text-[#777777]">
+                    <p className="text-[14px] leading-relaxed text-brand-muted">
                       Tap any hotspot on the editorial frame to inspect garment provenance, choose
                       your size, and add pieces directly to your bag.
                     </p>
-                    <div className="pt-2 space-y-2 border-t border-[#EAEAEA]">
+                    <div className="pt-2 space-y-2 border-t border-brand-border">
                       {LOOK_HOTSPOTS.map((hs, i) => {
                         const prod = PRODUCTS.find((p) => p.id === hs.productId)!;
                         const active = activeHotspotId === hs.id;
@@ -1723,14 +1723,14 @@ export default function App() {
                             }}
                             className={`w-full flex items-center justify-between py-2.5 px-3 border text-left transition-colors ${
                               active
-                                ? 'border-[#171717] bg-[#FFFFFF]'
-                                : 'border-transparent hover:border-[#EAEAEA]'
+                                ? 'border-brand-primary bg-brand-surface'
+                                : 'border-transparent hover:border-brand-border'
                             }`}
                           >
                             <span className="font-sans-ed text-[11px] uppercase tracking-[0.12em]">
                               0{i + 1}. {prod.title}
                             </span>
-                            <span className="font-sans-ed text-[11px] text-[#777777]">
+                            <span className="font-sans-ed text-[11px] text-brand-muted">
                               {formatINR(prod.price)}
                             </span>
                           </button>
@@ -1740,7 +1740,7 @@ export default function App() {
                   </div>
 
                   <div className="lg:col-span-8 relative">
-                    <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#EAEAEA]">
+                    <div className="relative aspect-[4/3] w-full overflow-hidden border border-brand-border">
                       <img
                         src={IMG_SHOP_LOOK}
                         alt="Shop the Look Editorial"
@@ -1760,12 +1760,12 @@ export default function App() {
                             aria-label={hs.label}
                             className="absolute -translate-x-1/2 -translate-y-1/2 group z-20"
                           >
-                            <span className="absolute inset-0 bg-[#FFFFFF] animate-hotspot-ring" />
+                            <span className="absolute inset-0 bg-brand-surface animate-hotspot-ring" />
                             <span
                               className={`relative w-7 h-7 flex items-center justify-center font-sans-ed text-[10px] border transition-colors ${
                                 isActive
-                                  ? 'bg-[#B89B72] text-[#FFFFFF] border-[#FFFFFF]'
-                                  : 'bg-[#171717] text-[#FFFFFF] border-[#FFFFFF] group-hover:bg-[#B89B72]'
+                                  ? 'bg-brand-primary-hover text-brand-white border-brand-white'
+                                  : 'bg-brand-primary text-brand-white border-brand-white group-hover:bg-brand-primary-hover'
                               }`}
                             >
                               0{i + 1}
@@ -1779,10 +1779,10 @@ export default function App() {
                         const prod = hs ? PRODUCTS.find((p) => p.id === hs.productId) : null;
                         if (!prod) return null;
                         return (
-                          <div className="absolute bottom-4 right-4 left-4 sm:left-auto sm:w-80 bg-[#FFFFFF] border border-[#171717] p-4 z-30 shadow-lg">
+                          <div className="absolute bottom-4 right-4 left-4 sm:left-auto sm:w-80 bg-brand-surface border border-brand-primary p-4 z-30 shadow-lg">
                             <div className="flex justify-between items-start gap-2 mb-3">
                               <div>
-                                <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-[#B89B72]">
+                                <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-brand-primary">
                                   {prod.brand}
                                 </p>
                                 <button
@@ -1795,7 +1795,7 @@ export default function App() {
                               <button
                                 onClick={() => setActiveHotspotId(null)}
                                 aria-label="Close popover"
-                                className="p-0.5 text-[#777777] hover:text-[#171717]"
+                                className="p-0.5 text-brand-muted hover:text-brand-primary"
                               >
                                 <X className="w-4 h-4" />
                               </button>
@@ -1804,7 +1804,7 @@ export default function App() {
                               <img
                                 src={prod.colors[0].images[0]}
                                 alt={prod.title}
-                                className="w-14 aspect-[3/4] object-cover border border-[#EAEAEA]"
+                                className="w-14 aspect-[3/4] object-cover border border-brand-border"
                               />
                               <div className="flex-1">
                                 <p className="font-sans-ed text-[12px] tracking-[0.1em] mb-2">
@@ -1817,8 +1817,8 @@ export default function App() {
                                       onClick={() => setHotspotSize(sz)}
                                       className={`px-2 py-1 font-sans-ed text-[10px] uppercase border transition-colors ${
                                         hotspotSize === sz
-                                          ? 'bg-[#171717] text-[#FFFFFF] border-[#171717]'
-                                          : 'border-[#EAEAEA] text-[#171717] hover:border-[#171717]'
+                                          ? 'bg-brand-primary text-brand-white border-brand-primary'
+                                          : 'border-brand-border text-brand-ink hover:border-brand-primary-hover'
                                       }`}
                                     >
                                       {sz}
@@ -1829,7 +1829,7 @@ export default function App() {
                             </div>
                             <button
                               onClick={() => addToCart(prod, hotspotSize, 0, true)}
-                              className="w-full py-2.5 bg-[#171717] text-[#FFFFFF] hover:bg-[#B89B72] transition-colors font-sans-ed text-[11px] uppercase tracking-[0.12em]"
+                              className="w-full py-2.5 bg-brand-primary text-brand-white hover:bg-brand-primary-hover transition-colors font-sans-ed text-[11px] uppercase tracking-[0.12em]"
                             >
                               Add to Bag — {formatINR(prod.price)}
                             </button>
@@ -1845,7 +1845,7 @@ export default function App() {
             {/* 8. Shop-by-Brand Section */}
             <section className="max-w-[1600px] mx-auto px-4 sm:px-8 py-14 sm:py-20">
               <div className="mb-8">
-                <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-[#777777] mb-1">
+                <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-brand-muted mb-1">
                   The Designer Directory
                 </p>
                 <h2 className="font-serif-ed text-3xl sm:text-4xl font-light">Shop by Brand</h2>
@@ -1855,15 +1855,15 @@ export default function App() {
                   <button
                     key={b.name}
                     onClick={() => navigateToShop('All', b.name)}
-                    className="border border-[#EAEAEA] bg-[#F8F6F2] hover:border-[#171717] hover:bg-[#FFFFFF] p-6 text-left transition-all group"
+                    className="border border-brand-border bg-brand-bg hover:border-brand-primary-hover hover:bg-brand-surface p-6 text-left transition-all group"
                   >
-                    <p className="font-serif-ed text-xl tracking-[0.06em] group-hover:text-[#B89B72] transition-colors">
+                    <p className="font-serif-ed text-xl tracking-[0.06em] group-hover:text-brand-primary transition-colors">
                       {b.name}
                     </p>
-                    <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-[#777777] mt-2">
+                    <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-brand-muted mt-2">
                       {b.origin}
                     </p>
-                    <p className="text-[12px] text-[#777777] mt-1">{b.tagline}</p>
+                    <p className="text-[12px] text-brand-muted mt-1">{b.tagline}</p>
                   </button>
                 ))}
               </div>
@@ -1872,7 +1872,7 @@ export default function App() {
             {/* 9. Curated Fashion Collections */}
             <section className="max-w-[1600px] mx-auto px-4 sm:px-8 pb-16 sm:pb-24">
               <div className="mb-8">
-                <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-[#777777] mb-1">
+                <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-brand-muted mb-1">
                   Seasonal Capsules
                 </p>
                 <h2 className="font-serif-ed text-3xl sm:text-4xl font-light">
@@ -1884,9 +1884,9 @@ export default function App() {
                   <button
                     key={col.title}
                     onClick={() => navigateToShop(col.filter)}
-                    className="group border border-[#EAEAEA] text-left bg-[#FFFFFF] overflow-hidden"
+                    className="group border border-brand-border text-left bg-brand-surface overflow-hidden"
                   >
-                    <div className="aspect-[4/3] overflow-hidden bg-[#F8F6F2]">
+                    <div className="aspect-[4/3] overflow-hidden bg-brand-bg">
                       <img
                         src={col.img}
                         alt={col.title}
@@ -1896,9 +1896,9 @@ export default function App() {
                     <div className="p-6 flex items-center justify-between">
                       <div>
                         <h3 className="font-serif-ed text-2xl font-light">{col.title}</h3>
-                        <p className="text-[12px] text-[#777777] mt-1">{col.subtitle}</p>
+                        <p className="text-[12px] text-brand-muted mt-1">{col.subtitle}</p>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-[#171717] group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 text-brand-ink group-hover:translate-x-1 transition-transform" />
                     </div>
                   </button>
                 ))}
@@ -1913,7 +1913,7 @@ export default function App() {
         {view === 'shop' && (
           <div>
             {/* Large Category Banner */}
-            <section className="relative h-56 sm:h-72 w-full overflow-hidden border-b border-[#EAEAEA] bg-[#171717]">
+            <section className="relative h-56 sm:h-72 w-full overflow-hidden border-b border-brand-border bg-brand-primary">
               <img
                 src={
                   filterCategory === 'Men'
@@ -1925,10 +1925,10 @@ export default function App() {
                 alt={filterCategory}
                 className="absolute inset-0 w-full h-full object-cover opacity-55"
               />
-              <div className="relative z-10 h-full max-w-[1600px] mx-auto px-4 sm:px-8 flex flex-col justify-end pb-8 text-[#FFFFFF]">
+              <div className="relative z-10 h-full max-w-[1600px] mx-auto px-4 sm:px-8 flex flex-col justify-end pb-8 text-brand-white">
                 {/* Breadcrumb Navigation */}
-                <nav className="flex items-center gap-2 font-sans-ed text-[10px] uppercase tracking-[0.14em] text-[#FFFFFF]/80 mb-2">
-                  <button onClick={navigateHome} className="hover:text-[#FFFFFF]">
+                <nav className="flex items-center gap-2 font-sans-ed text-[10px] uppercase tracking-[0.14em] text-brand-white/80 mb-2">
+                  <button onClick={navigateHome} className="hover:text-brand-ink">
                     Home
                   </button>
                   <ChevronRight className="w-3 h-3" />
@@ -1946,16 +1946,16 @@ export default function App() {
 
             <div className="max-w-[1600px] mx-auto px-4 sm:px-8 py-8 sm:py-12">
               {/* Top Toolbar */}
-              <div className="pb-6 border-b border-[#EAEAEA] flex flex-wrap items-center justify-between gap-4">
-                <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-[#777777]">
+              <div className="pb-6 border-b border-brand-border flex flex-wrap items-center justify-between gap-4">
+                <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] text-brand-muted">
                   Showing {filteredProducts.length}{' '}
                   {filteredProducts.length === 1 ? 'Piece' : 'Pieces'}
                   {filterBrand ? ` · ${filterBrand}` : ''}
                 </p>
 
                 <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-                  <div className="flex items-center border border-[#EAEAEA] px-3 py-2 flex-1 sm:w-60 focus-within:border-[#171717]">
-                    <Search className="w-3.5 h-3.5 text-[#777777] mr-2" />
+                  <div className="flex items-center border border-brand-border px-3 py-2 flex-1 sm:w-60 focus-within:border-brand-primary">
+                    <Search className="w-3.5 h-3.5 text-brand-muted mr-2" />
                     <input
                       type="text"
                       value={searchQuery}
@@ -1968,7 +1968,7 @@ export default function App() {
                   {/* Mobile Filter Drawer Trigger */}
                   <button
                     onClick={() => setMobileFilterOpen(true)}
-                    className="lg:hidden inline-flex items-center gap-2 px-4 py-2.5 border border-[#171717] font-sans-ed text-[11px] uppercase tracking-[0.12em]"
+                    className="lg:hidden inline-flex items-center gap-2 px-4 py-2.5 border border-brand-primary font-sans-ed text-[11px] uppercase tracking-[0.12em]"
                   >
                     <SlidersHorizontal className="w-3.5 h-3.5" /> Filters
                   </button>
@@ -1976,7 +1976,7 @@ export default function App() {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as SortOption)}
-                    className="px-4 py-2.5 bg-[#FFFFFF] border border-[#EAEAEA] hover:border-[#171717] font-sans-ed text-[11px] uppercase tracking-[0.12em] focus:outline-none"
+                    className="px-4 py-2.5 bg-brand-surface border border-brand-border hover:border-brand-primary-hover font-sans-ed text-[11px] uppercase tracking-[0.12em] focus:outline-none"
                   >
                     <option value="featured">Sort: Featured</option>
                     <option value="price-asc">Price: Low to High</option>
@@ -1985,12 +1985,12 @@ export default function App() {
                     <option value="rating">Sort: Top Rated</option>
                   </select>
 
-                  <div className="hidden lg:flex border border-[#EAEAEA]">
+                  <div className="hidden lg:flex border border-brand-border">
                     <button
                       onClick={() => setGridCols(3)}
                       aria-label="3 column grid"
                       className={`p-2.5 ${
-                        gridCols === 3 ? 'bg-[#171717] text-[#FFFFFF]' : 'text-[#777777]'
+                        gridCols === 3 ? 'bg-brand-primary text-brand-white' : 'text-brand-muted'
                       }`}
                     >
                       <Grid3X3 className="w-4 h-4" />
@@ -1999,7 +1999,7 @@ export default function App() {
                       onClick={() => setGridCols(4)}
                       aria-label="4 column grid"
                       className={`p-2.5 ${
-                        gridCols === 4 ? 'bg-[#171717] text-[#FFFFFF]' : 'text-[#777777]'
+                        gridCols === 4 ? 'bg-brand-primary text-brand-white' : 'text-brand-muted'
                       }`}
                     >
                       <LayoutGrid className="w-4 h-4" />
@@ -2010,20 +2010,20 @@ export default function App() {
 
               <div className="flex gap-10 pt-8">
                 {/* Desktop Sidebar Filters */}
-                <aside className="hidden lg:block w-64 shrink-0 border-r border-[#EAEAEA] pr-8">
+                <aside className="hidden lg:block w-64 shrink-0 border-r border-brand-border pr-8">
                   {renderFilterControls()}
                 </aside>
 
                 {/* Responsive Product Grid */}
                 <div className="flex-1">
                   {filteredProducts.length === 0 ? (
-                    <div className="border border-[#EAEAEA] p-16 text-center space-y-4 bg-[#F8F6F2]">
+                    <div className="border border-brand-border p-16 text-center space-y-4 bg-brand-bg">
                       <p className="font-serif-ed text-3xl font-light">
                         No pieces match your current selection.
                       </p>
                       <button
                         onClick={resetAllFilters}
-                        className="px-6 py-3 bg-[#171717] text-[#FFFFFF] font-sans-ed text-[11px] uppercase tracking-[0.12em]"
+                        className="px-6 py-3 bg-brand-primary text-brand-white font-sans-ed text-[11px] uppercase tracking-[0.12em]"
                       >
                         Reset All Filters
                       </button>
@@ -2058,19 +2058,19 @@ export default function App() {
         {view === 'product' && (
           <div className="max-w-[1600px] mx-auto px-4 sm:px-8 py-8 sm:py-12">
             {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 font-sans-ed text-[11px] uppercase tracking-[0.12em] text-[#777777] mb-6">
-              <button onClick={navigateHome} className="hover:text-[#171717]">
+            <nav className="flex items-center gap-2 font-sans-ed text-[11px] uppercase tracking-[0.12em] text-brand-muted mb-6">
+              <button onClick={navigateHome} className="hover:text-brand-primary">
                 Home
               </button>
               <ChevronRight className="w-3 h-3" />
               <button
                 onClick={() => navigateToShop(activeProduct.category)}
-                className="hover:text-[#171717]"
+                className="hover:text-brand-primary"
               >
                 {activeProduct.category}
               </button>
               <ChevronRight className="w-3 h-3" />
-              <span className="text-[#171717] truncate">{activeProduct.title}</span>
+              <span className="text-brand-ink truncate">{activeProduct.title}</span>
             </nav>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
@@ -2082,7 +2082,7 @@ export default function App() {
                       key={idx}
                       onClick={() => setPdpImageIdx(idx)}
                       className={`w-16 sm:w-20 aspect-[3/4] border overflow-hidden shrink-0 ${
-                        pdpImageIdx === idx ? 'border-[#171717]' : 'border-[#EAEAEA] opacity-70 hover:opacity-100'
+                        pdpImageIdx === idx ? 'border-brand-primary' : 'border-brand-border opacity-70 hover:opacity-100'
                       }`}
                     >
                       <img src={imgSrc} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
@@ -2092,14 +2092,14 @@ export default function App() {
 
                 <div
                   onClick={() => setLightboxImg(activeMainImg)}
-                  className="relative flex-1 aspect-[3/4] bg-[#F8F6F2] border border-[#EAEAEA] overflow-hidden cursor-zoom-in group"
+                  className="relative flex-1 aspect-[3/4] bg-brand-bg border border-brand-border overflow-hidden cursor-zoom-in group"
                 >
                   <img
                     src={activeMainImg}
                     alt={activeProduct.title}
                     className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
                   />
-                  <span className="absolute bottom-4 right-4 bg-[#FFFFFF]/90 border border-[#EAEAEA] px-3 py-1.5 font-sans-ed text-[10px] uppercase tracking-[0.12em] flex items-center gap-1.5">
+                  <span className="absolute bottom-4 right-4 bg-brand-surface/90 border border-brand-border px-3 py-1.5 font-sans-ed text-[10px] uppercase tracking-[0.12em] flex items-center gap-1.5">
                     <ZoomIn className="w-3.5 h-3.5" /> Click to Zoom
                   </span>
                 </div>
@@ -2108,18 +2108,18 @@ export default function App() {
               {/* Right: Elegant Product Info + Pincode + Add/Buy Now + Accordion */}
               <div className="lg:col-span-5">
                 <div className="lg:sticky lg:top-24 space-y-6">
-                  <div className="space-y-2 pb-5 border-b border-[#EAEAEA]">
+                  <div className="space-y-2 pb-5 border-b border-brand-border">
                     <div className="flex items-center justify-between">
                       <button
                         onClick={() => navigateToShop('All', activeProduct.brand)}
-                        className="font-sans-ed text-[11px] uppercase tracking-[0.16em] text-[#B89B72] hover:underline"
+                        className="font-sans-ed text-[11px] uppercase tracking-[0.16em] text-brand-primary hover:underline"
                       >
                         {activeProduct.brand}
                       </button>
                       <div className="flex items-center gap-1 text-[12px]">
-                        <Star className="w-3.5 h-3.5 fill-[#B89B72] text-[#B89B72]" />
+                        <Star className="w-3.5 h-3.5 fill-brand-accent text-brand-accent" />
                         <span className="font-medium">{activeProduct.rating}</span>
-                        <span className="text-[#777777]">({activeReviews.length} reviews)</span>
+                        <span className="text-brand-muted">({activeReviews.length} reviews)</span>
                       </div>
                     </div>
 
@@ -2133,22 +2133,22 @@ export default function App() {
                       </span>
                       {activeProduct.originalPrice && (
                         <>
-                          <span className="font-sans-ed text-[13px] text-[#777777] line-through">
+                          <span className="font-sans-ed text-[13px] text-brand-muted line-through">
                             {formatINR(activeProduct.originalPrice)}
                           </span>
-                          <span className="px-2 py-0.5 bg-[#B89B72] text-[#FFFFFF] font-sans-ed text-[10px] uppercase tracking-[0.1em]">
+                          <span className="px-2 py-0.5 bg-brand-primary text-brand-white font-sans-ed text-[10px] uppercase tracking-[0.1em]">
                             {calcDiscountPct(activeProduct.price, activeProduct.originalPrice)}% OFF
                           </span>
                         </>
                       )}
                     </div>
-                    <p className="text-[11px] text-[#777777]">Inclusive of all taxes</p>
+                    <p className="text-[11px] text-brand-muted">Inclusive of all taxes</p>
                   </div>
 
                   {/* Color Selector */}
                   <div>
                     <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] mb-2.5">
-                      Color: <span className="text-[#777777]">{activeColor.name}</span>
+                      Color: <span className="text-brand-muted">{activeColor.name}</span>
                     </p>
                     <div className="flex gap-3">
                       {activeProduct.colors.map((c, idx) => (
@@ -2161,8 +2161,8 @@ export default function App() {
                           aria-label={c.name}
                           className={`w-8 h-8 border transition-all ${
                             pdpColorIdx === idx
-                              ? 'border-[#B89B72] ring-1 ring-[#B89B72] ring-offset-2 ring-offset-[#FFFFFF]'
-                              : 'border-[#EAEAEA]'
+                              ? 'border-brand-accent ring-1 ring-brand-accent ring-offset-2 ring-offset-brand-surface'
+                              : 'border-brand-border'
                           }`}
                           style={{ backgroundColor: c.hex }}
                         />
@@ -2174,11 +2174,11 @@ export default function App() {
                   <div>
                     <div className="flex items-center justify-between mb-2.5">
                       <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em]">
-                        Select Size: <span className="text-[#777777]">{pdpSize}</span>
+                        Select Size: <span className="text-brand-muted">{pdpSize}</span>
                       </p>
                       <button
                         onClick={() => setSizeGuideOpen(true)}
-                        className="inline-flex items-center gap-1.5 font-sans-ed text-[11px] uppercase tracking-[0.12em] text-[#777777] hover:text-[#171717] border-b border-[#EAEAEA]"
+                        className="inline-flex items-center gap-1.5 font-sans-ed text-[11px] uppercase tracking-[0.12em] text-brand-muted hover:text-brand-primary border-b border-brand-border"
                       >
                         <Ruler className="w-3.5 h-3.5" /> Size Guide
                       </button>
@@ -2190,8 +2190,8 @@ export default function App() {
                           onClick={() => setPdpSize(sz)}
                           className={`py-3 font-sans-ed text-[11px] uppercase tracking-[0.12em] border transition-colors ${
                             pdpSize === sz
-                              ? 'bg-[#171717] text-[#FFFFFF] border-[#171717]'
-                              : 'border-[#EAEAEA] hover:border-[#171717]'
+                              ? 'bg-brand-primary text-brand-white border-brand-primary'
+                              : 'border-brand-border hover:border-brand-primary-hover'
                           }`}
                         >
                           {sz}
@@ -2204,13 +2204,13 @@ export default function App() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                     <button
                       onClick={() => addToCart(activeProduct, pdpSize, pdpColorIdx, true)}
-                      className="py-4 bg-[#171717] text-[#FFFFFF] hover:bg-[#B89B72] transition-colors font-sans-ed text-[11px] uppercase tracking-[0.14em]"
+                      className="py-4 bg-brand-primary text-brand-white hover:bg-brand-primary-hover transition-colors font-sans-ed text-[11px] uppercase tracking-[0.14em]"
                     >
                       Add to Bag
                     </button>
                     <button
                       onClick={() => buyNow(activeProduct, pdpSize, pdpColorIdx)}
-                      className="py-4 bg-[#B89B72] text-[#FFFFFF] hover:bg-[#171717] transition-colors font-sans-ed text-[11px] uppercase tracking-[0.14em]"
+                      className="py-4 bg-brand-primary text-brand-white hover:bg-brand-primary-hover transition-colors font-sans-ed text-[11px] uppercase tracking-[0.14em]"
                     >
                       Buy Now
                     </button>
@@ -2218,12 +2218,12 @@ export default function App() {
 
                   <button
                     onClick={() => toggleWishlist(activeProduct.id)}
-                    className="w-full py-3 border border-[#EAEAEA] hover:border-[#171717] flex items-center justify-center gap-2 transition-colors font-sans-ed text-[11px] uppercase tracking-[0.12em]"
+                    className="w-full py-3 border border-brand-border hover:border-brand-primary-hover flex items-center justify-center gap-2 transition-colors font-sans-ed text-[11px] uppercase tracking-[0.12em]"
                   >
                     <Heart
                       className={`w-4 h-4 ${
                         wishlist.includes(activeProduct.id)
-                          ? 'fill-[#B89B72] text-[#B89B72]'
+                          ? 'fill-brand-accent text-brand-accent'
                           : ''
                       }`}
                     />
@@ -2231,9 +2231,9 @@ export default function App() {
                   </button>
 
                   {/* Delivery Pincode Checker */}
-                  <div className="border border-[#EAEAEA] bg-[#F8F6F2] p-4 space-y-2.5">
-                    <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-[#777777] flex items-center gap-1.5">
-                      <Truck className="w-3.5 h-3.5 text-[#171717]" /> Check Delivery Availability
+                  <div className="border border-brand-border bg-brand-bg p-4 space-y-2.5">
+                    <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-brand-muted flex items-center gap-1.5">
+                      <Truck className="w-3.5 h-3.5 text-brand-ink" /> Check Delivery Availability
                     </p>
                     <form onSubmit={handlePincodeCheck} className="flex">
                       <input
@@ -2242,28 +2242,28 @@ export default function App() {
                         value={pincode}
                         onChange={(e) => setPincode(e.target.value)}
                         placeholder="ENTER PIN CODE"
-                        className="flex-1 px-3 py-2 bg-[#FFFFFF] border border-[#EAEAEA] font-sans-ed text-[11px] tracking-[0.1em] focus:outline-none focus:border-[#171717]"
+                        className="flex-1 px-3 py-2 bg-brand-surface border border-brand-border font-sans-ed text-[11px] tracking-[0.1em] focus:outline-none focus:border-brand-primary"
                       />
                       <button
                         type="submit"
-                        className="px-4 py-2 bg-[#171717] text-[#FFFFFF] font-sans-ed text-[10px] uppercase tracking-[0.12em]"
+                        className="px-4 py-2 bg-brand-primary text-brand-white font-sans-ed text-[10px] uppercase tracking-[0.12em]"
                       >
                         Check
                       </button>
                     </form>
                     {pincodeResult && (
-                      <p className="text-[12px] text-[#171717]">{pincodeResult}</p>
+                      <p className="text-[12px] text-brand-ink">{pincodeResult}</p>
                     )}
                   </div>
 
                   {/* Product Description & Care Accordions */}
-                  <div className="border-t border-[#EAEAEA]">
+                  <div className="border-t border-brand-border">
                     {[
                       {
                         key: 'description',
                         label: 'Description & Craft',
                         content: (
-                          <p className="text-[13px] text-[#777777] leading-relaxed">
+                          <p className="text-[13px] text-brand-muted leading-relaxed">
                             {activeProduct.description}
                           </p>
                         ),
@@ -2272,7 +2272,7 @@ export default function App() {
                         key: 'fabric',
                         label: 'Fabric & Care',
                         content: (
-                          <ul className="space-y-1.5 text-[13px] text-[#777777]">
+                          <ul className="space-y-1.5 text-[13px] text-brand-muted">
                             {activeProduct.fabricAndCare.map((line, i) => (
                               <li key={i}>• {line}</li>
                             ))}
@@ -2283,7 +2283,7 @@ export default function App() {
                         key: 'fit',
                         label: 'Fit & Sizing',
                         content: (
-                          <ul className="space-y-1.5 text-[13px] text-[#777777]">
+                          <ul className="space-y-1.5 text-[13px] text-brand-muted">
                             {activeProduct.fitAndSizing.map((line, i) => (
                               <li key={i}>• {line}</li>
                             ))}
@@ -2294,7 +2294,7 @@ export default function App() {
                         key: 'shipping',
                         label: 'Shipping & Returns',
                         content: (
-                          <p className="text-[13px] text-[#777777] leading-relaxed">
+                          <p className="text-[13px] text-brand-muted leading-relaxed">
                             {activeProduct.shippingAndReturns}
                           </p>
                         ),
@@ -2302,7 +2302,7 @@ export default function App() {
                     ].map((acc) => {
                       const isOpen = openAccordion === acc.key;
                       return (
-                        <div key={acc.key} className="border-b border-[#EAEAEA]">
+                        <div key={acc.key} className="border-b border-brand-border">
                           <button
                             onClick={() => setOpenAccordion(isOpen ? null : acc.key)}
                             className="w-full py-4 flex items-center justify-between font-sans-ed text-[11px] uppercase tracking-[0.12em]"
@@ -2324,9 +2324,9 @@ export default function App() {
             </div>
 
             {/* Ratings & Reviews Section */}
-            <section className="mt-20 pt-12 border-t border-[#EAEAEA] grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <section className="mt-20 pt-12 border-t border-brand-border grid grid-cols-1 lg:grid-cols-12 gap-10">
               <div className="lg:col-span-4 space-y-4">
-                <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-[#777777]">
+                <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-brand-muted">
                   Verified Client Feedback
                 </p>
                 <div className="flex items-baseline gap-3">
@@ -2336,11 +2336,11 @@ export default function App() {
                       {[1, 2, 3, 4, 5].map((s) => (
                         <Star
                           key={s}
-                          className="w-4 h-4 fill-[#B89B72] text-[#B89B72]"
+                          className="w-4 h-4 fill-brand-accent text-brand-accent"
                         />
                       ))}
                     </div>
-                    <p className="text-[12px] text-[#777777] mt-1">
+                    <p className="text-[12px] text-brand-muted mt-1">
                       Based on {activeReviews.length} verified reviews
                     </p>
                   </div>
@@ -2349,7 +2349,7 @@ export default function App() {
                 {/* Write a Review */}
                 <form
                   onSubmit={handleSubmitReview}
-                  className="border border-[#EAEAEA] bg-[#F8F6F2] p-5 space-y-3 mt-4"
+                  className="border border-brand-border bg-brand-bg p-5 space-y-3 mt-4"
                 >
                   <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em]">
                     Add Your Review
@@ -2364,8 +2364,8 @@ export default function App() {
                         <Star
                           className={`w-4 h-4 ${
                             star <= newReviewRating
-                              ? 'fill-[#B89B72] text-[#B89B72]'
-                              : 'text-[#EAEAEA]'
+                              ? 'fill-brand-accent text-brand-accent'
+                              : 'text-brand-secondary'
                           }`}
                         />
                       </button>
@@ -2376,11 +2376,11 @@ export default function App() {
                     value={newReviewText}
                     onChange={(e) => setNewReviewText(e.target.value)}
                     placeholder="Share your fit & fabric impression..."
-                    className="w-full p-2.5 bg-[#FFFFFF] border border-[#EAEAEA] text-[12px] focus:outline-none focus:border-[#171717]"
+                    className="w-full p-2.5 bg-brand-surface border border-brand-border text-[12px] focus:outline-none focus:border-brand-primary"
                   />
                   <button
                     type="submit"
-                    className="px-5 py-2 bg-[#171717] text-[#FFFFFF] font-sans-ed text-[10px] uppercase tracking-[0.12em]"
+                    className="px-5 py-2 bg-brand-primary text-brand-white font-sans-ed text-[10px] uppercase tracking-[0.12em]"
                   >
                     Submit Review
                   </button>
@@ -2389,36 +2389,36 @@ export default function App() {
 
               <div className="lg:col-span-8 space-y-4">
                 {activeReviews.map((rev) => (
-                  <div key={rev.id} className="border border-[#EAEAEA] p-5 space-y-2">
+                  <div key={rev.id} className="border border-brand-border p-5 space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span className="font-sans-ed text-[11px] uppercase tracking-[0.1em] font-medium">
                           {rev.author}
                         </span>
-                        <span className="text-[11px] text-[#777777]">· {rev.city}</span>
+                        <span className="text-[11px] text-brand-muted">· {rev.city}</span>
                         {rev.verifiedSize && (
-                          <span className="px-2 py-0.5 bg-[#F8F6F2] border border-[#EAEAEA] font-sans-ed text-[9px] uppercase">
+                          <span className="px-2 py-0.5 bg-brand-bg border border-brand-border font-sans-ed text-[9px] uppercase">
                             Size {rev.verifiedSize}
                           </span>
                         )}
                       </div>
-                      <span className="text-[11px] text-[#777777]">{rev.date}</span>
+                      <span className="text-[11px] text-brand-muted">{rev.date}</span>
                     </div>
                     <div className="flex gap-0.5">
                       {Array.from({ length: rev.rating }).map((_, idx) => (
-                        <Star key={idx} className="w-3.5 h-3.5 fill-[#B89B72] text-[#B89B72]" />
+                        <Star key={idx} className="w-3.5 h-3.5 fill-brand-accent text-brand-accent" />
                       ))}
                     </div>
-                    <p className="text-[13px] text-[#171717] leading-relaxed">{rev.comment}</p>
+                    <p className="text-[13px] text-brand-ink leading-relaxed">{rev.comment}</p>
                   </div>
                 ))}
               </div>
             </section>
 
             {/* Recommended Products */}
-            <section className="mt-20 pt-12 border-t border-[#EAEAEA]">
+            <section className="mt-20 pt-12 border-t border-brand-border">
               <div className="mb-8">
-                <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-[#777777] mb-1">
+                <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-brand-muted mb-1">
                   Atelier Pairing
                 </p>
                 <h2 className="font-serif-ed text-3xl font-light">Recommended For You</h2>
@@ -2447,13 +2447,13 @@ export default function App() {
         {view === 'lookbook' && (
           <div className="max-w-[1600px] mx-auto px-4 sm:px-8 py-14 space-y-14">
             <div className="max-w-2xl">
-              <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-[#B89B72] mb-2">
+              <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-brand-primary mb-2">
                 Lookbook — Autumn / Winter ’26
               </p>
               <h1 className="font-serif-ed text-4xl sm:text-6xl font-light tracking-[-0.02em] mb-4">
                 Forms in Travertine &amp; Wool
               </h1>
-              <p className="text-[14px] text-[#777777] leading-relaxed">
+              <p className="text-[14px] text-brand-muted leading-relaxed">
                 Photographed in natural morning light across limestone courtyards. Each look pairs
                 unhurried volume with sharp architectural seams.
               </p>
@@ -2466,8 +2466,8 @@ export default function App() {
                 { img: IMG_W_SUIT, look: 'Look 03', title: 'Ivory Virgin Wool Study', productId: 'mm-03' },
                 { img: IMG_M_SUIT, look: 'Look 04', title: 'Unstructured Espresso Hopsack', productId: 'mm-07' },
               ].map((item) => (
-                <div key={item.look} className="border border-[#EAEAEA] group bg-[#FFFFFF]">
-                  <div className="aspect-[3/4] overflow-hidden bg-[#F8F6F2]">
+                <div key={item.look} className="border border-brand-border group bg-brand-surface">
+                  <div className="aspect-[3/4] overflow-hidden bg-brand-bg">
                     <img
                       src={item.img}
                       alt={item.title}
@@ -2476,14 +2476,14 @@ export default function App() {
                   </div>
                   <div className="p-6 flex items-center justify-between">
                     <div>
-                      <p className="font-sans-ed text-[10px] uppercase tracking-[0.14em] text-[#B89B72]">
+                      <p className="font-sans-ed text-[10px] uppercase tracking-[0.14em] text-brand-primary">
                         {item.look}
                       </p>
                       <h3 className="font-serif-ed text-2xl font-light mt-1">{item.title}</h3>
                     </div>
                     <button
                       onClick={() => navigateToProduct(item.productId)}
-                      className="px-5 py-2.5 border border-[#171717] font-sans-ed text-[11px] uppercase tracking-[0.12em] hover:bg-[#171717] hover:text-[#FFFFFF] transition-colors"
+                      className="px-5 py-2.5 border border-brand-primary font-sans-ed text-[11px] uppercase tracking-[0.12em] hover:bg-brand-primary-hover hover:text-brand-ink transition-colors"
                     >
                       Shop Look
                     </button>
@@ -2499,7 +2499,7 @@ export default function App() {
         {/* ------------------------------------------------------------------ */}
         {view === 'checkout' && (
           <div className="max-w-[1300px] mx-auto px-4 sm:px-8 py-12 sm:py-16">
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-8 border-b border-[#EAEAEA] mb-10">
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-8 border-b border-brand-border mb-10">
               <h1 className="font-serif-ed text-3xl sm:text-4xl font-light">
                 {checkoutStep === 4 ? 'Order Confirmed' : 'Atelier Checkout'}
               </h1>
@@ -2513,10 +2513,10 @@ export default function App() {
                       key={label}
                       className={`px-2.5 py-1 border ${
                         active
-                          ? 'border-[#171717] bg-[#171717] text-[#FFFFFF]'
+                          ? 'border-brand-primary bg-brand-primary text-brand-white'
                           : done
-                          ? 'border-[#B89B72] text-[#B89B72]'
-                          : 'border-[#EAEAEA] text-[#777777]'
+                          ? 'border-brand-accent text-brand-primary'
+                          : 'border-brand-border text-brand-muted'
                       }`}
                     >
                       {label}
@@ -2527,8 +2527,8 @@ export default function App() {
             </div>
 
             {checkoutStep === 4 ? (
-              <div className="border border-[#EAEAEA] p-8 sm:p-14 max-w-3xl mx-auto space-y-8 bg-[#F8F6F2]">
-                <div className="flex items-center gap-3 text-[#B89B72]">
+              <div className="border border-brand-border p-8 sm:p-14 max-w-3xl mx-auto space-y-8 bg-brand-bg">
+                <div className="flex items-center gap-3 text-brand-primary">
                   <Check className="w-6 h-6" />
                   <span className="font-sans-ed text-[11px] uppercase tracking-[0.14em]">
                     Order Received &amp; Reserved
@@ -2538,23 +2538,23 @@ export default function App() {
                   <h2 className="font-serif-ed text-4xl font-light mb-2">
                     Thank you, {shippingForm.fullName}.
                   </h2>
-                  <p className="text-[14px] text-[#777777]">
+                  <p className="text-[14px] text-brand-muted">
                     Tracking reference:{' '}
-                    <strong className="text-[#171717] font-sans-ed tracking-[0.1em]">
+                    <strong className="text-brand-ink font-sans-ed tracking-[0.1em]">
                       {orderNumber}
                     </strong>
                     . Confirmation dispatched to {shippingForm.email}.
                   </p>
                 </div>
 
-                <div className="border-t border-b border-[#EAEAEA] py-6 space-y-4">
+                <div className="border-t border-b border-brand-border py-6 space-y-4">
                   {cart.map((item) => (
                     <div key={item.key} className="flex justify-between items-center text-[13px]">
                       <div>
                         <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em]">
                           {item.brand} — {item.title} × {item.quantity}
                         </p>
-                        <p className="text-[#777777] text-[12px]">
+                        <p className="text-brand-muted text-[12px]">
                           Size: {item.size} / Color: {item.colorName}
                         </p>
                       </div>
@@ -2563,7 +2563,7 @@ export default function App() {
                       </span>
                     </div>
                   ))}
-                  <div className="pt-4 border-t border-[#EAEAEA] flex justify-between font-sans-ed text-[12px] uppercase tracking-[0.12em]">
+                  <div className="pt-4 border-t border-brand-border flex justify-between font-sans-ed text-[12px] uppercase tracking-[0.12em]">
                     <span>Total Paid</span>
                     <span>{formatINR(total)}</span>
                   </div>
@@ -2576,7 +2576,7 @@ export default function App() {
                     setCheckoutStep(1);
                     navigateHome();
                   }}
-                  className="px-8 py-4 bg-[#171717] text-[#FFFFFF] font-sans-ed text-[11px] uppercase tracking-[0.14em] hover:bg-[#B89B72] transition-colors"
+                  className="px-8 py-4 bg-brand-primary text-brand-white font-sans-ed text-[11px] uppercase tracking-[0.14em] hover:bg-brand-primary-hover transition-colors"
                 >
                   Continue Shopping
                 </button>
@@ -2585,13 +2585,13 @@ export default function App() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                 <div className="lg:col-span-7 space-y-6">
                   {checkoutError && (
-                    <div className="p-3 border border-[#B89B72] text-[#B89B72] font-sans-ed text-[11px] uppercase tracking-[0.1em]">
+                    <div className="p-3 border border-brand-accent text-brand-primary font-sans-ed text-[11px] uppercase tracking-[0.1em]">
                       {checkoutError}
                     </div>
                   )}
 
                   {checkoutStep === 1 && (
-                    <div className="space-y-5 border border-[#EAEAEA] p-6 sm:p-8">
+                    <div className="space-y-5 border border-brand-border p-6 sm:p-8">
                       <div className="flex items-center gap-2 font-sans-ed text-[11px] uppercase tracking-[0.12em]">
                         <MapPin className="w-4 h-4" /> Shipping Address
                       </div>
@@ -2606,7 +2606,7 @@ export default function App() {
                           { label: 'PIN Code', key: 'pin', span: 1 },
                         ].map((f) => (
                           <div key={f.key} className={f.span === 2 ? 'sm:col-span-2' : ''}>
-                            <label className="block font-sans-ed text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1.5">
+                            <label className="block font-sans-ed text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1.5">
                               {f.label}
                             </label>
                             <input
@@ -2615,7 +2615,7 @@ export default function App() {
                               onChange={(e) =>
                                 setShippingForm((prev) => ({ ...prev, [f.key]: e.target.value }))
                               }
-                              className="w-full px-3.5 py-3 bg-transparent border border-[#EAEAEA] focus:border-[#171717] focus:outline-none text-[13px]"
+                              className="w-full px-3.5 py-3 bg-transparent border border-brand-border focus:border-brand-primary focus:outline-none text-[13px]"
                             />
                           </div>
                         ))}
@@ -2624,7 +2624,7 @@ export default function App() {
                   )}
 
                   {checkoutStep === 2 && (
-                    <div className="space-y-4 border border-[#EAEAEA] p-6 sm:p-8">
+                    <div className="space-y-4 border border-brand-border p-6 sm:p-8">
                       <div className="flex items-center gap-2 font-sans-ed text-[11px] uppercase tracking-[0.12em] mb-2">
                         <Truck className="w-4 h-4" /> Delivery Method
                       </div>
@@ -2632,15 +2632,15 @@ export default function App() {
                         onClick={() => setDeliveryMethod('express')}
                         className={`w-full p-5 border text-left flex justify-between items-center ${
                           deliveryMethod === 'express'
-                            ? 'border-[#171717] bg-[#F8F6F2]'
-                            : 'border-[#EAEAEA]'
+                            ? 'border-brand-primary bg-brand-bg'
+                            : 'border-brand-border'
                         }`}
                       >
                         <div>
                           <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em]">
                             Express Air Courier (2–3 Business Days)
                           </p>
-                          <p className="text-[12px] text-[#777777] mt-1">
+                          <p className="text-[12px] text-brand-muted mt-1">
                             Insured signature delivery in archival garment packaging.
                           </p>
                         </div>
@@ -2653,15 +2653,15 @@ export default function App() {
                         onClick={() => setDeliveryMethod('whiteglove')}
                         className={`w-full p-5 border text-left flex justify-between items-center ${
                           deliveryMethod === 'whiteglove'
-                            ? 'border-[#171717] bg-[#F8F6F2]'
-                            : 'border-[#EAEAEA]'
+                            ? 'border-brand-primary bg-brand-bg'
+                            : 'border-brand-border'
                         }`}
                       >
                         <div>
                           <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em]">
                             Atelier Same-Day White-Glove Courier
                           </p>
-                          <p className="text-[12px] text-[#777777] mt-1">
+                          <p className="text-[12px] text-brand-muted mt-1">
                             Hand-delivered on cedar hangers within Mumbai &amp; New Delhi.
                           </p>
                         </div>
@@ -2671,7 +2671,7 @@ export default function App() {
                   )}
 
                   {checkoutStep === 3 && (
-                    <div className="space-y-5 border border-[#EAEAEA] p-6 sm:p-8">
+                    <div className="space-y-5 border border-brand-border p-6 sm:p-8">
                       <div className="flex items-center gap-2 font-sans-ed text-[11px] uppercase tracking-[0.12em]">
                         <CreditCard className="w-4 h-4" /> Payment Details
                       </div>
@@ -2681,8 +2681,8 @@ export default function App() {
                           onClick={() => setPaymentMethod('razorpay')}
                           className={`flex-1 py-3 border font-sans-ed text-[11px] uppercase tracking-[0.12em] ${
                             paymentMethod === 'razorpay'
-                              ? 'bg-[#171717] text-[#FFFFFF] border-[#171717]'
-                              : 'border-[#EAEAEA]'
+                              ? 'bg-brand-primary text-brand-white border-brand-primary'
+                              : 'border-brand-border'
                           }`}
                         >
                           Razorpay (Card / UPI)
@@ -2692,8 +2692,8 @@ export default function App() {
                           onClick={() => setPaymentMethod('cod')}
                           className={`flex-1 py-3 border font-sans-ed text-[11px] uppercase tracking-[0.12em] ${
                             paymentMethod === 'cod'
-                              ? 'bg-[#171717] text-[#FFFFFF] border-[#171717]'
-                              : 'border-[#EAEAEA]'
+                              ? 'bg-brand-primary text-brand-white border-brand-primary'
+                              : 'border-brand-border'
                           }`}
                         >
                           Cash on Delivery
@@ -2701,8 +2701,8 @@ export default function App() {
                       </div>
 
                       {paymentMethod === 'razorpay' ? (
-                        <div className="space-y-3 p-4 bg-[#F8F6F2] border border-[#EAEAEA] text-[12px]">
-                          <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-[#B89B72]">
+                        <div className="space-y-3 p-4 bg-brand-bg border border-brand-border text-[12px]">
+                          <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-brand-primary">
                             Razorpay Secure Checkout · Server-Side HMAC Verification
                           </p>
                           <div className="grid grid-cols-2 gap-3">
@@ -2711,26 +2711,26 @@ export default function App() {
                               value={cardForm.number}
                               onChange={(e) => setCardForm({ ...cardForm, number: e.target.value })}
                               placeholder="Card / UPI ID"
-                              className="col-span-2 px-3 py-2.5 bg-[#FFFFFF] border border-[#EAEAEA] text-[12px]"
+                              className="col-span-2 px-3 py-2.5 bg-brand-surface border border-brand-border text-[12px]"
                             />
                             <input
                               type="text"
                               value={cardForm.expiry}
                               onChange={(e) => setCardForm({ ...cardForm, expiry: e.target.value })}
                               placeholder="MM/YY"
-                              className="px-3 py-2.5 bg-[#FFFFFF] border border-[#EAEAEA] text-[12px]"
+                              className="px-3 py-2.5 bg-brand-surface border border-brand-border text-[12px]"
                             />
                             <input
                               type="password"
                               value={cardForm.cvv}
                               onChange={(e) => setCardForm({ ...cardForm, cvv: e.target.value })}
                               placeholder="CVV"
-                              className="px-3 py-2.5 bg-[#FFFFFF] border border-[#EAEAEA] text-[12px]"
+                              className="px-3 py-2.5 bg-brand-surface border border-brand-border text-[12px]"
                             />
                           </div>
                         </div>
                       ) : (
-                        <div className="p-4 bg-[#F8F6F2] border border-[#EAEAEA] text-[12px] text-[#777777]">
+                        <div className="p-4 bg-brand-bg border border-brand-border text-[12px] text-brand-muted">
                           Pay via cash or UPI upon white-glove delivery. Order verified via OTP.
                         </div>
                       )}
@@ -2741,14 +2741,14 @@ export default function App() {
                     {checkoutStep > 1 ? (
                       <button
                         onClick={() => setCheckoutStep((s) => (s - 1) as 1 | 2 | 3)}
-                        className="px-6 py-3.5 border border-[#EAEAEA] hover:border-[#171717] font-sans-ed text-[11px] uppercase tracking-[0.12em]"
+                        className="px-6 py-3.5 border border-brand-border hover:border-brand-primary-hover font-sans-ed text-[11px] uppercase tracking-[0.12em]"
                       >
                         Back
                       </button>
                     ) : (
                       <button
                         onClick={() => navigateToShop('All')}
-                        className="px-6 py-3.5 border border-[#EAEAEA] hover:border-[#171717] font-sans-ed text-[11px] uppercase tracking-[0.12em]"
+                        className="px-6 py-3.5 border border-brand-border hover:border-brand-primary-hover font-sans-ed text-[11px] uppercase tracking-[0.12em]"
                       >
                         Return to Shop
                       </button>
@@ -2756,7 +2756,7 @@ export default function App() {
 
                     <button
                       onClick={handleCheckoutNext}
-                      className="px-8 py-3.5 bg-[#171717] text-[#FFFFFF] hover:bg-[#B89B72] transition-colors font-sans-ed text-[11px] uppercase tracking-[0.14em]"
+                      className="px-8 py-3.5 bg-brand-primary text-brand-white hover:bg-brand-primary-hover transition-colors font-sans-ed text-[11px] uppercase tracking-[0.14em]"
                     >
                       {checkoutStep === 3 ? `Complete Order — ${formatINR(total)}` : 'Continue'}
                     </button>
@@ -2765,7 +2765,7 @@ export default function App() {
 
                 {/* Order Summary Sidebar */}
                 <aside className="lg:col-span-5">
-                  <div className="border border-[#EAEAEA] p-6 sm:p-8 space-y-5 bg-[#F8F6F2]">
+                  <div className="border border-brand-border p-6 sm:p-8 space-y-5 bg-brand-bg">
                     <h2 className="font-sans-ed text-[11px] uppercase tracking-[0.12em]">
                       Order Summary ({bagCount})
                     </h2>
@@ -2775,16 +2775,16 @@ export default function App() {
                           <img
                             src={item.image}
                             alt={item.title}
-                            className="w-14 aspect-[3/4] object-cover border border-[#EAEAEA]"
+                            className="w-14 aspect-[3/4] object-cover border border-brand-border"
                           />
                           <div className="flex-1 min-w-0">
-                            <p className="font-sans-ed text-[9px] uppercase tracking-[0.12em] text-[#B89B72]">
+                            <p className="font-sans-ed text-[9px] uppercase tracking-[0.12em] text-brand-primary">
                               {item.brand}
                             </p>
                             <p className="font-sans-ed text-[11px] uppercase tracking-[0.1em] truncate">
                               {item.title}
                             </p>
-                            <p className="text-[11px] text-[#777777]">
+                            <p className="text-[11px] text-brand-muted">
                               {item.size} / {item.colorName} × {item.quantity}
                             </p>
                           </div>
@@ -2794,22 +2794,22 @@ export default function App() {
                         </div>
                       ))}
                     </div>
-                    <div className="border-t border-[#EAEAEA] pt-4 space-y-2 text-[12px]">
-                      <div className="flex justify-between text-[#777777]">
+                    <div className="border-t border-brand-border pt-4 space-y-2 text-[12px]">
+                      <div className="flex justify-between text-brand-muted">
                         <span>Subtotal</span>
                         <span>{formatINR(subtotal)}</span>
                       </div>
                       {discount > 0 && (
-                        <div className="flex justify-between text-[#B89B72]">
+                        <div className="flex justify-between text-brand-primary">
                           <span>Promo (WELCOME15)</span>
                           <span>-{formatINR(discount)}</span>
                         </div>
                       )}
-                      <div className="flex justify-between text-[#777777]">
+                      <div className="flex justify-between text-brand-muted">
                         <span>Shipping</span>
                         <span>{shippingCost === 0 ? 'Complimentary' : formatINR(shippingCost)}</span>
                       </div>
-                      <div className="flex justify-between pt-3 border-t border-[#EAEAEA] font-sans-ed text-[12px] uppercase tracking-[0.12em]">
+                      <div className="flex justify-between pt-3 border-t border-brand-border font-sans-ed text-[12px] uppercase tracking-[0.12em]">
                         <span>Total</span>
                         <span>{formatINR(total)}</span>
                       </div>
@@ -2825,15 +2825,15 @@ export default function App() {
       {/* ==================================================================== */}
       {/* 10. ELEGANT FOOTER WITH NEWSLETTER SIGNUP                            */}
       {/* ==================================================================== */}
-      <footer className="border-t border-[#EAEAEA] bg-[#F8F6F2] mt-auto">
+      <footer className="border-t border-brand-border bg-brand-bg mt-auto">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-8 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10">
           <div className="lg:col-span-4 space-y-3">
             <p className="font-serif-ed text-2xl tracking-[0.16em] uppercase">BANDRA STREET</p>
-            <p className="text-[13px] text-[#777777] leading-relaxed max-w-sm">
+            <p className="text-[13px] text-brand-muted leading-relaxed max-w-sm">
               A curated global luxury fashion marketplace uniting architectural tailoring,
               artisanal knitwear, and Italian leather goods. Milan · Paris · Mumbai.
             </p>
-            <div className="flex gap-4 pt-2 text-[#777777]">
+            <div className="flex gap-4 pt-2 text-brand-muted">
               <ShieldCheck className="w-4 h-4" />
               <Truck className="w-4 h-4" />
               <RotateCcw className="w-4 h-4" />
@@ -2842,24 +2842,24 @@ export default function App() {
 
           <div className="lg:col-span-2">
             <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] mb-4">Collections</p>
-            <ul className="space-y-2.5 text-[12px] text-[#777777]">
+            <ul className="space-y-2.5 text-[12px] text-brand-muted">
               <li>
-                <button onClick={() => navigateToShop('New Arrivals')} className="hover:text-[#171717]">
+                <button onClick={() => navigateToShop('New Arrivals')} className="hover:text-brand-primary">
                   New Arrivals
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateToShop('Women')} className="hover:text-[#171717]">
+                <button onClick={() => navigateToShop('Women')} className="hover:text-brand-primary">
                   Women
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateToShop('Men')} className="hover:text-[#171717]">
+                <button onClick={() => navigateToShop('Men')} className="hover:text-brand-primary">
                   Men
                 </button>
               </li>
               <li>
-                <button onClick={() => navigateToShop('Accessories')} className="hover:text-[#171717]">
+                <button onClick={() => navigateToShop('Accessories')} className="hover:text-brand-primary">
                   Accessories
                 </button>
               </li>
@@ -2868,7 +2868,7 @@ export default function App() {
 
           <div className="lg:col-span-2">
             <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] mb-4">Client Care</p>
-            <ul className="space-y-2.5 text-[12px] text-[#777777]">
+            <ul className="space-y-2.5 text-[12px] text-brand-muted">
               <li>Express Delivery (2–3 Days)</li>
               <li>14-Day Archival Returns</li>
               <li>Code WELCOME15 (15% Off)</li>
@@ -2880,7 +2880,7 @@ export default function App() {
             <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em]">
               Private Client Dispatch
             </p>
-            <p className="text-[12px] text-[#777777]">
+            <p className="text-[12px] text-brand-muted">
               Receive seasonal lookbooks, private archive access, and salon invitations.
             </p>
             <form onSubmit={handleNewsletter} className="flex pt-1">
@@ -2889,18 +2889,18 @@ export default function App() {
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder="ENTER YOUR EMAIL"
-                className="flex-1 px-3.5 py-3 bg-[#FFFFFF] border border-[#171717] font-sans-ed text-[11px] uppercase tracking-[0.1em] focus:outline-none placeholder:text-[#777777]"
+                className="flex-1 px-3.5 py-3 bg-brand-surface border border-brand-primary font-sans-ed text-[11px] uppercase tracking-[0.1em] focus:outline-none placeholder:text-brand-muted"
               />
               <button
                 type="submit"
-                className="px-5 py-3 bg-[#171717] text-[#FFFFFF] hover:bg-[#B89B72] transition-colors font-sans-ed text-[11px] uppercase tracking-[0.12em]"
+                className="px-5 py-3 bg-brand-primary text-brand-white hover:bg-brand-primary-hover transition-colors font-sans-ed text-[11px] uppercase tracking-[0.12em]"
               >
                 Subscribe
               </button>
             </form>
           </div>
         </div>
-        <div className="border-t border-[#EAEAEA] py-4 px-4 sm:px-8 max-w-[1600px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-[11px] text-[#777777]">
+        <div className="border-t border-brand-border py-4 px-4 sm:px-8 max-w-[1600px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-[11px] text-brand-muted">
           <p className="font-sans-ed uppercase tracking-[0.12em]">© 2026 Bandra Street Atelier</p>
           <p>Prices inclusive of duties &amp; GST</p>
         </div>
@@ -2909,11 +2909,11 @@ export default function App() {
       {/* ==================================================================== */}
       {/* MOBILE BOTTOM NAVIGATION BAR                                         */}
       {/* ==================================================================== */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#FFFFFF] border-t border-[#EAEAEA] grid grid-cols-5 h-14">
+      <nav className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-brand-surface border-t border-brand-border grid grid-cols-5 h-14">
         <button
           onClick={navigateHome}
           className={`flex flex-col items-center justify-center gap-0.5 text-[9px] font-sans-ed uppercase tracking-[0.1em] ${
-            view === 'home' ? 'text-[#B89B72]' : 'text-[#171717]'
+            view === 'home' ? 'text-brand-primary' : 'text-brand-ink'
           }`}
         >
           <Home className="w-4 h-4" />
@@ -2922,7 +2922,7 @@ export default function App() {
         <button
           onClick={() => navigateToShop('All')}
           className={`flex flex-col items-center justify-center gap-0.5 text-[9px] font-sans-ed uppercase tracking-[0.1em] ${
-            view === 'shop' ? 'text-[#B89B72]' : 'text-[#171717]'
+            view === 'shop' ? 'text-brand-primary' : 'text-brand-ink'
           }`}
         >
           <Sparkles className="w-4 h-4" />
@@ -2930,21 +2930,21 @@ export default function App() {
         </button>
         <button
           onClick={() => setSearchOpen((v) => !v)}
-          className="flex flex-col items-center justify-center gap-0.5 text-[9px] font-sans-ed uppercase tracking-[0.1em] text-[#171717]"
+          className="flex flex-col items-center justify-center gap-0.5 text-[9px] font-sans-ed uppercase tracking-[0.1em] text-brand-ink"
         >
           <Search className="w-4 h-4" />
           Search
         </button>
         <button
           onClick={() => setWishlistOpen(true)}
-          className="relative flex flex-col items-center justify-center gap-0.5 text-[9px] font-sans-ed uppercase tracking-[0.1em] text-[#171717]"
+          className="relative flex flex-col items-center justify-center gap-0.5 text-[9px] font-sans-ed uppercase tracking-[0.1em] text-brand-ink"
         >
           <Heart className="w-4 h-4" />
           Saved ({wishlist.length})
         </button>
         <button
           onClick={() => setBagOpen(true)}
-          className="relative flex flex-col items-center justify-center gap-0.5 text-[9px] font-sans-ed uppercase tracking-[0.1em] text-[#171717]"
+          className="relative flex flex-col items-center justify-center gap-0.5 text-[9px] font-sans-ed uppercase tracking-[0.1em] text-brand-ink"
         >
           <ShoppingBag className="w-4 h-4" />
           Bag ({bagCount})
@@ -2957,11 +2957,11 @@ export default function App() {
       {mobileFilterOpen && (
         <div className="fixed inset-0 z-50 flex justify-end lg:hidden">
           <div
-            className="fixed inset-0 bg-[#171717]/40"
+            className="fixed inset-0 bg-brand-primary/40"
             onClick={() => setMobileFilterOpen(false)}
           />
-          <div className="relative z-10 w-full max-w-sm bg-[#FFFFFF] h-full flex flex-col border-l border-[#EAEAEA]">
-            <div className="px-6 py-4 border-b border-[#EAEAEA] flex items-center justify-between">
+          <div className="relative z-10 w-full max-w-sm bg-brand-surface h-full flex flex-col border-l border-brand-border">
+            <div className="px-6 py-4 border-b border-brand-border flex items-center justify-between">
               <span className="font-sans-ed text-[11px] uppercase tracking-[0.14em]">
                 Filter Collection
               </span>
@@ -2970,10 +2970,10 @@ export default function App() {
               </button>
             </div>
             <div className="flex-1 overflow-y-auto p-6">{renderFilterControls()}</div>
-            <div className="p-4 border-t border-[#EAEAEA]">
+            <div className="p-4 border-t border-brand-border">
               <button
                 onClick={() => setMobileFilterOpen(false)}
-                className="w-full py-3.5 bg-[#171717] text-[#FFFFFF] font-sans-ed text-[11px] uppercase tracking-[0.14em]"
+                className="w-full py-3.5 bg-brand-primary text-brand-white font-sans-ed text-[11px] uppercase tracking-[0.14em]"
               >
                 Show {filteredProducts.length} Results
               </button>
@@ -2988,11 +2988,11 @@ export default function App() {
       {bagOpen && (
         <div className="fixed inset-0 z-50 flex justify-end">
           <div
-            className="fixed inset-0 bg-[#171717]/40 backdrop-blur-[2px]"
+            className="fixed inset-0 bg-brand-primary/40 backdrop-blur-[2px]"
             onClick={() => setBagOpen(false)}
           />
-          <div className="relative z-10 w-full max-w-md bg-[#FFFFFF] border-l border-[#EAEAEA] h-full flex flex-col">
-            <div className="px-6 py-5 border-b border-[#EAEAEA] flex items-center justify-between">
+          <div className="relative z-10 w-full max-w-md bg-brand-surface border-l border-brand-border h-full flex flex-col">
+            <div className="px-6 py-5 border-b border-brand-border flex items-center justify-between">
               <span className="font-sans-ed text-[11px] uppercase tracking-[0.14em]">
                 Shopping Bag ({bagCount})
               </span>
@@ -3002,15 +3002,15 @@ export default function App() {
             </div>
 
             {/* Free Shipping Progress Bar */}
-            <div className="px-6 py-4 bg-[#F8F6F2] border-b border-[#EAEAEA]">
+            <div className="px-6 py-4 bg-brand-bg border-b border-brand-border">
               <p className="font-sans-ed text-[11px] uppercase tracking-[0.1em] mb-2">
                 {remainingForFreeShip > 0
                   ? `Add ${formatINR(remainingForFreeShip)} more for complimentary express shipping`
                   : 'Complimentary Express Shipping Unlocked'}
               </p>
-              <div className="w-full h-1 bg-[#EAEAEA]">
+              <div className="w-full h-1 bg-brand-border">
                 <div
-                  className="h-full bg-[#B89B72] transition-all duration-500"
+                  className="h-full bg-brand-accent transition-all duration-500"
                   style={{ width: `${shippingProgress}%` }}
                 />
               </div>
@@ -3019,7 +3019,7 @@ export default function App() {
             <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
               {cart.length === 0 ? (
                 <div className="py-16 text-center space-y-4">
-                  <p className="font-serif-ed text-2xl font-light text-[#777777]">
+                  <p className="font-serif-ed text-2xl font-light text-brand-muted">
                     Your shopping bag is currently empty.
                   </p>
                   <button
@@ -3027,7 +3027,7 @@ export default function App() {
                       setBagOpen(false);
                       navigateToShop('All');
                     }}
-                    className="px-6 py-3 border border-[#171717] font-sans-ed text-[11px] uppercase tracking-[0.12em] hover:bg-[#171717] hover:text-[#FFFFFF]"
+                    className="px-6 py-3 border border-brand-primary font-sans-ed text-[11px] uppercase tracking-[0.12em] hover:bg-brand-primary-hover hover:text-brand-ink"
                   >
                     Explore Collection
                   </button>
@@ -3036,18 +3036,18 @@ export default function App() {
                 cart.map((item) => (
                   <div
                     key={item.key}
-                    className="flex gap-4 pb-6 border-b border-[#EAEAEA] last:border-b-0"
+                    className="flex gap-4 pb-6 border-b border-brand-border last:border-b-0"
                   >
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-20 aspect-[3/4] object-cover border border-[#EAEAEA] shrink-0"
+                      className="w-20 aspect-[3/4] object-cover border border-brand-border shrink-0"
                     />
                     <div className="flex-1 flex flex-col justify-between">
                       <div>
                         <div className="flex justify-between gap-2">
                           <div>
-                            <p className="font-sans-ed text-[9px] uppercase tracking-[0.12em] text-[#B89B72]">
+                            <p className="font-sans-ed text-[9px] uppercase tracking-[0.12em] text-brand-primary">
                               {item.brand}
                             </p>
                             <button
@@ -3062,22 +3062,22 @@ export default function App() {
                           </div>
                           <button
                             onClick={() => removeFromCart(item.key)}
-                            className="text-[#777777] hover:text-[#171717]"
+                            className="text-brand-muted hover:text-brand-primary"
                             aria-label="Remove item"
                           >
                             <X className="w-3.5 h-3.5" />
                           </button>
                         </div>
-                        <p className="text-[11px] text-[#777777] mt-1">
+                        <p className="text-[11px] text-brand-muted mt-1">
                           Size: {item.size} · Color: {item.colorName}
                         </p>
                       </div>
 
                       <div className="flex items-center justify-between pt-3">
-                        <div className="flex items-center border border-[#EAEAEA]">
+                        <div className="flex items-center border border-brand-border">
                           <button
                             onClick={() => updateCartQty(item.key, -1)}
-                            className="p-1.5 hover:bg-[#F8F6F2]"
+                            className="p-1.5 hover:bg-brand-bg"
                             aria-label="Decrease quantity"
                           >
                             <Minus className="w-3 h-3" />
@@ -3085,7 +3085,7 @@ export default function App() {
                           <span className="px-3 font-sans-ed text-[11px]">{item.quantity}</span>
                           <button
                             onClick={() => updateCartQty(item.key, 1)}
-                            className="p-1.5 hover:bg-[#F8F6F2]"
+                            className="p-1.5 hover:bg-brand-bg"
                             aria-label="Increase quantity"
                           >
                             <Plus className="w-3 h-3" />
@@ -3102,39 +3102,39 @@ export default function App() {
             </div>
 
             {cart.length > 0 && (
-              <div className="p-6 border-t border-[#EAEAEA] bg-[#FFFFFF] space-y-4">
+              <div className="p-6 border-t border-brand-border bg-brand-surface space-y-4">
                 <form onSubmit={handleApplyPromo} className="flex">
                   <input
                     type="text"
                     value={promoInput}
                     onChange={(e) => setPromoInput(e.target.value)}
                     placeholder="PROMO CODE (TRY WELCOME15)"
-                    className="flex-1 px-3 py-2.5 bg-transparent border border-[#EAEAEA] focus:border-[#171717] focus:outline-none font-sans-ed text-[10px] uppercase tracking-[0.12em]"
+                    className="flex-1 px-3 py-2.5 bg-transparent border border-brand-border focus:border-brand-primary focus:outline-none font-sans-ed text-[10px] uppercase tracking-[0.12em]"
                   />
                   <button
                     type="submit"
-                    className="px-4 py-2.5 border border-l-0 border-[#171717] bg-[#171717] text-[#FFFFFF] font-sans-ed text-[10px] uppercase tracking-[0.12em] hover:bg-[#B89B72] hover:border-[#B89B72]"
+                    className="px-4 py-2.5 border border-l-0 border-brand-primary bg-brand-primary text-brand-white font-sans-ed text-[10px] uppercase tracking-[0.12em] hover:bg-brand-primary-hover hover:border-brand-accent"
                   >
                     Apply
                   </button>
                 </form>
-                {promoError && <p className="text-[11px] text-[#B89B72]">{promoError}</p>}
+                {promoError && <p className="text-[11px] text-brand-primary">{promoError}</p>}
                 {appliedPromo && (
-                  <div className="flex items-center justify-between text-[11px] text-[#B89B72] font-sans-ed uppercase tracking-[0.1em]">
+                  <div className="flex items-center justify-between text-[11px] text-brand-primary font-sans-ed uppercase tracking-[0.1em]">
                     <span>Code {appliedPromo} Applied (15% Off)</span>
-                    <button onClick={() => setAppliedPromo(null)} className="underline text-[#777777]">
+                    <button onClick={() => setAppliedPromo(null)} className="underline text-brand-muted">
                       Remove
                     </button>
                   </div>
                 )}
 
-                <div className="space-y-1.5 pt-2 border-t border-[#EAEAEA] text-[12px]">
-                  <div className="flex justify-between text-[#777777]">
+                <div className="space-y-1.5 pt-2 border-t border-brand-border text-[12px]">
+                  <div className="flex justify-between text-brand-muted">
                     <span>Subtotal</span>
                     <span>{formatINR(subtotal)}</span>
                   </div>
                   {discount > 0 && (
-                    <div className="flex justify-between text-[#B89B72]">
+                    <div className="flex justify-between text-brand-primary">
                       <span>Privilege Discount</span>
                       <span>-{formatINR(discount)}</span>
                     </div>
@@ -3152,7 +3152,7 @@ export default function App() {
                     setView('checkout');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="w-full py-4 bg-[#171717] text-[#FFFFFF] hover:bg-[#B89B72] transition-colors font-sans-ed text-[11px] uppercase tracking-[0.14em]"
+                  className="w-full py-4 bg-brand-primary text-brand-white hover:bg-brand-primary-hover transition-colors font-sans-ed text-[11px] uppercase tracking-[0.14em]"
                 >
                   Proceed to Checkout
                 </button>
@@ -3168,11 +3168,11 @@ export default function App() {
       {wishlistOpen && (
         <div className="fixed inset-0 z-50 flex justify-end">
           <div
-            className="fixed inset-0 bg-[#171717]/40 backdrop-blur-[2px]"
+            className="fixed inset-0 bg-brand-primary/40 backdrop-blur-[2px]"
             onClick={() => setWishlistOpen(false)}
           />
-          <div className="relative z-10 w-full max-w-md bg-[#FFFFFF] border-l border-[#EAEAEA] h-full flex flex-col">
-            <div className="px-6 py-5 border-b border-[#EAEAEA] flex items-center justify-between">
+          <div className="relative z-10 w-full max-w-md bg-brand-surface border-l border-brand-border h-full flex flex-col">
+            <div className="px-6 py-5 border-b border-brand-border flex items-center justify-between">
               <span className="font-sans-ed text-[11px] uppercase tracking-[0.14em]">
                 Saved Wishlist ({wishlist.length})
               </span>
@@ -3182,7 +3182,7 @@ export default function App() {
             </div>
             <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
               {wishlist.length === 0 ? (
-                <p className="font-serif-ed text-2xl font-light text-[#777777] text-center py-16">
+                <p className="font-serif-ed text-2xl font-light text-brand-muted text-center py-16">
                   Your wishlist is empty.
                 </p>
               ) : (
@@ -3190,17 +3190,17 @@ export default function App() {
                   const p = PRODUCTS.find((item) => item.id === id);
                   if (!p) return null;
                   return (
-                    <div key={p.id} className="flex gap-4 pb-6 border-b border-[#EAEAEA]">
+                    <div key={p.id} className="flex gap-4 pb-6 border-b border-brand-border">
                       <img
                         src={p.colors[0].images[0]}
                         alt={p.title}
-                        className="w-20 aspect-[3/4] object-cover border border-[#EAEAEA]"
+                        className="w-20 aspect-[3/4] object-cover border border-brand-border"
                       />
                       <div className="flex-1 flex flex-col justify-between">
                         <div>
                           <div className="flex justify-between gap-2">
                             <div>
-                              <p className="font-sans-ed text-[9px] uppercase tracking-[0.12em] text-[#B89B72]">
+                              <p className="font-sans-ed text-[9px] uppercase tracking-[0.12em] text-brand-primary">
                                 {p.brand}
                               </p>
                               <button
@@ -3215,12 +3215,12 @@ export default function App() {
                             </div>
                             <button
                               onClick={() => toggleWishlist(p.id)}
-                              className="text-[#777777] hover:text-[#171717]"
+                              className="text-brand-muted hover:text-brand-primary"
                             >
                               <X className="w-3.5 h-3.5" />
                             </button>
                           </div>
-                          <p className="font-sans-ed text-[12px] text-[#777777] mt-1">
+                          <p className="font-sans-ed text-[12px] text-brand-muted mt-1">
                             {formatINR(p.price)}
                           </p>
                         </div>
@@ -3229,7 +3229,7 @@ export default function App() {
                             addToCart(p, p.sizes[0], 0, true);
                             setWishlistOpen(false);
                           }}
-                          className="mt-3 py-2 border border-[#171717] font-sans-ed text-[10px] uppercase tracking-[0.12em] hover:bg-[#171717] hover:text-[#FFFFFF] transition-colors"
+                          className="mt-3 py-2 border border-brand-primary font-sans-ed text-[10px] uppercase tracking-[0.12em] hover:bg-brand-primary-hover hover:text-brand-ink transition-colors"
                         >
                           Move to Bag ({p.sizes[0]})
                         </button>
@@ -3247,8 +3247,8 @@ export default function App() {
       {/* MODALS: MOBILE MENU, LIGHTBOX, SIZE GUIDE, ACCOUNT                   */}
       {/* ==================================================================== */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-[#FFFFFF] p-6 flex flex-col">
-          <div className="flex justify-between items-center pb-6 border-b border-[#EAEAEA]">
+        <div className="fixed inset-0 z-50 bg-brand-surface p-6 flex flex-col">
+          <div className="flex justify-between items-center pb-6 border-b border-brand-border">
             <span className="font-serif-ed text-xl tracking-[0.14em] uppercase">BANDRA STREET</span>
             <button onClick={() => setMobileMenuOpen(false)}>
               <X className="w-5 h-5" />
@@ -3275,11 +3275,11 @@ export default function App() {
 
       {lightboxImg && (
         <div
-          className="fixed inset-0 z-50 bg-[#171717]/90 flex items-center justify-center p-4 sm:p-10 cursor-zoom-out"
+          className="fixed inset-0 z-50 bg-brand-primary/90 flex items-center justify-center p-4 sm:p-10 cursor-zoom-out"
           onClick={() => setLightboxImg(null)}
         >
           <button
-            className="absolute top-6 right-6 text-[#FFFFFF] p-2 border border-[#FFFFFF]/40"
+            className="absolute top-6 right-6 text-brand-white p-2 border border-brand-white/40"
             onClick={() => setLightboxImg(null)}
           >
             <X className="w-5 h-5" />
@@ -3293,9 +3293,9 @@ export default function App() {
       )}
 
       {sizeGuideOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#171717]/50">
-          <div className="bg-[#FFFFFF] border border-[#171717] max-w-lg w-full p-6 sm:p-8 space-y-5">
-            <div className="flex justify-between items-center pb-3 border-b border-[#EAEAEA]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-primary/50">
+          <div className="bg-brand-surface border border-brand-primary max-w-lg w-full p-6 sm:p-8 space-y-5">
+            <div className="flex justify-between items-center pb-3 border-b border-brand-border">
               <h3 className="font-serif-ed text-2xl font-light">Atelier Size Guide (cm)</h3>
               <button onClick={() => setSizeGuideOpen(false)}>
                 <X className="w-4 h-4" />
@@ -3303,14 +3303,14 @@ export default function App() {
             </div>
             <table className="w-full text-left font-sans-ed text-[11px] uppercase tracking-[0.1em]">
               <thead>
-                <tr className="border-b border-[#EAEAEA] text-[#777777]">
+                <tr className="border-b border-brand-border text-brand-muted">
                   <th className="py-2">Size</th>
                   <th className="py-2">Chest</th>
                   <th className="py-2">Waist</th>
                   <th className="py-2">Hip</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#EAEAEA]">
+              <tbody className="divide-y divide-brand-border">
                 {[
                   ['XS', '82–85', '64–67', '90–93'],
                   ['S', '86–89', '68–71', '94–97'],
@@ -3332,9 +3332,9 @@ export default function App() {
       )}
 
       {accountOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#171717]/50">
-          <div className="bg-[#FFFFFF] border border-[#171717] max-w-lg w-full p-6 sm:p-8 space-y-5 max-h-[85vh] overflow-y-auto">
-            <div className="flex justify-between items-center pb-3 border-b border-[#EAEAEA]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-primary/50">
+          <div className="bg-brand-surface border border-brand-primary max-w-lg w-full p-6 sm:p-8 space-y-5 max-h-[85vh] overflow-y-auto">
+            <div className="flex justify-between items-center pb-3 border-b border-brand-border">
               <h3 className="font-serif-ed text-2xl font-light">
                 {authUser ? 'Client Account & Orders' : 'Client Sign In'}
               </h3>
@@ -3350,28 +3350,28 @@ export default function App() {
                     <p className="font-sans-ed text-[11px] uppercase tracking-[0.12em] font-medium">
                       {authUser.name}
                     </p>
-                    <p className="text-[#777777] text-[12px]">{authUser.email}</p>
+                    <p className="text-brand-muted text-[12px]">{authUser.email}</p>
                   </div>
                   <button
                     onClick={() => {
                       setAuthUser(null);
                       showToast('Signed out');
                     }}
-                    className="px-3 py-1.5 border border-[#EAEAEA] hover:border-[#171717] font-sans-ed text-[10px] uppercase tracking-[0.1em]"
+                    className="px-3 py-1.5 border border-brand-border hover:border-brand-primary-hover font-sans-ed text-[10px] uppercase tracking-[0.1em]"
                   >
                     Sign Out
                   </button>
                 </div>
 
                 <div className="space-y-2.5">
-                  <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                  <p className="font-sans-ed text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                     Order History ({customerOrders.length})
                   </p>
                   {customerOrders.map((ord) => (
-                    <div key={ord.id} className="p-3.5 border border-[#EAEAEA] bg-[#F8F6F2] flex justify-between items-center">
+                    <div key={ord.id} className="p-3.5 border border-brand-border bg-brand-bg flex justify-between items-center">
                       <div>
                         <p className="font-sans-ed text-[11px] font-medium">{ord.id}</p>
-                        <p className="text-[11px] text-[#777777]">
+                        <p className="text-[11px] text-brand-muted">
                           {ord.date} · {ord.payment} · {ord.status}
                         </p>
                       </div>
@@ -3387,7 +3387,7 @@ export default function App() {
                               );
                               showToast(`Return requested for ${ord.id}`);
                             }}
-                            className="text-[10px] underline text-[#B89B72]"
+                            className="text-[10px] underline text-brand-primary"
                           >
                             Request Return
                           </button>
@@ -3399,13 +3399,13 @@ export default function App() {
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="flex border-b border-[#EAEAEA] text-[11px] font-sans-ed uppercase tracking-[0.12em]">
+                <div className="flex border-b border-brand-border text-[11px] font-sans-ed uppercase tracking-[0.12em]">
                   {(['login', 'register', 'reset'] as const).map((t) => (
                     <button
                       key={t}
                       onClick={() => setAuthTab(t)}
                       className={`flex-1 py-2.5 border-b-2 ${
-                        authTab === t ? 'border-[#171717] text-[#171717]' : 'border-transparent text-[#777777]'
+                        authTab === t ? 'border-brand-primary text-brand-ink' : 'border-transparent text-brand-muted'
                       }`}
                     >
                       {t === 'login' ? 'Sign In' : t === 'register' ? 'Register' : 'Reset'}
@@ -3435,7 +3435,7 @@ export default function App() {
                       value={authName}
                       onChange={(e) => setAuthName(e.target.value)}
                       placeholder="FULL NAME"
-                      className="w-full px-3.5 py-2.5 border border-[#EAEAEA] text-[12px]"
+                      className="w-full px-3.5 py-2.5 border border-brand-border text-[12px]"
                     />
                   )}
                   <input
@@ -3444,7 +3444,7 @@ export default function App() {
                     value={authEmail}
                     onChange={(e) => setAuthEmail(e.target.value)}
                     placeholder="EMAIL ADDRESS"
-                    className="w-full px-3.5 py-2.5 border border-[#EAEAEA] text-[12px]"
+                    className="w-full px-3.5 py-2.5 border border-brand-border text-[12px]"
                   />
                   {authTab !== 'reset' && (
                     <input
@@ -3453,12 +3453,12 @@ export default function App() {
                       value={authPassword}
                       onChange={(e) => setAuthPassword(e.target.value)}
                       placeholder="PASSWORD"
-                      className="w-full px-3.5 py-2.5 border border-[#EAEAEA] text-[12px]"
+                      className="w-full px-3.5 py-2.5 border border-brand-border text-[12px]"
                     />
                   )}
                   <button
                     type="submit"
-                    className="w-full py-3 bg-[#171717] text-[#FFFFFF] font-sans-ed text-[11px] uppercase tracking-[0.12em]"
+                    className="w-full py-3 bg-brand-primary text-brand-white font-sans-ed text-[11px] uppercase tracking-[0.12em]"
                   >
                     {authTab === 'login'
                       ? 'Sign In'
@@ -3480,7 +3480,7 @@ export default function App() {
         {toasts.map((t) => (
           <div
             key={t.id}
-            className="bg-[#171717] text-[#FFFFFF] border border-[#171717] px-5 py-3 font-sans-ed text-[11px] uppercase tracking-[0.12em] shadow-md"
+            className="bg-brand-primary text-brand-white border border-brand-primary px-5 py-3 font-sans-ed text-[11px] uppercase tracking-[0.12em] shadow-md"
           >
             {t.text}
           </div>
@@ -3516,12 +3516,12 @@ function ProductCard({
 
   return (
     <div
-      className="group flex flex-col bg-[#FFFFFF]"
+      className="group flex flex-col bg-brand-surface"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       {/* 3:4 Portrait Image Container */}
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#F8F6F2] border border-[#EAEAEA]">
+      <div className="relative aspect-[3/4] w-full overflow-hidden bg-brand-bg border border-brand-border">
         <button
           onClick={() => onSelect(product.id)}
           className="w-full h-full block text-left"
@@ -3537,17 +3537,17 @@ function ProductCard({
         {/* Badges: NEW, BESTSELLER, SALE */}
         <div className="absolute top-3 left-3 flex flex-col gap-1">
           {discountPct > 0 && (
-            <span className="px-2 py-0.5 bg-[#B89B72] text-[#FFFFFF] font-sans-ed text-[9px] uppercase tracking-[0.12em]">
+            <span className="px-2 py-0.5 bg-brand-primary text-brand-white font-sans-ed text-[9px] uppercase tracking-[0.12em]">
               SALE · {discountPct}% OFF
             </span>
           )}
           {product.isNew && (
-            <span className="px-2 py-0.5 bg-[#FFFFFF] text-[#171717] border border-[#EAEAEA] font-sans-ed text-[9px] uppercase tracking-[0.12em]">
+            <span className="px-2 py-0.5 bg-brand-surface text-brand-ink border border-brand-border font-sans-ed text-[9px] uppercase tracking-[0.12em]">
               NEW
             </span>
           )}
           {product.isBestSeller && !discountPct && (
-            <span className="px-2 py-0.5 bg-[#171717] text-[#FFFFFF] font-sans-ed text-[9px] uppercase tracking-[0.12em]">
+            <span className="px-2 py-0.5 bg-brand-primary text-brand-white font-sans-ed text-[9px] uppercase tracking-[0.12em]">
               BESTSELLER
             </span>
           )}
@@ -3560,18 +3560,18 @@ function ProductCard({
             onToggleWishlist(product.id);
           }}
           aria-label="Toggle wishlist"
-          className="absolute top-3 right-3 p-2 bg-[#FFFFFF]/90 border border-[#EAEAEA] hover:border-[#171717] transition-colors"
+          className="absolute top-3 right-3 p-2 bg-brand-surface/90 border border-brand-border hover:border-brand-primary-hover transition-colors"
         >
           <Heart
             className={`w-3.5 h-3.5 ${
-              isWishlisted ? 'fill-[#B89B72] text-[#B89B72]' : 'text-[#171717]'
+              isWishlisted ? 'fill-brand-accent text-brand-accent' : 'text-brand-ink'
             }`}
           />
         </button>
 
         {/* Quick-Add Size Selection & Button on Hover */}
-        <div className="absolute inset-x-0 bottom-0 p-2.5 bg-[#FFFFFF]/95 border-t border-[#EAEAEA] translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-          <p className="font-sans-ed text-[9px] uppercase tracking-[0.12em] text-[#777777] mb-1.5 text-center">
+        <div className="absolute inset-x-0 bottom-0 p-2.5 bg-brand-surface/95 border-t border-brand-border translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+          <p className="font-sans-ed text-[9px] uppercase tracking-[0.12em] text-brand-muted mb-1.5 text-center">
             Quick Add to Bag
           </p>
           <div className="flex justify-center flex-wrap gap-1">
@@ -3582,7 +3582,7 @@ function ProductCard({
                   e.stopPropagation();
                   onQuickAdd(product, sz);
                 }}
-                className="px-2.5 py-1 border border-[#EAEAEA] hover:bg-[#171717] hover:text-[#FFFFFF] hover:border-[#171717] transition-colors font-sans-ed text-[10px] uppercase tracking-[0.1em]"
+                className="px-2.5 py-1 border border-brand-border hover:bg-brand-primary-hover hover:text-brand-ink hover:border-brand-primary-hover transition-colors font-sans-ed text-[10px] uppercase tracking-[0.1em]"
               >
                 {sz}
               </button>
@@ -3593,25 +3593,25 @@ function ProductCard({
 
       {/* Product Metadata: Brand, Title, Price, Original Price, Discount % */}
       <div className="pt-3 space-y-1">
-        <p className="font-sans-ed text-[10px] uppercase tracking-[0.14em] text-[#B89B72]">
+        <p className="font-sans-ed text-[10px] uppercase tracking-[0.14em] text-brand-primary">
           {product.brand}
         </p>
         <button
           onClick={() => onSelect(product.id)}
-          className="text-left font-sans-ed text-[11px] uppercase tracking-[0.1em] text-[#171717] hover:text-[#777777] transition-colors leading-snug block w-full truncate"
+          className="text-left font-sans-ed text-[11px] uppercase tracking-[0.1em] text-brand-ink hover:text-brand-muted transition-colors leading-snug block w-full truncate"
         >
           {product.title}
         </button>
         <div className="flex items-baseline gap-2 pt-0.5">
-          <span className="font-sans-ed text-[12px] font-medium text-[#171717]">
+          <span className="font-sans-ed text-[12px] font-medium text-brand-ink">
             {formatINR(product.price)}
           </span>
           {product.originalPrice && (
             <>
-              <span className="font-sans-ed text-[11px] text-[#777777] line-through">
+              <span className="font-sans-ed text-[11px] text-brand-muted line-through">
                 {formatINR(product.originalPrice)}
               </span>
-              <span className="font-sans-ed text-[10px] text-[#B89B72] font-medium">
+              <span className="font-sans-ed text-[10px] text-brand-primary font-medium">
                 ({discountPct}% OFF)
               </span>
             </>

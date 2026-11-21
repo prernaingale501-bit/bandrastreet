@@ -404,6 +404,11 @@ const REVENUE_CHART_DATA = [
 ];
 
 const formatINR = (n: number) => '₹' + n.toLocaleString('en-IN');
+const CHART_TOOLTIP_STYLE = {
+  backgroundColor: 'var(--color-brand-surface)',
+  borderColor: 'var(--color-brand-border)',
+  color: 'var(--color-brand-ink)',
+};
 
 // ============================================================================
 // MAIN VENDOR DASHBOARD COMPONENT
@@ -796,22 +801,22 @@ export default function App() {
   // RENDER
   // ============================================================================
   return (
-    <div className="min-h-screen bg-[#F8F6F2] text-[#171717] flex font-sans antialiased">
+    <div className="min-h-screen bg-brand-bg text-brand-ink flex font-sans antialiased">
       {/* ==================================================================== */}
       {/* DESKTOP SIDEBAR                                                      */}
       {/* ==================================================================== */}
-      <aside className="hidden lg:flex w-64 bg-[#FFFFFF] border-r border-[#EAEAEA] flex-col shrink-0">
-        <div className="h-16 px-6 border-b border-[#EAEAEA] flex items-center justify-between">
+      <aside className="hidden lg:flex w-64 bg-brand-surface border-r border-brand-border flex-col shrink-0">
+        <div className="h-16 px-6 border-b border-brand-border flex items-center justify-between">
           <div>
-            <p className="font-serif text-lg tracking-[0.14em] uppercase font-medium">BANDRA STREET</p>
-            <p className="text-[10px] uppercase tracking-[0.14em] text-[#B89B72]">Vendor Portal</p>
+            <p className="font-serif text-lg tracking-[0.14em] uppercase font-medium">Bandra Street</p>
+            <p className="text-[10px] uppercase tracking-[0.14em] text-brand-primary">Vendor Portal</p>
           </div>
         </div>
 
         {/* Vendor Session Switcher (Demonstrates strict RLS isolation) */}
-        <div className="p-4 border-b border-[#EAEAEA] bg-[#F8F6F2]/70">
-          <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1.5 flex items-center gap-1">
-            <Shield className="w-3 h-3 text-[#B89B72]" /> Authenticated Store
+        <div className="p-4 border-b border-brand-border bg-brand-bg/70">
+          <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1.5 flex items-center gap-1">
+            <Shield className="w-3 h-3 text-brand-accent" /> Authenticated Store
           </p>
           <select
             value={activeVendorId}
@@ -820,7 +825,7 @@ export default function App() {
               setSelectedOrder(null);
               showToast('Switched isolated vendor session');
             }}
-            className="w-full px-2.5 py-1.5 bg-[#FFFFFF] border border-[#EAEAEA] text-[11px] font-medium uppercase tracking-[0.08em] focus:outline-none"
+            className="w-full px-2.5 py-1.5 bg-brand-surface border border-brand-border text-[11px] font-medium uppercase tracking-[0.08em] focus:outline-none"
           >
             {VENDORS.map((v) => (
               <option key={v.id} value={v.id}>
@@ -828,18 +833,18 @@ export default function App() {
               </option>
             ))}
           </select>
-          <div className="flex items-center justify-between mt-2 text-[10px] text-[#777777]">
+          <div className="flex items-center justify-between mt-2 text-[10px] text-brand-muted">
             <span>Role:</span>
             <button
               onClick={() => setRole(role === 'Owner' ? 'Manager' : 'Owner')}
-              className="px-2 py-0.5 border border-[#EAEAEA] bg-[#FFFFFF] text-[#171717] uppercase tracking-[0.08em] hover:border-[#171717]"
+              className="px-2 py-0.5 border border-brand-border bg-brand-surface text-brand-ink uppercase tracking-[0.08em] hover:border-brand-primary-hover"
             >
               {role}
             </button>
           </div>
           <button
             onClick={() => setVendorOnboardingOpen(true)}
-            className="w-full mt-2 py-1.5 border border-[#171717] text-[10px] uppercase tracking-[0.1em] hover:bg-[#171717] hover:text-[#FFFFFF] transition-colors"
+            className="w-full mt-2 py-1.5 border border-brand-primary text-[10px] uppercase tracking-[0.1em] hover:bg-brand-primary-hover hover:text-brand-white transition-colors"
           >
             + Register New Vendor
           </button>
@@ -848,7 +853,7 @@ export default function App() {
         <nav className="flex-1 overflow-y-auto p-4 space-y-6">
           {NAV_GROUPS.map((group) => (
             <div key={group.label}>
-              <p className="px-3 text-[10px] uppercase tracking-[0.14em] text-[#777777] mb-2">
+              <p className="px-3 text-[10px] uppercase tracking-[0.14em] text-brand-muted mb-2">
                 {group.label}
               </p>
               <div className="space-y-0.5">
@@ -863,8 +868,8 @@ export default function App() {
                       }}
                       className={`w-full flex items-center justify-between px-3 py-2.5 text-[12px] transition-colors ${
                         active
-                          ? 'bg-[#171717] text-[#FFFFFF] font-medium'
-                          : 'text-[#171717] hover:bg-[#F8F6F2]'
+                          ? 'bg-brand-primary text-brand-white font-medium'
+                          : 'text-brand-ink hover:bg-brand-bg'
                       }`}
                     >
                       <span className="flex items-center gap-2.5">
@@ -874,7 +879,7 @@ export default function App() {
                       {item.badge !== undefined && (
                         <span
                           className={`px-1.5 py-0.5 text-[10px] ${
-                            active ? 'bg-[#B89B72] text-[#FFFFFF]' : 'bg-[#F8F6F2] text-[#171717] border border-[#EAEAEA]'
+                            active ? 'bg-brand-primary-hover text-brand-white' : 'bg-brand-bg text-brand-ink border border-brand-border'
                           }`}
                         >
                           {item.badge}
@@ -894,11 +899,11 @@ export default function App() {
       {/* ==================================================================== */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Navigation */}
-        <header className="h-16 bg-[#FFFFFF] border-b border-[#EAEAEA] px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30">
+        <header className="h-16 bg-brand-primary text-brand-white border-b border-brand-primary-hover px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileSidebarOpen(true)}
-              className="lg:hidden p-2 border border-[#EAEAEA]"
+              className="lg:hidden p-2 border border-brand-border"
               aria-label="Open navigation"
             >
               <Menu className="w-4 h-4" />
@@ -907,7 +912,7 @@ export default function App() {
               <h1 className="text-[13px] uppercase tracking-[0.14em] font-semibold">
                 {NAV_GROUPS.flatMap((g) => g.items).find((i) => i.id === activeTab)?.title}
               </h1>
-              <p className="text-[11px] text-[#777777] hidden sm:block">
+              <p className="text-[11px] text-brand-secondary hidden sm:block">
                 {activeVendor.name} · RLS Scoped ({role})
               </p>
             </div>
@@ -916,7 +921,7 @@ export default function App() {
           <div className="flex items-center gap-3">
             <button
               onClick={downloadSalesCSV}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 border border-[#EAEAEA] hover:border-[#171717] text-[11px] uppercase tracking-[0.1em]"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 border border-brand-secondary text-brand-white hover:border-brand-accent text-[11px] uppercase tracking-[0.1em]"
             >
               <Download className="w-3.5 h-3.5" /> Export CSV
             </button>
@@ -925,7 +930,7 @@ export default function App() {
                 setEditingProduct(null);
                 setActiveTab('add-product');
               }}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#171717] text-[#FFFFFF] hover:bg-[#B89B72] transition-colors text-[11px] uppercase tracking-[0.12em]"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-brand-primary-hover text-brand-white hover:bg-brand-primary transition-colors text-[11px] uppercase tracking-[0.12em]"
             >
               <Plus className="w-3.5 h-3.5" /> Add Product
             </button>
@@ -942,52 +947,52 @@ export default function App() {
               {/* 6 KPI Cards */}
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
                 {[
-                  { label: 'Total Sales', value: formatINR(totalSales), sub: '+18.4% vs last mo', icon: <IndianRupee className="w-4 h-4 text-[#B89B72]" /> },
-                  { label: 'Total Orders', value: String(vendorOrders.length), sub: 'Last 30 days', icon: <ShoppingCart className="w-4 h-4 text-[#B89B72]" /> },
-                  { label: 'Total Products', value: String(vendorProducts.length), sub: `${lowStockProducts.length} low stock`, icon: <Package className="w-4 h-4 text-[#B89B72]" /> },
-                  { label: 'Pending Orders', value: String(pendingOrdersCount), sub: 'Awaiting dispatch', icon: <Clock className="w-4 h-4 text-[#B89B72]" /> },
-                  { label: 'Monthly Revenue', value: formatINR(418500), sub: 'Nov 2026', icon: <Wallet className="w-4 h-4 text-[#B89B72]" /> },
-                  { label: 'Sales Growth', value: '+22.4%', sub: 'MoM trajectory', icon: <TrendingUp className="w-4 h-4 text-[#B89B72]" /> },
+                  { label: 'Total Sales', value: formatINR(totalSales), sub: '+18.4% vs last mo', icon: <IndianRupee className="w-4 h-4 text-brand-accent" /> },
+                  { label: 'Total Orders', value: String(vendorOrders.length), sub: 'Last 30 days', icon: <ShoppingCart className="w-4 h-4 text-brand-accent" /> },
+                  { label: 'Total Products', value: String(vendorProducts.length), sub: `${lowStockProducts.length} low stock`, icon: <Package className="w-4 h-4 text-brand-accent" /> },
+                  { label: 'Pending Orders', value: String(pendingOrdersCount), sub: 'Awaiting dispatch', icon: <Clock className="w-4 h-4 text-brand-accent" /> },
+                  { label: 'Monthly Revenue', value: formatINR(418500), sub: 'Nov 2026', icon: <Wallet className="w-4 h-4 text-brand-accent" /> },
+                  { label: 'Sales Growth', value: '+22.4%', sub: 'MoM trajectory', icon: <TrendingUp className="w-4 h-4 text-brand-accent" /> },
                 ].map((kpi) => (
-                  <div key={kpi.label} className="bg-[#FFFFFF] border border-[#EAEAEA] p-5 space-y-2">
+                  <div key={kpi.label} className="bg-brand-surface border border-brand-border p-5 space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                      <span className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                         {kpi.label}
                       </span>
                       {kpi.icon}
                     </div>
                     <p className="text-2xl font-semibold tracking-tight">{kpi.value}</p>
-                    <p className="text-[11px] text-[#777777]">{kpi.sub}</p>
+                    <p className="text-[11px] text-brand-muted">{kpi.sub}</p>
                   </div>
                 ))}
               </div>
 
               {/* Revenue Chart + Low-Stock Alerts */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div className="lg:col-span-8 bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+                <div className="lg:col-span-8 bg-brand-surface border border-brand-border p-6">
                   <div className="flex items-center justify-between mb-6">
                     <div>
                       <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                         Revenue Performance (INR)
                       </h2>
-                      <p className="text-[12px] text-[#777777]">6-month gross merchandise volume</p>
+                      <p className="text-[12px] text-brand-muted">6-month gross merchandise volume</p>
                     </div>
-                    <span className="px-2.5 py-1 bg-[#F8F6F2] border border-[#EAEAEA] text-[10px] uppercase tracking-[0.1em] text-[#B89B72]">
+                    <span className="px-2.5 py-1 bg-brand-bg border border-brand-border text-[10px] uppercase tracking-[0.1em] text-brand-primary">
                       +22.4% Growth
                     </span>
                   </div>
                   <div className="h-72">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={REVENUE_CHART_DATA}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#EAEAEA" />
-                        <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#777777' }} />
-                        <YAxis tick={{ fontSize: 11, fill: '#777777' }} />
-                        <Tooltip />
+                        <CartesianGrid strokeDasharray="3 3" stroke="var(--color-brand-border)" />
+                        <XAxis dataKey="month" tick={{ fontSize: 11, fill: 'var(--color-brand-muted)' }} />
+                        <YAxis tick={{ fontSize: 11, fill: 'var(--color-brand-muted)' }} />
+                        <Tooltip contentStyle={CHART_TOOLTIP_STYLE} />
                         <Area
                           type="monotone"
                           dataKey="revenue"
-                          stroke="#171717"
-                          fill="#B89B72"
+                          stroke="var(--color-brand-primary)"
+                          fill="var(--color-brand-accent)"
                           fillOpacity={0.22}
                           strokeWidth={2}
                         />
@@ -997,32 +1002,32 @@ export default function App() {
                 </div>
 
                 {/* Low-Stock Alerts */}
-                <div className="lg:col-span-4 bg-[#FFFFFF] border border-[#EAEAEA] p-6 flex flex-col">
+                <div className="lg:col-span-4 bg-brand-surface border border-brand-border p-6 flex flex-col">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold flex items-center gap-2">
-                      <AlertTriangle className="w-4 h-4 text-[#B89B72]" /> Low-Stock Alerts
+                      <AlertTriangle className="w-4 h-4 text-brand-accent" /> Low-Stock Alerts
                     </h2>
                     <button
                       onClick={() => setActiveTab('inventory')}
-                      className="text-[11px] uppercase tracking-[0.1em] text-[#B89B72] hover:underline"
+                      className="text-[11px] uppercase tracking-[0.1em] text-brand-primary hover:underline"
                     >
                       Manage
                     </button>
                   </div>
                   <div className="space-y-3 flex-1">
                     {lowStockProducts.length === 0 ? (
-                      <p className="text-[13px] text-[#777777] py-8 text-center">
+                      <p className="text-[13px] text-brand-muted py-8 text-center">
                         All SKUs are well stocked.
                       </p>
                     ) : (
                       lowStockProducts.map((p) => (
                         <div
                           key={p.id}
-                          className="p-3.5 bg-[#F8F6F2] border border-[#EAEAEA] flex items-center justify-between gap-3"
+                          className="p-3.5 bg-brand-bg border border-brand-border flex items-center justify-between gap-3"
                         >
                           <div className="min-w-0">
                             <p className="text-[12px] font-medium truncate">{p.title}</p>
-                            <p className="text-[11px] text-[#777777]">
+                            <p className="text-[11px] text-brand-muted">
                               {p.sku} · Only {p.stock} left
                             </p>
                           </div>
@@ -1031,7 +1036,7 @@ export default function App() {
                               adjustStock(p.id, 10);
                               showToast(`Restocked +10 units for ${p.sku}`);
                             }}
-                            className="px-3 py-1.5 bg-[#171717] text-[#FFFFFF] text-[10px] uppercase tracking-[0.1em] shrink-0"
+                            className="px-3 py-1.5 bg-brand-primary text-brand-white text-[10px] uppercase tracking-[0.1em] shrink-0"
                           >
                             +10 Stock
                           </button>
@@ -1044,14 +1049,14 @@ export default function App() {
 
               {/* Recent Orders & Best-Selling Products */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div className="lg:col-span-7 bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+                <div className="lg:col-span-7 bg-brand-surface border border-brand-border p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                       Recent Orders
                     </h2>
                     <button
                       onClick={() => setActiveTab('orders')}
-                      className="text-[11px] uppercase tracking-[0.1em] text-[#B89B72] hover:underline"
+                      className="text-[11px] uppercase tracking-[0.1em] text-brand-primary hover:underline"
                     >
                       View All
                     </button>
@@ -1059,16 +1064,16 @@ export default function App() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-[12px]">
                       <thead>
-                        <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                        <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                           <th className="py-2.5">Order</th>
                           <th className="py-2.5">Customer</th>
                           <th className="py-2.5">Amount</th>
                           <th className="py-2.5">Status</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-[#EAEAEA]">
+                      <tbody className="divide-y divide-brand-border">
                         {vendorOrders.slice(0, 5).map((o) => (
-                          <tr key={o.id} className="hover:bg-[#F8F6F2]">
+                          <tr key={o.id} className="hover:bg-brand-bg">
                             <td className="py-3 font-medium">{o.orderNumber}</td>
                             <td className="py-3">{o.customerName}</td>
                             <td className="py-3">{formatINR(o.grossAmount)}</td>
@@ -1082,7 +1087,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+                <div className="lg:col-span-5 bg-brand-surface border border-brand-border p-6">
                   <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-4">
                     Best-Selling Products
                   </h2>
@@ -1090,15 +1095,15 @@ export default function App() {
                     {bestSellingProducts.map((p) => (
                       <div
                         key={p.id}
-                        className="flex items-center justify-between p-3 border border-[#EAEAEA]"
+                        className="flex items-center justify-between p-3 border border-brand-border"
                       >
                         <div className="min-w-0">
                           <p className="text-[12px] font-medium truncate">{p.title}</p>
-                          <p className="text-[11px] text-[#777777]">
+                          <p className="text-[11px] text-brand-muted">
                             {p.soldCount} sold · {formatINR(p.salePrice || p.price)}
                           </p>
                         </div>
-                        <span className="text-[11px] font-semibold text-[#B89B72] shrink-0">
+                        <span className="text-[11px] font-semibold text-brand-primary shrink-0">
                           {formatINR((p.salePrice || p.price) * p.soldCount)}
                         </span>
                       </div>
@@ -1113,10 +1118,10 @@ export default function App() {
           {/* 2. PRODUCTS LIST                                                 */}
           {/* ---------------------------------------------------------------- */}
           {activeTab === 'products' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 space-y-5">
+            <div className="bg-brand-surface border border-brand-border p-6 space-y-5">
               <div className="flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center border border-[#EAEAEA] px-3 py-2 w-full sm:w-72">
-                  <Search className="w-4 h-4 text-[#777777] mr-2" />
+                <div className="flex items-center border border-brand-border px-3 py-2 w-full sm:w-72">
+                  <Search className="w-4 h-4 text-brand-muted mr-2" />
                   <input
                     type="text"
                     value={productSearch}
@@ -1130,7 +1135,7 @@ export default function App() {
                     setEditingProduct(null);
                     setActiveTab('add-product');
                   }}
-                  className="px-4 py-2.5 bg-[#171717] text-[#FFFFFF] text-[11px] uppercase tracking-[0.12em]"
+                  className="px-4 py-2.5 bg-brand-primary text-brand-white text-[11px] uppercase tracking-[0.12em]"
                 >
                   + Add Product
                 </button>
@@ -1139,7 +1144,7 @@ export default function App() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                    <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                       <th className="py-3">Product</th>
                       <th className="py-3">SKU</th>
                       <th className="py-3">Category</th>
@@ -1149,7 +1154,7 @@ export default function App() {
                       <th className="py-3 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#EAEAEA]">
+                  <tbody className="divide-y divide-brand-border">
                     {vendorProducts
                       .filter(
                         (p) =>
@@ -1157,15 +1162,15 @@ export default function App() {
                           p.sku.toLowerCase().includes(productSearch.toLowerCase())
                       )
                       .map((p) => (
-                        <tr key={p.id} className="hover:bg-[#F8F6F2]">
+                        <tr key={p.id} className="hover:bg-brand-bg">
                           <td className="py-3.5 font-medium">{p.title}</td>
-                          <td className="py-3.5 text-[#777777]">{p.sku}</td>
+                          <td className="py-3.5 text-brand-muted">{p.sku}</td>
                           <td className="py-3.5">{p.category}</td>
                           <td className="py-3.5">
                             {p.salePrice ? (
                               <span>
                                 {formatINR(p.salePrice)}{' '}
-                                <span className="line-through text-[#777777] text-[11px]">
+                                <span className="line-through text-brand-muted text-[11px]">
                                   {formatINR(p.price)}
                                 </span>
                               </span>
@@ -1175,21 +1180,21 @@ export default function App() {
                           </td>
                           <td className="py-3.5">{p.stock}</td>
                           <td className="py-3.5">
-                            <span className="px-2 py-0.5 text-[10px] uppercase border border-[#EAEAEA] bg-[#F8F6F2]">
+                            <span className="px-2 py-0.5 text-[10px] uppercase border border-brand-border bg-brand-bg">
                               {p.status}
                             </span>
                           </td>
                           <td className="py-3.5 text-right space-x-2">
                             <button
                               onClick={() => startEditProduct(p)}
-                              className="p-1.5 border border-[#EAEAEA] hover:border-[#171717]"
+                              className="p-1.5 border border-brand-border hover:border-brand-primary-hover"
                               aria-label="Edit"
                             >
                               <Edit3 className="w-3.5 h-3.5" />
                             </button>
                             <button
                               onClick={() => setDeleteConfirmId(p.id)}
-                              className="p-1.5 border border-[#EAEAEA] hover:border-[#171717] text-[#777777] hover:text-[#171717]"
+                              className="p-1.5 border border-brand-border hover:border-brand-primary-hover text-brand-muted hover:text-brand-primary"
                               aria-label="Delete"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
@@ -1209,24 +1214,24 @@ export default function App() {
           {activeTab === 'add-product' && (
             <form
               onSubmit={handleSaveProduct}
-              className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 sm:p-8 max-w-4xl space-y-6"
+              className="bg-brand-surface border border-brand-border p-6 sm:p-8 max-w-4xl space-y-6"
             >
-              <div className="flex items-center justify-between border-b border-[#EAEAEA] pb-4">
+              <div className="flex items-center justify-between border-b border-brand-border pb-4">
                 <h2 className="font-serif text-2xl font-light">
                   {editingProduct ? `Edit: ${editingProduct.title}` : 'Add New Product'}
                 </h2>
-                <span className="text-[11px] uppercase tracking-[0.12em] text-[#B89B72]">
+                <span className="text-[11px] uppercase tracking-[0.12em] text-brand-primary">
                   Brand: {activeVendor.name}
                 </span>
               </div>
 
               {/* Image Upload */}
               <div>
-                <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-2">
+                <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-2">
                   Product Images Upload
                 </label>
-                <label className="flex flex-col items-center justify-center border border-dashed border-[#171717] bg-[#F8F6F2] p-6 cursor-pointer hover:bg-[#FFFFFF] transition-colors">
-                  <Upload className="w-5 h-5 mb-2 text-[#B89B72]" />
+                <label className="flex flex-col items-center justify-center border border-dashed border-brand-primary bg-brand-bg p-6 cursor-pointer hover:bg-brand-surface transition-colors">
+                  <Upload className="w-5 h-5 mb-2 text-brand-accent" />
                   <span className="text-[11px] uppercase tracking-[0.12em]">
                     Click to upload 3:4 editorial photos
                   </span>
@@ -1245,7 +1250,7 @@ export default function App() {
                         key={i}
                         src={src}
                         alt="Uploaded preview"
-                        className="w-16 aspect-[3/4] object-cover border border-[#EAEAEA]"
+                        className="w-16 aspect-[3/4] object-cover border border-brand-border"
                       />
                     ))}
                   </div>
@@ -1254,7 +1259,7 @@ export default function App() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1.5">
+                  <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1.5">
                     Product Title *
                   </label>
                   <input
@@ -1262,11 +1267,11 @@ export default function App() {
                     value={productForm.title}
                     onChange={(e) => setProductForm({ ...productForm, title: e.target.value })}
                     placeholder="e.g., Sculpted Cashmere Coat"
-                    className="w-full px-3.5 py-2.5 border border-[#EAEAEA] text-[13px] focus:outline-none focus:border-[#171717]"
+                    className="w-full px-3.5 py-2.5 border border-brand-border text-[13px] focus:outline-none focus:border-brand-primary"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1.5">
+                  <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1.5">
                     SKU *
                   </label>
                   <input
@@ -1274,11 +1279,11 @@ export default function App() {
                     value={productForm.sku}
                     onChange={(e) => setProductForm({ ...productForm, sku: e.target.value })}
                     placeholder="e.g., VER-COAT-009"
-                    className="w-full px-3.5 py-2.5 border border-[#EAEAEA] text-[13px] focus:outline-none focus:border-[#171717]"
+                    className="w-full px-3.5 py-2.5 border border-brand-border text-[13px] focus:outline-none focus:border-brand-primary"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1.5">
+                  <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1.5">
                     Category
                   </label>
                   <select
@@ -1289,7 +1294,7 @@ export default function App() {
                         category: e.target.value as 'Women' | 'Men' | 'Accessories',
                       })
                     }
-                    className="w-full px-3.5 py-2.5 border border-[#EAEAEA] bg-[#FFFFFF] text-[13px]"
+                    className="w-full px-3.5 py-2.5 border border-brand-border bg-brand-surface text-[13px]"
                   >
                     <option value="Women">Women</option>
                     <option value="Men">Men</option>
@@ -1297,7 +1302,7 @@ export default function App() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1.5">
+                  <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1.5">
                     Product Status
                   </label>
                   <select
@@ -1305,7 +1310,7 @@ export default function App() {
                     onChange={(e) =>
                       setProductForm({ ...productForm, status: e.target.value as ProductStatus })
                     }
-                    className="w-full px-3.5 py-2.5 border border-[#EAEAEA] bg-[#FFFFFF] text-[13px]"
+                    className="w-full px-3.5 py-2.5 border border-brand-border bg-brand-surface text-[13px]"
                   >
                     <option value="Active">Active</option>
                     <option value="Draft">Draft</option>
@@ -1313,7 +1318,7 @@ export default function App() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1.5">
+                  <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1.5">
                     Regular Price (INR) *
                   </label>
                   <input
@@ -1321,11 +1326,11 @@ export default function App() {
                     value={productForm.price}
                     onChange={(e) => setProductForm({ ...productForm, price: e.target.value })}
                     placeholder="64000"
-                    className="w-full px-3.5 py-2.5 border border-[#EAEAEA] text-[13px]"
+                    className="w-full px-3.5 py-2.5 border border-brand-border text-[13px]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1.5">
+                  <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1.5">
                     Sale Price (INR, optional)
                   </label>
                   <input
@@ -1333,22 +1338,22 @@ export default function App() {
                     value={productForm.salePrice}
                     onChange={(e) => setProductForm({ ...productForm, salePrice: e.target.value })}
                     placeholder="52000"
-                    className="w-full px-3.5 py-2.5 border border-[#EAEAEA] text-[13px]"
+                    className="w-full px-3.5 py-2.5 border border-brand-border text-[13px]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1.5">
+                  <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1.5">
                     Inventory Quantity
                   </label>
                   <input
                     type="number"
                     value={productForm.stock}
                     onChange={(e) => setProductForm({ ...productForm, stock: e.target.value })}
-                    className="w-full px-3.5 py-2.5 border border-[#EAEAEA] text-[13px]"
+                    className="w-full px-3.5 py-2.5 border border-brand-border text-[13px]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1.5">
+                  <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1.5">
                     Color Variant
                   </label>
                   <div className="flex gap-2">
@@ -1356,13 +1361,13 @@ export default function App() {
                       type="text"
                       value={productForm.colorName}
                       onChange={(e) => setProductForm({ ...productForm, colorName: e.target.value })}
-                      className="flex-1 px-3 py-2.5 border border-[#EAEAEA] text-[13px]"
+                      className="flex-1 px-3 py-2.5 border border-brand-border text-[13px]"
                     />
                     <input
                       type="color"
                       value={productForm.colorHex}
                       onChange={(e) => setProductForm({ ...productForm, colorHex: e.target.value })}
-                      className="w-11 h-10 border border-[#EAEAEA] p-1"
+                      className="w-11 h-10 border border-brand-border p-1"
                     />
                   </div>
                 </div>
@@ -1370,7 +1375,7 @@ export default function App() {
 
               {/* Size Variants */}
               <div>
-                <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-2">
+                <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-2">
                   Size Variants
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -1390,8 +1395,8 @@ export default function App() {
                         }
                         className={`px-3.5 py-1.5 border text-[11px] uppercase ${
                           selected
-                            ? 'bg-[#171717] text-[#FFFFFF] border-[#171717]'
-                            : 'border-[#EAEAEA]'
+                            ? 'bg-brand-primary text-brand-white border-brand-primary'
+                            : 'border-brand-border'
                         }`}
                       >
                         {sz}
@@ -1402,7 +1407,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1.5">
+                <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1.5">
                   Product Description
                 </label>
                 <textarea
@@ -1410,21 +1415,21 @@ export default function App() {
                   value={productForm.description}
                   onChange={(e) => setProductForm({ ...productForm, description: e.target.value })}
                   placeholder="Describe fabric provenance, silhouette, and atelier craft..."
-                  className="w-full px-3.5 py-2.5 border border-[#EAEAEA] text-[13px]"
+                  className="w-full px-3.5 py-2.5 border border-brand-border text-[13px]"
                 />
               </div>
 
               <div className="flex gap-3 pt-2">
                 <button
                   type="submit"
-                  className="px-7 py-3.5 bg-[#171717] text-[#FFFFFF] hover:bg-[#B89B72] transition-colors text-[11px] uppercase tracking-[0.14em]"
+                  className="px-7 py-3.5 bg-brand-primary text-brand-white hover:bg-brand-primary-hover transition-colors text-[11px] uppercase tracking-[0.14em]"
                 >
                   {editingProduct ? 'Save Changes' : 'Publish Product'}
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveTab('products')}
-                  className="px-6 py-3.5 border border-[#EAEAEA] text-[11px] uppercase tracking-[0.12em]"
+                  className="px-6 py-3.5 border border-brand-border text-[11px] uppercase tracking-[0.12em]"
                 >
                   Cancel
                 </button>
@@ -1436,14 +1441,14 @@ export default function App() {
           {/* 4. INVENTORY                                                     */}
           {/* ---------------------------------------------------------------- */}
           {activeTab === 'inventory' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 space-y-4">
+            <div className="bg-brand-surface border border-brand-border p-6 space-y-4">
               <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                 SKU Inventory Ledger
               </h2>
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                    <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                       <th className="py-3">SKU</th>
                       <th className="py-3">Product</th>
                       <th className="py-3">Status</th>
@@ -1451,25 +1456,25 @@ export default function App() {
                       <th className="py-3 text-right">Adjust</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#EAEAEA]">
+                  <tbody className="divide-y divide-brand-border">
                     {vendorProducts.map((p) => (
                       <tr key={p.id}>
                         <td className="py-3 font-mono text-[11px]">{p.sku}</td>
                         <td className="py-3 font-medium">{p.title}</td>
                         <td className="py-3">
                           {p.stock <= 5 ? (
-                            <span className="text-[#B89B72] text-[11px] font-medium">Low Stock</span>
+                            <span className="text-brand-primary text-[11px] font-medium">Low Stock</span>
                           ) : (
-                            <span className="text-[#777777] text-[11px]">Healthy</span>
+                            <span className="text-brand-muted text-[11px]">Healthy</span>
                           )}
                         </td>
                         <td className="py-3 font-semibold">{p.stock} units</td>
                         <td className="py-3 text-right">
-                          <div className="inline-flex items-center border border-[#EAEAEA]">
-                            <button onClick={() => adjustStock(p.id, -1)} className="p-1.5 hover:bg-[#F8F6F2]">
+                          <div className="inline-flex items-center border border-brand-border">
+                            <button onClick={() => adjustStock(p.id, -1)} className="p-1.5 hover:bg-brand-bg">
                               <Minus className="w-3.5 h-3.5" />
                             </button>
-                            <button onClick={() => adjustStock(p.id, 1)} className="p-1.5 hover:bg-[#F8F6F2] border-l border-[#EAEAEA]">
+                            <button onClick={() => adjustStock(p.id, 1)} className="p-1.5 hover:bg-brand-bg border-l border-brand-border">
                               <Plus className="w-3.5 h-3.5" />
                             </button>
                           </div>
@@ -1486,7 +1491,7 @@ export default function App() {
           {/* 5. ORDERS                                                        */}
           {/* ---------------------------------------------------------------- */}
           {activeTab === 'orders' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 space-y-5">
+            <div className="bg-brand-surface border border-brand-border p-6 space-y-5">
               <div className="flex flex-wrap gap-2">
                 {['All', 'Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'].map((st) => (
                   <button
@@ -1494,8 +1499,8 @@ export default function App() {
                     onClick={() => setOrderStatusFilter(st)}
                     className={`px-3.5 py-1.5 border text-[11px] uppercase tracking-[0.1em] ${
                       orderStatusFilter === st
-                        ? 'bg-[#171717] text-[#FFFFFF] border-[#171717]'
-                        : 'border-[#EAEAEA] hover:border-[#171717]'
+                        ? 'bg-brand-primary text-brand-white border-brand-primary'
+                        : 'border-brand-border hover:border-brand-primary-hover'
                     }`}
                   >
                     {st}
@@ -1506,7 +1511,7 @@ export default function App() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                    <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                       <th className="py-3">Order #</th>
                       <th className="py-3">Date</th>
                       <th className="py-3">Customer</th>
@@ -1516,18 +1521,18 @@ export default function App() {
                       <th className="py-3 text-right">Manage</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#EAEAEA]">
+                  <tbody className="divide-y divide-brand-border">
                     {vendorOrders
                       .filter((o) => orderStatusFilter === 'All' || o.status === orderStatusFilter)
                       .map((o) => (
-                        <tr key={o.id} className="hover:bg-[#F8F6F2]">
+                        <tr key={o.id} className="hover:bg-brand-bg">
                           <td className="py-3.5 font-medium">{o.orderNumber}</td>
-                          <td className="py-3.5 text-[#777777]">{o.date}</td>
+                          <td className="py-3.5 text-brand-muted">{o.date}</td>
                           <td className="py-3.5">
                             {o.customerName} ({o.customerCity})
                           </td>
                           <td className="py-3.5 font-medium">{formatINR(o.netAmount)}</td>
-                          <td className="py-3.5 font-mono text-[11px] text-[#777777]">
+                          <td className="py-3.5 font-mono text-[11px] text-brand-muted">
                             {o.trackingNumber || '—'}
                           </td>
                           <td className="py-3.5">
@@ -1537,7 +1542,7 @@ export default function App() {
                             {o.status === 'Pending' && (
                               <button
                                 onClick={() => updateOrderStatus(o.id, 'Processing')}
-                                className="px-3 py-1 bg-[#171717] text-[#FFFFFF] text-[10px] uppercase tracking-[0.1em]"
+                                className="px-3 py-1 bg-brand-primary text-brand-white text-[10px] uppercase tracking-[0.1em]"
                               >
                                 Accept
                               </button>
@@ -1547,7 +1552,7 @@ export default function App() {
                                 setSelectedOrder(o);
                                 setTrackingDraft(o.trackingNumber);
                               }}
-                              className="px-3 py-1 border border-[#EAEAEA] hover:border-[#171717] text-[10px] uppercase tracking-[0.1em]"
+                              className="px-3 py-1 border border-brand-border hover:border-brand-primary-hover text-[10px] uppercase tracking-[0.1em]"
                             >
                               Details
                             </button>
@@ -1564,14 +1569,14 @@ export default function App() {
           {/* 6. RETURNS & CANCELLATIONS                                       */}
           {/* ---------------------------------------------------------------- */}
           {activeTab === 'returns' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 space-y-4">
+            <div className="bg-brand-surface border border-brand-border p-6 space-y-4">
               <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                 Returns &amp; Cancellations Queue
               </h2>
               {vendorOrders.filter(
                 (o) => o.status === 'Return Requested' || o.status === 'Cancelled' || o.status === 'Refunded'
               ).length === 0 ? (
-                <p className="text-[13px] text-[#777777] py-10 text-center">
+                <p className="text-[13px] text-brand-muted py-10 text-center">
                   No active return or cancellation requests.
                 </p>
               ) : (
@@ -1586,16 +1591,16 @@ export default function App() {
                     .map((o) => (
                       <div
                         key={o.id}
-                        className="p-5 border border-[#EAEAEA] bg-[#F8F6F2] flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                        className="p-5 border border-brand-border bg-brand-bg flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                       >
                         <div>
                           <p className="text-[12px] font-semibold">
                             {o.orderNumber} — {o.customerName}
                           </p>
-                          <p className="text-[12px] text-[#777777] mt-1">
+                          <p className="text-[12px] text-brand-muted mt-1">
                             Reason: {o.returnReason || 'Client requested cancellation'}
                           </p>
-                          <p className="text-[11px] text-[#B89B72] mt-1">
+                          <p className="text-[11px] text-brand-primary mt-1">
                             Amount: {formatINR(o.grossAmount)} · Status: {o.status}
                           </p>
                         </div>
@@ -1603,13 +1608,13 @@ export default function App() {
                           <div className="flex gap-2">
                             <button
                               onClick={() => updateOrderStatus(o.id, 'Refunded')}
-                              className="px-4 py-2 bg-[#171717] text-[#FFFFFF] text-[10px] uppercase tracking-[0.12em]"
+                              className="px-4 py-2 bg-brand-primary text-brand-white text-[10px] uppercase tracking-[0.12em]"
                             >
                               Approve Refund
                             </button>
                             <button
                               onClick={() => updateOrderStatus(o.id, 'Delivered')}
-                              className="px-4 py-2 border border-[#EAEAEA] bg-[#FFFFFF] text-[10px] uppercase tracking-[0.12em]"
+                              className="px-4 py-2 border border-brand-border bg-brand-surface text-[10px] uppercase tracking-[0.12em]"
                             >
                               Decline
                             </button>
@@ -1626,18 +1631,18 @@ export default function App() {
           {/* 7. CUSTOMERS (Vendor-scoped)                                     */}
           {/* ---------------------------------------------------------------- */}
           {activeTab === 'customers' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 space-y-4">
+            <div className="bg-brand-surface border border-brand-border p-6 space-y-4">
               <div className="flex justify-between items-center">
                 <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                   Verified Store Customers
                 </h2>
-                <span className="text-[11px] text-[#777777]">
+                <span className="text-[11px] text-brand-muted">
                   Isolated to {activeVendor.name} orders only
                 </span>
               </div>
               <table className="w-full text-left text-[12px]">
                 <thead>
-                  <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                  <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                     <th className="py-3">Client</th>
                     <th className="py-3">City</th>
                     <th className="py-3">Orders</th>
@@ -1645,14 +1650,14 @@ export default function App() {
                     <th className="py-3">Last Order</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#EAEAEA]">
+                <tbody className="divide-y divide-brand-border">
                   {vendorCustomers.map((c) => (
                     <tr key={c.name}>
                       <td className="py-3 font-medium">{c.name}</td>
-                      <td className="py-3 text-[#777777]">{c.city}</td>
+                      <td className="py-3 text-brand-muted">{c.city}</td>
                       <td className="py-3">{c.orders}</td>
                       <td className="py-3 font-medium">{formatINR(c.spend)}</td>
-                      <td className="py-3 text-[#777777]">{c.lastDate}</td>
+                      <td className="py-3 text-brand-muted">{c.lastDate}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -1665,35 +1670,41 @@ export default function App() {
           {/* ---------------------------------------------------------------- */}
           {activeTab === 'analytics' && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+              <div className="bg-brand-surface border border-brand-border p-6">
                 <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-4">
                   Monthly Order Volume
                 </h2>
                 <div className="h-72">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={REVENUE_CHART_DATA}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#EAEAEA" />
-                      <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#777777' }} />
-                      <YAxis tick={{ fontSize: 11, fill: '#777777' }} />
-                      <Tooltip />
-                      <Bar dataKey="orders" fill="#171717" />
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--color-brand-border)" />
+                      <XAxis dataKey="month" tick={{ fontSize: 11, fill: 'var(--color-brand-muted)' }} />
+                      <YAxis tick={{ fontSize: 11, fill: 'var(--color-brand-muted)' }} />
+                      <Tooltip contentStyle={CHART_TOOLTIP_STYLE} />
+                      <Bar dataKey="orders" fill="var(--color-brand-primary)" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
               </div>
 
-              <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+              <div className="bg-brand-surface border border-brand-border p-6">
                 <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-4">
                   Revenue Trajectory
                 </h2>
                 <div className="h-72">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={REVENUE_CHART_DATA}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#EAEAEA" />
-                      <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#777777' }} />
-                      <YAxis tick={{ fontSize: 11, fill: '#777777' }} />
-                      <Tooltip />
-                      <Area type="monotone" dataKey="revenue" stroke="#B89B72" fill="#B89B72" fillOpacity={0.25} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--color-brand-border)" />
+                      <XAxis dataKey="month" tick={{ fontSize: 11, fill: 'var(--color-brand-muted)' }} />
+                      <YAxis tick={{ fontSize: 11, fill: 'var(--color-brand-muted)' }} />
+                      <Tooltip contentStyle={CHART_TOOLTIP_STYLE} />
+                      <Area
+                        type="monotone"
+                        dataKey="revenue"
+                        stroke="var(--color-brand-accent)"
+                        fill="var(--color-brand-accent)"
+                        fillOpacity={0.25}
+                      />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
@@ -1707,45 +1718,45 @@ export default function App() {
           {(activeTab === 'earnings' || activeTab === 'commission' || activeTab === 'payouts') && (
             <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-5">
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">Total Earnings (Net)</p>
+                <div className="bg-brand-surface border border-brand-border p-5">
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">Total Earnings (Net)</p>
                   <p className="text-2xl font-semibold mt-2">{formatINR(totalNetEarnings)}</p>
                 </div>
-                <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-5">
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                <div className="bg-brand-surface border border-brand-border p-5">
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                     Platform Commission ({Math.round(activeVendor.commissionRate * 100)}%)
                   </p>
                   <p className="text-2xl font-semibold mt-2">{formatINR(totalCommission)}</p>
                 </div>
-                <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-5">
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">Available Balance</p>
-                  <p className="text-2xl font-semibold text-[#B89B72] mt-2">{formatINR(availableBalance)}</p>
+                <div className="bg-brand-surface border border-brand-border p-5">
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">Available Balance</p>
+                  <p className="text-2xl font-semibold text-brand-primary mt-2">{formatINR(availableBalance)}</p>
                 </div>
-                <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-5">
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">Pending Balance</p>
+                <div className="bg-brand-surface border border-brand-border p-5">
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">Pending Balance</p>
                   <p className="text-2xl font-semibold mt-2">{formatINR(pendingBalance)}</p>
                 </div>
               </div>
 
-              <div className="flex flex-wrap justify-between items-center gap-4 bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+              <div className="flex flex-wrap justify-between items-center gap-4 bg-brand-surface border border-brand-border p-6">
                 <div>
                   <h2 className="text-[13px] font-semibold uppercase tracking-[0.1em]">
                     Settlement &amp; Payouts
                   </h2>
-                  <p className="text-[12px] text-[#777777]">
+                  <p className="text-[12px] text-brand-muted">
                     Bank: {activeVendor.bankAccount} · Lifetime settled: {formatINR(completedPayouts)}
                   </p>
                 </div>
                 <div className="flex gap-3">
                   <button
                     onClick={downloadSalesCSV}
-                    className="px-4 py-2.5 border border-[#EAEAEA] hover:border-[#171717] text-[11px] uppercase tracking-[0.1em] inline-flex items-center gap-1.5"
+                    className="px-4 py-2.5 border border-brand-border hover:border-brand-primary-hover text-[11px] uppercase tracking-[0.1em] inline-flex items-center gap-1.5"
                   >
                     <Download className="w-3.5 h-3.5" /> Sales Report
                   </button>
                   <button
                     onClick={() => setPayoutModalOpen(true)}
-                    className="px-5 py-2.5 bg-[#171717] text-[#FFFFFF] hover:bg-[#B89B72] text-[11px] uppercase tracking-[0.12em]"
+                    className="px-5 py-2.5 bg-brand-primary text-brand-white hover:bg-brand-primary-hover text-[11px] uppercase tracking-[0.12em]"
                   >
                     Request Payout
                   </button>
@@ -1753,14 +1764,14 @@ export default function App() {
               </div>
 
               {/* Transaction & Commission Ledger */}
-              <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+              <div className="bg-brand-surface border border-brand-border p-6">
                 <h3 className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-4">
                   {activeTab === 'payouts' ? 'Payout History' : 'Transaction & Commission History'}
                 </h3>
                 {activeTab === 'payouts' ? (
                   <table className="w-full text-left text-[12px]">
                     <thead>
-                      <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                      <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                         <th className="py-3">Date</th>
                         <th className="py-3">Reference</th>
                         <th className="py-3">Destination</th>
@@ -1768,7 +1779,7 @@ export default function App() {
                         <th className="py-3">Status</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#EAEAEA]">
+                    <tbody className="divide-y divide-brand-border">
                       {vendorPayouts.map((p) => (
                         <tr key={p.id}>
                           <td className="py-3">{p.date}</td>
@@ -1776,7 +1787,7 @@ export default function App() {
                           <td className="py-3">{p.method}</td>
                           <td className="py-3 font-medium">{formatINR(p.amount)}</td>
                           <td className="py-3">
-                            <span className="px-2 py-0.5 border border-[#EAEAEA] bg-[#F8F6F2] text-[10px] uppercase">
+                            <span className="px-2 py-0.5 border border-brand-border bg-brand-bg text-[10px] uppercase">
                               {p.status}
                             </span>
                           </td>
@@ -1787,7 +1798,7 @@ export default function App() {
                 ) : (
                   <table className="w-full text-left text-[12px]">
                     <thead>
-                      <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                      <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                         <th className="py-3">Order</th>
                         <th className="py-3">Date</th>
                         <th className="py-3">Gross</th>
@@ -1795,14 +1806,14 @@ export default function App() {
                         <th className="py-3">Net Earned</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#EAEAEA]">
+                    <tbody className="divide-y divide-brand-border">
                       {vendorOrders.map((o) => (
                         <tr key={o.id}>
                           <td className="py-3 font-medium">{o.orderNumber}</td>
-                          <td className="py-3 text-[#777777]">{o.date}</td>
+                          <td className="py-3 text-brand-muted">{o.date}</td>
                           <td className="py-3">{formatINR(o.grossAmount)}</td>
-                          <td className="py-3 text-[#777777]">-{formatINR(o.commissionAmount)}</td>
-                          <td className="py-3 font-semibold text-[#B89B72]">{formatINR(o.netAmount)}</td>
+                          <td className="py-3 text-brand-muted">-{formatINR(o.commissionAmount)}</td>
+                          <td className="py-3 font-semibold text-brand-primary">{formatINR(o.netAmount)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -1816,31 +1827,31 @@ export default function App() {
           {/* 12. STORE SETTINGS                                               */}
           {/* ---------------------------------------------------------------- */}
           {activeTab === 'settings' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 sm:p-8 max-w-3xl space-y-6">
-              <h2 className="font-serif text-2xl font-light border-b border-[#EAEAEA] pb-4">
+            <div className="bg-brand-surface border border-brand-border p-6 sm:p-8 max-w-3xl space-y-6">
+              <h2 className="font-serif text-2xl font-light border-b border-brand-border pb-4">
                 Store Settings &amp; Access Control
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[13px]">
-                <div className="p-4 bg-[#F8F6F2] border border-[#EAEAEA]">
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">Store Name</p>
+                <div className="p-4 bg-brand-bg border border-brand-border">
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">Store Name</p>
                   <p className="font-medium mt-1">{activeVendor.name}</p>
                 </div>
-                <div className="p-4 bg-[#F8F6F2] border border-[#EAEAEA]">
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">GSTIN</p>
+                <div className="p-4 bg-brand-bg border border-brand-border">
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">GSTIN</p>
                   <p className="font-mono mt-1">{activeVendor.gstin}</p>
                 </div>
-                <div className="p-4 bg-[#F8F6F2] border border-[#EAEAEA]">
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">Active Role</p>
+                <div className="p-4 bg-brand-bg border border-brand-border">
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">Active Role</p>
                   <p className="font-medium mt-1">{role} (Vendor ID: {activeVendor.id})</p>
                 </div>
-                <div className="p-4 bg-[#F8F6F2] border border-[#EAEAEA]">
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">Settlement Bank</p>
+                <div className="p-4 bg-brand-bg border border-brand-border">
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">Settlement Bank</p>
                   <p className="font-medium mt-1">{activeVendor.bankAccount}</p>
                 </div>
               </div>
-              <div className="p-4 border border-[#EAEAEA] text-[12px] text-[#777777]">
+              <div className="p-4 border border-brand-border text-[12px] text-brand-muted">
                 Row-Level Security (RLS) policy active: queries are strictly filtered by{' '}
-                <code className="text-[#171717]">vendor_id = auth.uid()</code>. Cross-vendor data
+                <code className="text-brand-ink">vendor_id = auth.uid()</code>. Cross-vendor data
                 access is blocked.
               </div>
             </div>
@@ -1869,7 +1880,7 @@ export default function App() {
                   setSupportSubject('');
                   showToast('Support ticket submitted');
                 }}
-                className="lg:col-span-5 bg-[#FFFFFF] border border-[#EAEAEA] p-6 space-y-4"
+                className="lg:col-span-5 bg-brand-surface border border-brand-border p-6 space-y-4"
               >
                 <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                   Contact Vendor Concierge
@@ -1877,7 +1888,7 @@ export default function App() {
                 <select
                   value={supportCategory}
                   onChange={(e) => setSupportCategory(e.target.value)}
-                  className="w-full px-3 py-2.5 border border-[#EAEAEA] bg-[#FFFFFF] text-[12px]"
+                  className="w-full px-3 py-2.5 border border-brand-border bg-brand-surface text-[12px]"
                 >
                   <option>Logistics &amp; Courier</option>
                   <option>Payouts &amp; GST</option>
@@ -1888,29 +1899,29 @@ export default function App() {
                   value={supportSubject}
                   onChange={(e) => setSupportSubject(e.target.value)}
                   placeholder="Describe your request..."
-                  className="w-full px-3 py-2.5 border border-[#EAEAEA] text-[12px]"
+                  className="w-full px-3 py-2.5 border border-brand-border text-[12px]"
                 />
                 <button
                   type="submit"
-                  className="w-full py-3 bg-[#171717] text-[#FFFFFF] text-[11px] uppercase tracking-[0.12em]"
+                  className="w-full py-3 bg-brand-primary text-brand-white text-[11px] uppercase tracking-[0.12em]"
                 >
                   Submit Ticket
                 </button>
               </form>
 
-              <div className="lg:col-span-7 bg-[#FFFFFF] border border-[#EAEAEA] p-6 space-y-3">
+              <div className="lg:col-span-7 bg-brand-surface border border-brand-border p-6 space-y-3">
                 <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                   Your Support Tickets
                 </h2>
                 {vendorTickets.map((t) => (
-                  <div key={t.id} className="p-4 border border-[#EAEAEA] flex justify-between items-center">
+                  <div key={t.id} className="p-4 border border-brand-border flex justify-between items-center">
                     <div>
                       <p className="text-[12px] font-medium">{t.subject}</p>
-                      <p className="text-[11px] text-[#777777]">
+                      <p className="text-[11px] text-brand-muted">
                         {t.category} · {t.date}
                       </p>
                     </div>
-                    <span className="px-2.5 py-1 bg-[#F8F6F2] border border-[#EAEAEA] text-[10px] uppercase">
+                    <span className="px-2.5 py-1 bg-brand-bg border border-brand-border text-[10px] uppercase">
                       {t.status}
                     </span>
                   </div>
@@ -1925,12 +1936,12 @@ export default function App() {
       {/* MODALS: ORDER DETAILS, DELETE CONFIRM, PAYOUT REQUEST, MOBILE MENU   */}
       {/* ==================================================================== */}
       {selectedOrder && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-[#171717]/40">
-          <div className="w-full max-w-md bg-[#FFFFFF] h-full border-l border-[#EAEAEA] p-6 flex flex-col justify-between overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex justify-end bg-brand-primary/40">
+          <div className="w-full max-w-md bg-brand-surface h-full border-l border-brand-border p-6 flex flex-col justify-between overflow-y-auto">
             <div className="space-y-6">
-              <div className="flex justify-between items-center pb-4 border-b border-[#EAEAEA]">
+              <div className="flex justify-between items-center pb-4 border-b border-brand-border">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.12em] text-[#B89B72]">Order Details</p>
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-brand-primary">Order Details</p>
                   <h3 className="text-lg font-semibold">{selectedOrder.orderNumber}</h3>
                 </div>
                 <button onClick={() => setSelectedOrder(null)}>
@@ -1940,10 +1951,10 @@ export default function App() {
 
               <div className="text-[12px] space-y-1">
                 <p className="font-medium">{selectedOrder.customerName}</p>
-                <p className="text-[#777777]">{selectedOrder.customerCity} · {selectedOrder.date}</p>
+                <p className="text-brand-muted">{selectedOrder.customerCity} · {selectedOrder.date}</p>
               </div>
 
-              <div className="border-t border-b border-[#EAEAEA] py-4 space-y-2">
+              <div className="border-t border-b border-brand-border py-4 space-y-2">
                 {selectedOrder.items.map((it, idx) => (
                   <div key={idx} className="flex justify-between text-[12px]">
                     <span>
@@ -1955,13 +1966,13 @@ export default function App() {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                   Update Status
                 </label>
                 <select
                   value={selectedOrder.status}
                   onChange={(e) => updateOrderStatus(selectedOrder.id, e.target.value as OrderStatus)}
-                  className="w-full px-3 py-2.5 border border-[#EAEAEA] bg-[#FFFFFF] text-[12px]"
+                  className="w-full px-3 py-2.5 border border-brand-border bg-brand-surface text-[12px]"
                 >
                   {['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled', 'Refunded'].map((s) => (
                     <option key={s} value={s}>{s}</option>
@@ -1970,7 +1981,7 @@ export default function App() {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                   Shipping Tracking Number
                 </label>
                 <div className="flex gap-2">
@@ -1979,11 +1990,11 @@ export default function App() {
                     value={trackingDraft}
                     onChange={(e) => setTrackingDraft(e.target.value)}
                     placeholder="e.g., DHL-991024"
-                    className="flex-1 px-3 py-2 border border-[#EAEAEA] text-[12px]"
+                    className="flex-1 px-3 py-2 border border-brand-border text-[12px]"
                   />
                   <button
                     onClick={() => saveTrackingNumber(selectedOrder.id)}
-                    className="px-4 py-2 bg-[#171717] text-[#FFFFFF] text-[10px] uppercase tracking-[0.1em]"
+                    className="px-4 py-2 bg-brand-primary text-brand-white text-[10px] uppercase tracking-[0.1em]"
                   >
                     Save
                   </button>
@@ -1995,22 +2006,22 @@ export default function App() {
       )}
 
       {deleteConfirmId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#171717]/50">
-          <div className="bg-[#FFFFFF] border border-[#171717] max-w-sm w-full p-6 space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-primary/50">
+          <div className="bg-brand-surface border border-brand-primary max-w-sm w-full p-6 space-y-4">
             <h3 className="text-[14px] font-semibold uppercase tracking-[0.1em]">Delete Product?</h3>
-            <p className="text-[12px] text-[#777777]">
+            <p className="text-[12px] text-brand-muted">
               This will permanently remove the SKU from your store catalog.
             </p>
             <div className="flex justify-end gap-2">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="px-4 py-2 border border-[#EAEAEA] text-[11px] uppercase"
+                className="px-4 py-2 border border-brand-border text-[11px] uppercase"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmDeleteProduct}
-                className="px-4 py-2 bg-[#171717] text-[#FFFFFF] text-[11px] uppercase"
+                className="px-4 py-2 bg-brand-primary text-brand-white text-[11px] uppercase"
               >
                 Delete
               </button>
@@ -2020,10 +2031,10 @@ export default function App() {
       )}
 
       {payoutModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#171717]/50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-primary/50">
           <form
             onSubmit={handleRequestPayout}
-            className="bg-[#FFFFFF] border border-[#171717] max-w-md w-full p-6 space-y-4"
+            className="bg-brand-surface border border-brand-primary max-w-md w-full p-6 space-y-4"
           >
             <div className="flex justify-between items-center">
               <h3 className="text-[13px] font-semibold uppercase tracking-[0.12em]">
@@ -2033,18 +2044,18 @@ export default function App() {
                 <X className="w-4 h-4" />
               </button>
             </div>
-            <p className="text-[12px] text-[#777777]">
-              Available Balance: <strong className="text-[#171717]">{formatINR(availableBalance)}</strong>
+            <p className="text-[12px] text-brand-muted">
+              Available Balance: <strong className="text-brand-ink">{formatINR(availableBalance)}</strong>
             </p>
             <input
               type="number"
               value={payoutAmount}
               onChange={(e) => setPayoutAmount(e.target.value)}
-              className="w-full px-3.5 py-2.5 border border-[#EAEAEA] text-[13px]"
+              className="w-full px-3.5 py-2.5 border border-brand-border text-[13px]"
             />
             <button
               type="submit"
-              className="w-full py-3 bg-[#171717] text-[#FFFFFF] text-[11px] uppercase tracking-[0.12em]"
+              className="w-full py-3 bg-brand-primary text-brand-white text-[11px] uppercase tracking-[0.12em]"
             >
               Confirm Payout to {activeVendor.bankAccount}
             </button>
@@ -2054,10 +2065,10 @@ export default function App() {
 
       {mobileSidebarOpen && (
         <div className="fixed inset-0 z-50 flex lg:hidden">
-          <div className="fixed inset-0 bg-[#171717]/40" onClick={() => setMobileSidebarOpen(false)} />
-          <div className="relative z-10 w-64 bg-[#FFFFFF] h-full p-4 overflow-y-auto space-y-4">
-            <div className="flex justify-between items-center pb-3 border-b border-[#EAEAEA]">
-              <span className="font-serif text-base uppercase tracking-[0.12em]">BANDRA STREET</span>
+          <div className="fixed inset-0 bg-brand-primary/40" onClick={() => setMobileSidebarOpen(false)} />
+          <div className="relative z-10 w-64 bg-brand-surface h-full p-4 overflow-y-auto space-y-4">
+            <div className="flex justify-between items-center pb-3 border-b border-brand-border">
+              <span className="font-serif text-base uppercase tracking-[0.12em]">Bandra Street</span>
               <button onClick={() => setMobileSidebarOpen(false)}>
                 <X className="w-4 h-4" />
               </button>
@@ -2070,7 +2081,7 @@ export default function App() {
                   setMobileSidebarOpen(false);
                 }}
                 className={`w-full flex items-center gap-2.5 px-3 py-2 text-[12px] ${
-                  activeTab === item.id ? 'bg-[#171717] text-[#FFFFFF]' : 'text-[#171717]'
+                  activeTab === item.id ? 'bg-brand-primary text-brand-white' : 'text-brand-ink'
                 }`}
               >
                 {item.icon} {item.title}
@@ -2082,13 +2093,13 @@ export default function App() {
 
       {/* Vendor Pending Approval Lock Screen */}
       {pendingVendorApp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#171717]/75">
-          <div className="bg-[#FFFFFF] border border-[#171717] max-w-md w-full p-8 space-y-4 text-center">
-            <span className="inline-block px-3 py-1 bg-[#F8F6F2] border border-[#B89B72] text-[#B89B72] text-[10px] uppercase tracking-[0.14em]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-primary/75">
+          <div className="bg-brand-surface border border-brand-primary max-w-md w-full p-8 space-y-4 text-center">
+            <span className="inline-block px-3 py-1 bg-brand-bg border border-brand-accent text-brand-primary text-[10px] uppercase tracking-[0.14em]">
               Pending Admin Approval
             </span>
             <h3 className="font-serif text-3xl font-light">{pendingVendorApp.storeName}</h3>
-            <p className="text-[12px] text-[#777777] leading-relaxed">
+            <p className="text-[12px] text-brand-muted leading-relaxed">
               Your GSTIN ({pendingVendorApp.gstin}) and {pendingVendorApp.docs.length} verification
               document(s) have been submitted. Dashboard access is locked until Admin approval.
             </p>
@@ -2097,7 +2108,7 @@ export default function App() {
                 setPendingVendorApp(null);
                 showToast('Returned to approved vendor session');
               }}
-              className="px-6 py-3 bg-[#171717] text-[#FFFFFF] text-[11px] uppercase tracking-[0.12em]"
+              className="px-6 py-3 bg-brand-primary text-brand-white text-[11px] uppercase tracking-[0.12em]"
             >
               Return to Approved Store
             </button>
@@ -2107,7 +2118,7 @@ export default function App() {
 
       {/* Vendor Registration & Document Upload Modal */}
       {vendorOnboardingOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#171717]/50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-primary/50">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -2120,9 +2131,9 @@ export default function App() {
               setVendorOnboardingOpen(false);
               showToast('Vendor application submitted — Pending Approval');
             }}
-            className="bg-[#FFFFFF] border border-[#171717] max-w-md w-full p-6 space-y-4"
+            className="bg-brand-surface border border-brand-primary max-w-md w-full p-6 space-y-4"
           >
-            <div className="flex justify-between items-center pb-2 border-b border-[#EAEAEA]">
+            <div className="flex justify-between items-center pb-2 border-b border-brand-border">
               <h3 className="text-[13px] font-semibold uppercase tracking-[0.12em]">
                 Vendor Registration
               </h3>
@@ -2136,7 +2147,7 @@ export default function App() {
               placeholder="Store / Atelier Name"
               value={newVendorForm.storeName}
               onChange={(e) => setNewVendorForm({ ...newVendorForm, storeName: e.target.value })}
-              className="w-full px-3 py-2 border border-[#EAEAEA] text-[12px]"
+              className="w-full px-3 py-2 border border-brand-border text-[12px]"
             />
             <input
               type="text"
@@ -2144,7 +2155,7 @@ export default function App() {
               placeholder="GSTIN (e.g., 27AABCV4829L1Z5)"
               value={newVendorForm.gstin}
               onChange={(e) => setNewVendorForm({ ...newVendorForm, gstin: e.target.value })}
-              className="w-full px-3 py-2 border border-[#EAEAEA] text-[12px]"
+              className="w-full px-3 py-2 border border-brand-border text-[12px]"
             />
             <input
               type="text"
@@ -2152,9 +2163,9 @@ export default function App() {
               placeholder="PAN Number"
               value={newVendorForm.pan}
               onChange={(e) => setNewVendorForm({ ...newVendorForm, pan: e.target.value })}
-              className="w-full px-3 py-2 border border-[#EAEAEA] text-[12px]"
+              className="w-full px-3 py-2 border border-brand-border text-[12px]"
             />
-            <label className="block border border-dashed border-[#171717] p-3 text-center text-[11px] uppercase cursor-pointer bg-[#F8F6F2]">
+            <label className="block border border-dashed border-brand-primary p-3 text-center text-[11px] uppercase cursor-pointer bg-brand-bg">
               Upload GST / PAN / Cheque Documents ({newVendorForm.docs.length} selected)
               <input
                 type="file"
@@ -2168,7 +2179,7 @@ export default function App() {
             </label>
             <button
               type="submit"
-              className="w-full py-3 bg-[#171717] text-[#FFFFFF] text-[11px] uppercase tracking-[0.12em]"
+              className="w-full py-3 bg-brand-primary text-brand-white text-[11px] uppercase tracking-[0.12em]"
             >
               Submit Application
             </button>
@@ -2181,7 +2192,7 @@ export default function App() {
         {toasts.map((t) => (
           <div
             key={t.id}
-            className="bg-[#171717] text-[#FFFFFF] px-4 py-2.5 text-[11px] uppercase tracking-[0.1em] shadow-md"
+            className="bg-brand-primary text-brand-white px-4 py-2.5 text-[11px] uppercase tracking-[0.1em] shadow-md"
           >
             {t.text}
           </div>
@@ -2193,13 +2204,13 @@ export default function App() {
 
 function StatusBadge({ status }: { status: OrderStatus }) {
   const styles: Record<OrderStatus, string> = {
-    Pending: 'border-[#B89B72] text-[#B89B72] bg-[#F8F6F2]',
-    Processing: 'border-[#171717] text-[#171717] bg-[#F8F6F2]',
-    Shipped: 'border-[#EAEAEA] text-[#171717] bg-[#FFFFFF]',
-    Delivered: 'border-[#171717] text-[#FFFFFF] bg-[#171717]',
-    Cancelled: 'border-[#EAEAEA] text-[#777777] bg-[#F8F6F2]',
-    'Return Requested': 'border-[#B89B72] text-[#FFFFFF] bg-[#B89B72]',
-    Refunded: 'border-[#EAEAEA] text-[#777777] bg-[#FFFFFF]',
+    Pending: 'border-brand-accent text-brand-primary bg-brand-bg',
+    Processing: 'border-brand-primary text-brand-ink bg-brand-bg',
+    Shipped: 'border-brand-border text-brand-ink bg-brand-surface',
+    Delivered: 'border-brand-primary text-brand-white bg-brand-primary',
+    Cancelled: 'border-brand-border text-brand-muted bg-brand-bg',
+    'Return Requested': 'border-brand-primary text-brand-white bg-brand-primary',
+    Refunded: 'border-brand-border text-brand-muted bg-brand-surface',
   };
   return (
     <span className={`px-2 py-0.5 border text-[10px] uppercase tracking-[0.08em] ${styles[status]}`}>

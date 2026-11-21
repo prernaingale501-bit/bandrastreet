@@ -2,12 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-brand-primary: #2f4238;
+  --color-brand-primary-hover: #3e584b;
+  --color-brand-accent: #a77d5a;
+  --color-brand-bg: #f4f1ea;
+  --color-brand-surface: #fffcf7;
+  --color-brand-secondary: #e7ded2;
+  --color-brand-ink: #282720;
+  --color-brand-muted: #706b62;
+  --color-brand-border: #e3dace;
+  --color-brand-white: #ffffff;
+}
+
 @layer base {
   html,
   body {
-    background-color: #ffffff;
-    color: #171717;
+    background-color: var(--color-brand-bg);
+    color: var(--color-brand-ink);
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  input,
+  select,
+  textarea {
+    color: var(--color-brand-ink);
+    background-color: var(--color-brand-surface);
+    border-color: var(--color-brand-border);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-brand-muted);
+  }
+
+  :is(input, select, textarea, button):focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 2px;
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--color-brand-primary);
+  }
+
+  ::selection {
+    color: var(--color-brand-white);
+    background-color: var(--color-brand-primary);
   }
 }
 

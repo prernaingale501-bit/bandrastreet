@@ -11,8 +11,8 @@ export default function App() {
   return (
     <div>
       {/* Unified Portal Switcher */}
-      <div className="bg-[#171717] text-[#FFFFFF] border-b border-[#2E2E2E] px-4 py-1.5 flex items-center justify-between text-[10px] uppercase tracking-[0.14em]">
-        <span className="text-[#B89B72] font-semibold">Bandra Street Workspace</span>
+      <div className="bg-brand-primary text-brand-white border-b border-brand-primary-hover px-4 py-1.5 flex items-center justify-between text-[10px] uppercase tracking-[0.14em]">
+        <span className="text-brand-white font-semibold">Bandra Street Workspace</span>
         <div className="flex gap-2">
           {(['storefront', 'vendor', 'admin'] as PortalMode[]).map((mode) => (
             <button
@@ -20,8 +20,8 @@ export default function App() {
               onClick={() => setPortal(mode)}
               className={`px-3 py-1 border transition-colors ${
                 portal === mode
-                  ? 'bg-[#B89B72] text-[#FFFFFF] border-[#B89B72]'
-                  : 'border-[#3A3A3A] text-[#EAEAEA] hover:border-[#FFFFFF]'
+                  ? 'bg-brand-primary text-brand-white border-brand-primary'
+                  : 'border-brand-primary-hover text-brand-secondary hover:bg-brand-primary-hover hover:border-brand-primary-hover'
               }`}
             >
               {mode === 'storefront'

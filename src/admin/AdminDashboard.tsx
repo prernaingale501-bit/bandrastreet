@@ -353,6 +353,11 @@ const ORDER_STATUS_CHART = [
 ];
 
 const formatINR = (n: number) => '₹' + n.toLocaleString('en-IN');
+const CHART_TOOLTIP_STYLE = {
+  backgroundColor: 'var(--color-brand-surface)',
+  borderColor: 'var(--color-brand-border)',
+  color: 'var(--color-brand-ink)',
+};
 
 // ============================================================================
 // MAIN ADMIN DASHBOARD
@@ -569,22 +574,22 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8F6F2] text-[#171717] flex font-sans antialiased">
+    <div className="min-h-screen bg-brand-bg text-brand-ink flex font-sans antialiased">
       {/* ==================================================================== */}
       {/* DESKTOP SIDEBAR (20 ITEMS)                                           */}
       {/* ==================================================================== */}
-      <aside className="hidden lg:flex w-64 bg-[#171717] text-[#FFFFFF] flex-col shrink-0">
-        <div className="h-16 px-6 border-b border-[#2E2E2E] flex items-center justify-between">
+      <aside className="hidden lg:flex w-64 bg-brand-primary text-brand-white flex-col shrink-0">
+        <div className="h-16 px-6 border-b border-brand-primary-hover flex items-center justify-between">
           <div>
-            <p className="font-serif text-lg tracking-[0.14em] uppercase">BANDRA STREET</p>
-            <p className="text-[10px] uppercase tracking-[0.14em] text-[#B89B72]">Enterprise Admin</p>
+            <p className="font-serif text-lg tracking-[0.14em] uppercase">Bandra Street</p>
+            <p className="text-[10px] uppercase tracking-[0.14em] text-brand-secondary">Enterprise Admin</p>
           </div>
         </div>
 
         <nav className="flex-1 overflow-y-auto p-3 space-y-5">
           {SIDEBAR_GROUPS.map((g) => (
             <div key={g.label}>
-              <p className="px-3 text-[10px] uppercase tracking-[0.14em] text-[#777777] mb-1.5">
+              <p className="px-3 text-[10px] uppercase tracking-[0.14em] text-brand-secondary mb-1.5">
                 {g.label}
               </p>
               <div className="space-y-0.5">
@@ -596,8 +601,8 @@ export default function App() {
                       onClick={() => setActiveTab(item.id)}
                       className={`w-full flex items-center justify-between px-3 py-2 text-[12px] transition-colors ${
                         active
-                          ? 'bg-[#B89B72] text-[#FFFFFF] font-medium'
-                          : 'text-[#EAEAEA] hover:bg-[#262626]'
+                          ? 'bg-brand-primary-hover text-brand-white font-medium'
+                          : 'text-brand-secondary hover:bg-brand-primary-hover'
                       }`}
                     >
                       <span className="flex items-center gap-2.5 truncate">
@@ -605,7 +610,7 @@ export default function App() {
                         <span className="truncate">{item.title}</span>
                       </span>
                       {item.badge !== undefined && (
-                        <span className="px-1.5 py-0.5 text-[10px] bg-[#FFFFFF] text-[#171717] font-semibold">
+                        <span className="px-1.5 py-0.5 text-[10px] bg-brand-surface text-brand-ink font-semibold">
                           {item.badge}
                         </span>
                       )}
@@ -622,11 +627,11 @@ export default function App() {
       {/* MAIN CONTENT AREA                                                    */}
       {/* ==================================================================== */}
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-16 bg-[#FFFFFF] border-b border-[#EAEAEA] px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30">
+        <header className="h-16 bg-brand-primary text-brand-white border-b border-brand-primary-hover px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="lg:hidden p-2 border border-[#EAEAEA]"
+              className="lg:hidden p-2 border border-brand-border"
             >
               <Menu className="w-4 h-4" />
             </button>
@@ -634,7 +639,7 @@ export default function App() {
               <h1 className="text-[13px] uppercase tracking-[0.14em] font-semibold">
                 {SIDEBAR_GROUPS.flatMap((g) => g.items).find((i) => i.id === activeTab)?.title}
               </h1>
-              <p className="text-[11px] text-[#777777] hidden sm:block">
+              <p className="text-[11px] text-brand-secondary hidden sm:block">
                 Global Marketplace Governance · Supabase Admin RBAC
               </p>
             </div>
@@ -645,14 +650,14 @@ export default function App() {
               onClick={() =>
                 setAdminRole(adminRole === 'Super Admin' ? 'Compliance Moderator' : 'Super Admin')
               }
-              className="px-3 py-1.5 border border-[#EAEAEA] bg-[#F8F6F2] text-[10px] uppercase tracking-[0.12em] flex items-center gap-1.5"
+              className="px-3 py-1.5 border border-brand-border bg-brand-bg text-brand-ink text-[10px] uppercase tracking-[0.12em] flex items-center gap-1.5"
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-[#B89B72]" />
+              <ShieldCheck className="w-3.5 h-3.5 text-brand-accent" />
               {adminRole}
             </button>
             <button
               onClick={() => downloadReportCSV('marketplace_executive_report')}
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-[#171717] text-[#FFFFFF] text-[11px] uppercase tracking-[0.12em]"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-brand-primary-hover text-brand-white hover:bg-brand-primary text-[11px] uppercase tracking-[0.12em]"
             >
               <Download className="w-3.5 h-3.5" /> Export Report
             </button>
@@ -675,44 +680,56 @@ export default function App() {
                   { label: 'Pending Vendors', value: String(pendingVendors.length) },
                   { label: 'Product Queue', value: String(pendingProducts.length) },
                 ].map((kpi) => (
-                  <div key={kpi.label} className="bg-[#FFFFFF] border border-[#EAEAEA] p-4 space-y-1.5">
-                    <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">{kpi.label}</p>
+                  <div key={kpi.label} className="bg-brand-surface border border-brand-border p-4 space-y-1.5">
+                    <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">{kpi.label}</p>
                     <p className="text-xl font-semibold tracking-tight">{kpi.value}</p>
                   </div>
                 ))}
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <div className="lg:col-span-7 bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+                <div className="lg:col-span-7 bg-brand-surface border border-brand-border p-6">
                   <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-4">
                     Monthly Platform Revenue &amp; GMV
                   </h2>
                   <div className="h-72">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={MONTHLY_REVENUE}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#EAEAEA" />
-                        <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#777777' }} />
-                        <YAxis tick={{ fontSize: 11, fill: '#777777' }} />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="gmv" stroke="#171717" fill="#171717" fillOpacity={0.08} />
-                        <Area type="monotone" dataKey="revenue" stroke="#B89B72" fill="#B89B72" fillOpacity={0.3} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="var(--color-brand-border)" />
+                        <XAxis dataKey="month" tick={{ fontSize: 11, fill: 'var(--color-brand-muted)' }} />
+                        <YAxis tick={{ fontSize: 11, fill: 'var(--color-brand-muted)' }} />
+                        <Tooltip contentStyle={CHART_TOOLTIP_STYLE} />
+                        <Area
+                          type="monotone"
+                          dataKey="gmv"
+                          stroke="var(--color-brand-primary)"
+                          fill="var(--color-brand-primary)"
+                          fillOpacity={0.08}
+                        />
+                        <Area
+                          type="monotone"
+                          dataKey="revenue"
+                          stroke="var(--color-brand-accent)"
+                          fill="var(--color-brand-accent)"
+                          fillOpacity={0.3}
+                        />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+                <div className="lg:col-span-5 bg-brand-surface border border-brand-border p-6">
                   <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-4">
                     Order Status Distribution
                   </h2>
                   <div className="h-72">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={ORDER_STATUS_CHART}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#EAEAEA" />
-                        <XAxis dataKey="status" tick={{ fontSize: 11, fill: '#777777' }} />
-                        <YAxis tick={{ fontSize: 11, fill: '#777777' }} />
-                        <Tooltip />
-                        <Bar dataKey="count" fill="#171717" />
+                        <CartesianGrid strokeDasharray="3 3" stroke="var(--color-brand-border)" />
+                        <XAxis dataKey="status" tick={{ fontSize: 11, fill: 'var(--color-brand-muted)' }} />
+                        <YAxis tick={{ fontSize: 11, fill: 'var(--color-brand-muted)' }} />
+                        <Tooltip contentStyle={CHART_TOOLTIP_STYLE} />
+                        <Bar dataKey="count" fill="var(--color-brand-primary)" />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -720,14 +737,14 @@ export default function App() {
               </div>
 
               {/* Recent Transactions */}
-              <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+              <div className="bg-brand-surface border border-brand-border p-6">
                 <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-4">
                   Recent Marketplace Transactions
                 </h2>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-[12px]">
                     <thead>
-                      <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                      <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                         <th className="py-2.5">Order #</th>
                         <th className="py-2.5">Vendor</th>
                         <th className="py-2.5">Customer</th>
@@ -736,16 +753,16 @@ export default function App() {
                         <th className="py-2.5">Status</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#EAEAEA]">
+                    <tbody className="divide-y divide-brand-border">
                       {orders.map((o) => {
                         const rate = getVendorCommissionRate(o.vendorId);
                         return (
-                          <tr key={o.id} className="hover:bg-[#F8F6F2]">
+                          <tr key={o.id} className="hover:bg-brand-bg">
                             <td className="py-3 font-medium">{o.orderNumber}</td>
                             <td className="py-3">{o.vendorName}</td>
                             <td className="py-3">{o.customerName}</td>
                             <td className="py-3">{formatINR(o.amount)}</td>
-                            <td className="py-3 text-[#B89B72] font-medium">
+                            <td className="py-3 text-brand-primary font-medium">
                               {formatINR(Math.round((o.amount * rate) / 100))} ({rate}%)
                             </td>
                             <td className="py-3">{o.status}</td>
@@ -765,38 +782,38 @@ export default function App() {
           {activeTab === 'vendor-applications' && (
             <div className="space-y-6">
               {pendingVendors.length === 0 ? (
-                <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-12 text-center text-[13px] text-[#777777]">
+                <div className="bg-brand-surface border border-brand-border p-12 text-center text-[13px] text-brand-muted">
                   All vendor applications have been reviewed.
                 </div>
               ) : (
                 pendingVendors.map((v) => (
-                  <div key={v.id} className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 space-y-5">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EAEAEA] pb-4">
+                  <div key={v.id} className="bg-brand-surface border border-brand-border p-6 space-y-5">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-brand-border pb-4">
                       <div>
-                        <span className="px-2 py-0.5 bg-[#F8F6F2] border border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#B89B72]">
+                        <span className="px-2 py-0.5 bg-brand-bg border border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-primary">
                           {v.status}
                         </span>
                         <h2 className="font-serif text-2xl font-light mt-1">{v.name}</h2>
-                        <p className="text-[12px] text-[#777777]">
+                        <p className="text-[12px] text-brand-muted">
                           Owner: {v.ownerName} · {v.email} · {v.city}
                         </p>
                       </div>
                       <div className="flex flex-wrap gap-2">
                         <button
                           onClick={() => updateVendorStatus(v.id, 'Active')}
-                          className="px-4 py-2 bg-[#171717] text-[#FFFFFF] hover:bg-[#B89B72] text-[11px] uppercase tracking-[0.12em]"
+                          className="px-4 py-2 bg-brand-primary text-brand-white hover:bg-brand-primary-hover text-[11px] uppercase tracking-[0.12em]"
                         >
                           Approve Vendor
                         </button>
                         <button
                           onClick={() => setRejectModal({ type: 'vendor', id: v.id, mode: 'docs' })}
-                          className="px-4 py-2 border border-[#EAEAEA] hover:border-[#171717] text-[11px] uppercase tracking-[0.12em]"
+                          className="px-4 py-2 border border-brand-border hover:border-brand-primary-hover text-[11px] uppercase tracking-[0.12em]"
                         >
                           Request Docs
                         </button>
                         <button
                           onClick={() => setRejectModal({ type: 'vendor', id: v.id, mode: 'reject' })}
-                          className="px-4 py-2 border border-[#EAEAEA] text-[#777777] hover:text-[#171717] text-[11px] uppercase tracking-[0.12em]"
+                          className="px-4 py-2 border border-brand-border text-brand-muted hover:text-brand-primary text-[11px] uppercase tracking-[0.12em]"
                         >
                           Reject
                         </button>
@@ -804,42 +821,42 @@ export default function App() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-[12px]">
-                      <div className="p-4 bg-[#F8F6F2] border border-[#EAEAEA] flex items-center justify-between">
+                      <div className="p-4 bg-brand-bg border border-brand-border flex items-center justify-between">
                         <div>
-                          <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">GSTIN</p>
+                          <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">GSTIN</p>
                           <p className="font-mono font-medium mt-0.5">{v.gstin}</p>
                         </div>
                         <button
                           onClick={() => verifyVendorDoc(v.id, 'gstVerified')}
                           className={`px-2.5 py-1 text-[10px] uppercase border ${
                             v.gstVerified
-                              ? 'bg-[#171717] text-[#FFFFFF] border-[#171717]'
-                              : 'bg-[#FFFFFF] border-[#EAEAEA]'
+                              ? 'bg-brand-primary text-brand-white border-brand-primary'
+                              : 'bg-brand-surface border-brand-border'
                           }`}
                         >
                           {v.gstVerified ? 'Verified' : 'Verify GST'}
                         </button>
                       </div>
 
-                      <div className="p-4 bg-[#F8F6F2] border border-[#EAEAEA] flex items-center justify-between">
+                      <div className="p-4 bg-brand-bg border border-brand-border flex items-center justify-between">
                         <div>
-                          <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777]">PAN Number</p>
+                          <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted">PAN Number</p>
                           <p className="font-mono font-medium mt-0.5">{v.pan}</p>
                         </div>
                         <button
                           onClick={() => verifyVendorDoc(v.id, 'panVerified')}
                           className={`px-2.5 py-1 text-[10px] uppercase border ${
                             v.panVerified
-                              ? 'bg-[#171717] text-[#FFFFFF] border-[#171717]'
-                              : 'bg-[#FFFFFF] border-[#EAEAEA]'
+                              ? 'bg-brand-primary text-brand-white border-brand-primary'
+                              : 'bg-brand-surface border-brand-border'
                           }`}
                         >
                           {v.panVerified ? 'Verified' : 'Verify PAN'}
                         </button>
                       </div>
 
-                      <div className="p-4 bg-[#F8F6F2] border border-[#EAEAEA]">
-                        <p className="text-[10px] uppercase tracking-[0.12em] text-[#777777] mb-1">
+                      <div className="p-4 bg-brand-bg border border-brand-border">
+                        <p className="text-[10px] uppercase tracking-[0.12em] text-brand-muted mb-1">
                           Submitted Documents
                         </p>
                         <div className="flex flex-wrap gap-1.5">
@@ -847,9 +864,9 @@ export default function App() {
                             <span
                               key={doc}
                               onClick={() => showToast(`Opened ${doc}`)}
-                              className="px-2 py-0.5 bg-[#FFFFFF] border border-[#EAEAEA] text-[10px] cursor-pointer hover:border-[#171717] inline-flex items-center gap-1"
+                              className="px-2 py-0.5 bg-brand-surface border border-brand-border text-[10px] cursor-pointer hover:border-brand-primary-hover inline-flex items-center gap-1"
                             >
-                              <FileText className="w-3 h-3 text-[#B89B72]" /> {doc}
+                              <FileText className="w-3 h-3 text-brand-accent" /> {doc}
                             </span>
                           ))}
                         </div>
@@ -865,11 +882,11 @@ export default function App() {
           {/* 3. ALL VENDORS (SUSPEND / REACTIVATE)                            */}
           {/* ---------------------------------------------------------------- */}
           {activeTab === 'all-vendors' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+            <div className="bg-brand-surface border border-brand-border p-6">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                    <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                       <th className="py-3">Vendor</th>
                       <th className="py-3">GST / PAN</th>
                       <th className="py-3">GMV</th>
@@ -877,40 +894,40 @@ export default function App() {
                       <th className="py-3 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#EAEAEA]">
+                  <tbody className="divide-y divide-brand-border">
                     {vendors.map((v) => (
-                      <tr key={v.id} className="hover:bg-[#F8F6F2]">
+                      <tr key={v.id} className="hover:bg-brand-bg">
                         <td className="py-3.5">
                           <p className="font-medium">{v.name}</p>
-                          <p className="text-[11px] text-[#777777]">{v.ownerName} · {v.city}</p>
+                          <p className="text-[11px] text-brand-muted">{v.ownerName} · {v.city}</p>
                         </td>
                         <td className="py-3.5 font-mono text-[11px]">
                           {v.gstin} ({v.gstVerified ? '✓' : 'Pending'})
                         </td>
                         <td className="py-3.5 font-medium">{formatINR(v.gmv)}</td>
                         <td className="py-3.5">
-                          <span className="px-2 py-0.5 border border-[#EAEAEA] bg-[#F8F6F2] text-[10px] uppercase">
+                          <span className="px-2 py-0.5 border border-brand-border bg-brand-bg text-[10px] uppercase">
                             {v.status}
                           </span>
                         </td>
                         <td className="py-3.5 text-right space-x-2">
                           <button
                             onClick={() => setInspectVendor(v)}
-                            className="px-3 py-1 border border-[#EAEAEA] text-[10px] uppercase"
+                            className="px-3 py-1 border border-brand-border text-[10px] uppercase"
                           >
                             Inspect
                           </button>
                           {v.status === 'Active' ? (
                             <button
                               onClick={() => updateVendorStatus(v.id, 'Suspended')}
-                              className="px-3 py-1 border border-[#EAEAEA] text-[#777777] hover:text-[#171717] text-[10px] uppercase"
+                              className="px-3 py-1 border border-brand-border text-brand-muted hover:text-brand-primary text-[10px] uppercase"
                             >
                               Suspend
                             </button>
                           ) : (
                             <button
                               onClick={() => updateVendorStatus(v.id, 'Active')}
-                              className="px-3 py-1 bg-[#171717] text-[#FFFFFF] text-[10px] uppercase"
+                              className="px-3 py-1 bg-brand-primary text-brand-white text-[10px] uppercase"
                             >
                               Reactivate
                             </button>
@@ -928,11 +945,11 @@ export default function App() {
           {/* 5 & 6. PRODUCT APPROVALS & ALL PRODUCTS                          */}
           {/* ---------------------------------------------------------------- */}
           {(activeTab === 'product-approvals' || activeTab === 'products') && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 space-y-4">
+            <div className="bg-brand-surface border border-brand-border p-6 space-y-4">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                    <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                       <th className="py-3">Product</th>
                       <th className="py-3">Vendor</th>
                       <th className="py-3">Price</th>
@@ -941,19 +958,19 @@ export default function App() {
                       <th className="py-3 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#EAEAEA]">
+                  <tbody className="divide-y divide-brand-border">
                     {products
                       .filter((p) => (activeTab === 'product-approvals' ? p.approvalStatus === 'Pending' : true))
                       .map((p) => (
-                        <tr key={p.id} className="hover:bg-[#F8F6F2]">
+                        <tr key={p.id} className="hover:bg-brand-bg">
                           <td className="py-3.5">
                             <p className="font-medium">{p.title}</p>
-                            <p className="text-[11px] text-[#777777]">{p.sku} · {p.description}</p>
+                            <p className="text-[11px] text-brand-muted">{p.sku} · {p.description}</p>
                           </td>
                           <td className="py-3.5">{p.vendorName}</td>
                           <td className="py-3.5 font-medium">{formatINR(p.price)}</td>
                           <td className="py-3.5">
-                            <span className="px-2 py-0.5 border border-[#EAEAEA] bg-[#F8F6F2] text-[10px] uppercase">
+                            <span className="px-2 py-0.5 border border-brand-border bg-brand-bg text-[10px] uppercase">
                               {p.approvalStatus}
                             </span>
                           </td>
@@ -969,9 +986,9 @@ export default function App() {
                               className="inline-flex items-center gap-1 text-[11px] uppercase"
                             >
                               {p.visible ? (
-                                <><Eye className="w-3.5 h-3.5 text-[#B89B72]" /> Visible</>
+                                <><Eye className="w-3.5 h-3.5 text-brand-accent" /> Visible</>
                               ) : (
-                                <><EyeOff className="w-3.5 h-3.5 text-[#777777]" /> Hidden</>
+                                <><EyeOff className="w-3.5 h-3.5 text-brand-muted" /> Hidden</>
                               )}
                             </button>
                           </td>
@@ -979,7 +996,7 @@ export default function App() {
                             {p.approvalStatus !== 'Approved' && (
                               <button
                                 onClick={() => updateProductApproval(p.id, 'Approved')}
-                                className="px-3 py-1 bg-[#171717] text-[#FFFFFF] text-[10px] uppercase"
+                                className="px-3 py-1 bg-brand-primary text-brand-white text-[10px] uppercase"
                               >
                                 Approve
                               </button>
@@ -987,7 +1004,7 @@ export default function App() {
                             {p.approvalStatus !== 'Rejected' && (
                               <button
                                 onClick={() => setRejectModal({ type: 'product', id: p.id, mode: 'reject' })}
-                                className="px-3 py-1 border border-[#EAEAEA] text-[10px] uppercase"
+                                className="px-3 py-1 border border-brand-border text-[10px] uppercase"
                               >
                                 Reject
                               </button>
@@ -1006,7 +1023,7 @@ export default function App() {
           {/* ---------------------------------------------------------------- */}
           {activeTab === 'commission-settings' && (
             <div className="space-y-6">
-              <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 max-w-xl space-y-4">
+              <div className="bg-brand-surface border border-brand-border p-6 max-w-xl space-y-4">
                 <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                   Global Marketplace Commission
                 </h2>
@@ -1017,31 +1034,31 @@ export default function App() {
                     max={40}
                     value={globalCommission}
                     onChange={(e) => setGlobalCommission(Number(e.target.value))}
-                    className="w-28 px-3 py-2.5 border border-[#EAEAEA] text-[14px] font-semibold"
+                    className="w-28 px-3 py-2.5 border border-brand-border text-[14px] font-semibold"
                   />
-                  <span className="text-[13px] text-[#777777]">% default platform fee</span>
+                  <span className="text-[13px] text-brand-muted">% default platform fee</span>
                   <button
                     onClick={() => showToast(`Global commission set to ${globalCommission}%`)}
-                    className="px-5 py-2.5 bg-[#171717] text-[#FFFFFF] text-[11px] uppercase tracking-[0.12em]"
+                    className="px-5 py-2.5 bg-brand-primary text-brand-white text-[11px] uppercase tracking-[0.12em]"
                   >
                     Save
                   </button>
                 </div>
               </div>
 
-              <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+              <div className="bg-brand-surface border border-brand-border p-6">
                 <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-4">
                   Vendor-Specific Commission Overrides
                 </h2>
                 <table className="w-full text-left text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                    <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                       <th className="py-3">Vendor</th>
                       <th className="py-3">Commission (%)</th>
                       <th className="py-3">Estimated Platform Earnings</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#EAEAEA]">
+                  <tbody className="divide-y divide-brand-border">
                     {vendors.map((v) => {
                       const rate = v.commissionOverride ?? globalCommission;
                       return (
@@ -1061,10 +1078,10 @@ export default function App() {
                                   )
                                 );
                               }}
-                              className="w-20 px-2.5 py-1.5 border border-[#EAEAEA] text-[12px]"
+                              className="w-20 px-2.5 py-1.5 border border-brand-border text-[12px]"
                             />
                           </td>
-                          <td className="py-3 font-medium text-[#B89B72]">
+                          <td className="py-3 font-medium text-brand-primary">
                             {formatINR(Math.round((v.gmv * rate) / 100))}
                           </td>
                         </tr>
@@ -1080,7 +1097,7 @@ export default function App() {
           {/* 9. ORDERS / 10. PAYMENTS / 11. REFUNDS                           */}
           {/* ---------------------------------------------------------------- */}
           {(activeTab === 'orders' || activeTab === 'payments' || activeTab === 'refunds') && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 space-y-5">
+            <div className="bg-brand-surface border border-brand-border p-6 space-y-5">
               {activeTab === 'orders' && (
                 <div className="flex flex-wrap gap-2">
                   {['All', 'Pending', 'Processing', 'Shipped', 'Delivered', 'Return Requested', 'Cancelled', 'Refunded'].map(
@@ -1090,8 +1107,8 @@ export default function App() {
                         onClick={() => setOrderFilter(st)}
                         className={`px-3 py-1.5 border text-[10px] uppercase tracking-[0.1em] ${
                           orderFilter === st
-                            ? 'bg-[#171717] text-[#FFFFFF] border-[#171717]'
-                            : 'border-[#EAEAEA]'
+                            ? 'bg-brand-primary text-brand-white border-brand-primary'
+                            : 'border-brand-border'
                         }`}
                       >
                         {st}
@@ -1104,7 +1121,7 @@ export default function App() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-[12px]">
                   <thead>
-                    <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                    <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                       <th className="py-3">Order #</th>
                       <th className="py-3">Vendor</th>
                       <th className="py-3">Customer</th>
@@ -1114,7 +1131,7 @@ export default function App() {
                       <th className="py-3 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#EAEAEA]">
+                  <tbody className="divide-y divide-brand-border">
                     {orders
                       .filter((o) => {
                         if (activeTab === 'refunds') {
@@ -1123,24 +1140,24 @@ export default function App() {
                         return orderFilter === 'All' || o.status === orderFilter;
                       })
                       .map((o) => (
-                        <tr key={o.id} className="hover:bg-[#F8F6F2]">
+                        <tr key={o.id} className="hover:bg-brand-bg">
                           <td className="py-3.5 font-medium">{o.orderNumber}</td>
                           <td className="py-3.5">{o.vendorName}</td>
                           <td className="py-3.5">{o.customerName}</td>
-                          <td className="py-3.5 text-[#777777]">{o.paymentMethod}</td>
+                          <td className="py-3.5 text-brand-muted">{o.paymentMethod}</td>
                           <td className="py-3.5 font-medium">{formatINR(o.amount)}</td>
                           <td className="py-3.5">{o.status}</td>
                           <td className="py-3.5 text-right space-x-2">
                             <button
                               onClick={() => setSelectedOrder(o)}
-                              className="px-3 py-1 border border-[#EAEAEA] text-[10px] uppercase"
+                              className="px-3 py-1 border border-brand-border text-[10px] uppercase"
                             >
                               Manage
                             </button>
                             {o.status === 'Return Requested' && (
                               <button
                                 onClick={() => updateOrderStatus(o.id, 'Refunded')}
-                                className="px-3 py-1 bg-[#171717] text-[#FFFFFF] text-[10px] uppercase"
+                                className="px-3 py-1 bg-brand-primary text-brand-white text-[10px] uppercase"
                               >
                                 Refund
                               </button>
@@ -1158,21 +1175,21 @@ export default function App() {
           {/* 13. VENDOR PAYOUTS                                               */}
           {/* ---------------------------------------------------------------- */}
           {activeTab === 'vendor-payouts' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 space-y-5">
+            <div className="bg-brand-surface border border-brand-border p-6 space-y-5">
               <div className="flex justify-between items-center">
                 <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                   Vendor Payout Requests
                 </h2>
                 <button
                   onClick={() => downloadReportCSV('vendor_payout_report')}
-                  className="px-4 py-2 border border-[#EAEAEA] text-[11px] uppercase tracking-[0.1em] inline-flex items-center gap-1.5"
+                  className="px-4 py-2 border border-brand-border text-[11px] uppercase tracking-[0.1em] inline-flex items-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5" /> Payout Report
                 </button>
               </div>
               <table className="w-full text-left text-[12px]">
                 <thead>
-                  <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                  <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                     <th className="py-3">Vendor</th>
                     <th className="py-3">Bank</th>
                     <th className="py-3">Date</th>
@@ -1181,11 +1198,11 @@ export default function App() {
                     <th className="py-3 text-right">Decision</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#EAEAEA]">
+                <tbody className="divide-y divide-brand-border">
                   {payouts.map((p) => (
                     <tr key={p.id}>
                       <td className="py-3.5 font-medium">{p.vendorName}</td>
-                      <td className="py-3.5 text-[#777777]">{p.bank}</td>
+                      <td className="py-3.5 text-brand-muted">{p.bank}</td>
                       <td className="py-3.5">{p.date}</td>
                       <td className="py-3.5 font-semibold">{formatINR(p.amount)}</td>
                       <td className="py-3.5">{p.status}</td>
@@ -1194,13 +1211,13 @@ export default function App() {
                           <>
                             <button
                               onClick={() => handlePayoutAction(p.id, 'Approved')}
-                              className="px-3 py-1 bg-[#171717] text-[#FFFFFF] text-[10px] uppercase"
+                              className="px-3 py-1 bg-brand-primary text-brand-white text-[10px] uppercase"
                             >
                               Approve
                             </button>
                             <button
                               onClick={() => handlePayoutAction(p.id, 'Rejected')}
-                              className="px-3 py-1 border border-[#EAEAEA] text-[10px] uppercase"
+                              className="px-3 py-1 border border-brand-border text-[10px] uppercase"
                             >
                               Reject
                             </button>
@@ -1218,23 +1235,23 @@ export default function App() {
           {/* REMAINING ADMIN SECTIONS (Customers, Categories, Brands, etc.)    */}
           {/* ---------------------------------------------------------------- */}
           {activeTab === 'customers' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6">
+            <div className="bg-brand-surface border border-brand-border p-6">
               <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold mb-4">
                 Marketplace Customers
               </h2>
               <table className="w-full text-left text-[12px]">
                 <thead>
-                  <tr className="border-b border-[#EAEAEA] text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+                  <tr className="border-b border-brand-border text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                     <th className="py-3">Customer</th>
                     <th className="py-3">Last Order</th>
                     <th className="py-3">Total Spend</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#EAEAEA]">
+                <tbody className="divide-y divide-brand-border">
                   {orders.map((o) => (
                     <tr key={o.id}>
                       <td className="py-3 font-medium">{o.customerName}</td>
-                      <td className="py-3 text-[#777777]">{o.date}</td>
+                      <td className="py-3 text-brand-muted">{o.date}</td>
                       <td className="py-3">{formatINR(o.amount)}</td>
                     </tr>
                   ))}
@@ -1244,7 +1261,7 @@ export default function App() {
           )}
 
           {(activeTab === 'categories' || activeTab === 'brands') && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 max-w-2xl space-y-4">
+            <div className="bg-brand-surface border border-brand-border p-6 max-w-2xl space-y-4">
               <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                 {activeTab === 'categories' ? 'Manage Categories' : 'Registered Designer Brands'}
               </h2>
@@ -1256,7 +1273,7 @@ export default function App() {
                       value={newCategory}
                       onChange={(e) => setNewCategory(e.target.value)}
                       placeholder="New category name..."
-                      className="flex-1 px-3 py-2 border border-[#EAEAEA] text-[12px]"
+                      className="flex-1 px-3 py-2 border border-brand-border text-[12px]"
                     />
                     <button
                       onClick={() => {
@@ -1265,14 +1282,14 @@ export default function App() {
                         setNewCategory('');
                         showToast('Category added');
                       }}
-                      className="px-4 py-2 bg-[#171717] text-[#FFFFFF] text-[11px] uppercase"
+                      className="px-4 py-2 bg-brand-primary text-brand-white text-[11px] uppercase"
                     >
                       Add
                     </button>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {categories.map((c) => (
-                      <span key={c} className="px-3 py-1.5 border border-[#EAEAEA] bg-[#F8F6F2] text-[11px]">
+                      <span key={c} className="px-3 py-1.5 border border-brand-border bg-brand-bg text-[11px]">
                         {c}
                       </span>
                     ))}
@@ -1281,9 +1298,9 @@ export default function App() {
               ) : (
                 <div className="space-y-2">
                   {vendors.map((v) => (
-                    <div key={v.id} className="p-3 border border-[#EAEAEA] flex justify-between text-[12px]">
+                    <div key={v.id} className="p-3 border border-brand-border flex justify-between text-[12px]">
                       <span className="font-medium">{v.name}</span>
-                      <span className="text-[#777777]">{v.status}</span>
+                      <span className="text-brand-muted">{v.status}</span>
                     </div>
                   ))}
                 </div>
@@ -1292,7 +1309,7 @@ export default function App() {
           )}
 
           {(activeTab === 'coupons' || activeTab === 'promotions') && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 max-w-2xl space-y-5">
+            <div className="bg-brand-surface border border-brand-border p-6 max-w-2xl space-y-5">
               <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                 Marketplace Coupons &amp; Promotions
               </h2>
@@ -1302,13 +1319,13 @@ export default function App() {
                   value={newCouponCode}
                   onChange={(e) => setNewCouponCode(e.target.value.toUpperCase())}
                   placeholder="COUPON CODE"
-                  className="flex-1 px-3 py-2 border border-[#EAEAEA] text-[12px]"
+                  className="flex-1 px-3 py-2 border border-brand-border text-[12px]"
                 />
                 <input
                   type="number"
                   value={newCouponPct}
                   onChange={(e) => setNewCouponPct(e.target.value)}
-                  className="w-20 px-3 py-2 border border-[#EAEAEA] text-[12px]"
+                  className="w-20 px-3 py-2 border border-brand-border text-[12px]"
                 />
                 <button
                   onClick={() => {
@@ -1320,14 +1337,14 @@ export default function App() {
                     setNewCouponCode('');
                     showToast('Coupon created');
                   }}
-                  className="px-4 py-2 bg-[#171717] text-[#FFFFFF] text-[11px] uppercase"
+                  className="px-4 py-2 bg-brand-primary text-brand-white text-[11px] uppercase"
                 >
                   Create
                 </button>
               </div>
               <div className="space-y-2">
                 {coupons.map((c) => (
-                  <div key={c.id} className="p-3.5 border border-[#EAEAEA] flex justify-between items-center text-[12px]">
+                  <div key={c.id} className="p-3.5 border border-brand-border flex justify-between items-center text-[12px]">
                     <span>
                       <strong>{c.code}</strong> · {c.discountPct}% Off · {c.uses} uses
                     </span>
@@ -1338,7 +1355,7 @@ export default function App() {
                         )
                       }
                       className={`px-3 py-1 text-[10px] uppercase border ${
-                        c.active ? 'bg-[#171717] text-[#FFFFFF]' : 'border-[#EAEAEA]'
+                        c.active ? 'bg-brand-primary text-brand-white' : 'border-brand-border'
                       }`}
                     >
                       {c.active ? 'Active' : 'Paused'}
@@ -1350,13 +1367,13 @@ export default function App() {
           )}
 
           {activeTab === 'banners' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 max-w-2xl space-y-3">
+            <div className="bg-brand-surface border border-brand-border p-6 max-w-2xl space-y-3">
               <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">Homepage Banners</h2>
               {banners.map((b) => (
-                <div key={b.id} className="p-4 border border-[#EAEAEA] flex justify-between items-center text-[12px]">
+                <div key={b.id} className="p-4 border border-brand-border flex justify-between items-center text-[12px]">
                   <div>
                     <p className="font-medium">{b.title}</p>
-                    <p className="text-[11px] text-[#777777]">{b.placement}</p>
+                    <p className="text-[11px] text-brand-muted">{b.placement}</p>
                   </div>
                   <button
                     onClick={() =>
@@ -1365,7 +1382,7 @@ export default function App() {
                       )
                     }
                     className={`px-3 py-1 text-[10px] uppercase border ${
-                      b.active ? 'bg-[#171717] text-[#FFFFFF]' : 'border-[#EAEAEA]'
+                      b.active ? 'bg-brand-primary text-brand-white' : 'border-brand-border'
                     }`}
                   >
                     {b.active ? 'Live' : 'Hidden'}
@@ -1376,13 +1393,13 @@ export default function App() {
           )}
 
           {activeTab === 'reviews' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 max-w-2xl space-y-3">
+            <div className="bg-brand-surface border border-brand-border p-6 max-w-2xl space-y-3">
               <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">Review Moderation</h2>
               {reviews.map((r) => (
-                <div key={r.id} className="p-4 border border-[#EAEAEA] flex justify-between items-center text-[12px]">
+                <div key={r.id} className="p-4 border border-brand-border flex justify-between items-center text-[12px]">
                   <div>
                     <p className="font-medium">{r.product} — {r.author} ({r.rating}★)</p>
-                    <p className="text-[#777777]">{r.text}</p>
+                    <p className="text-brand-muted">{r.text}</p>
                   </div>
                   <button
                     onClick={() =>
@@ -1394,7 +1411,7 @@ export default function App() {
                         )
                       )
                     }
-                    className="px-3 py-1 border border-[#EAEAEA] text-[10px] uppercase"
+                    className="px-3 py-1 border border-brand-border text-[10px] uppercase"
                   >
                     {r.status}
                   </button>
@@ -1404,17 +1421,17 @@ export default function App() {
           )}
 
           {activeTab === 'reports' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-brand-surface border border-brand-border p-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
                 { name: 'gmv_revenue_report', title: 'GMV & Platform Revenue' },
                 { name: 'commission_ledger', title: 'Commission Transactions' },
                 { name: 'vendor_payout_report', title: 'Vendor Payouts Ledger' },
               ].map((rep) => (
-                <div key={rep.name} className="p-5 border border-[#EAEAEA] bg-[#F8F6F2] space-y-3">
+                <div key={rep.name} className="p-5 border border-brand-border bg-brand-bg space-y-3">
                   <p className="text-[12px] font-semibold uppercase tracking-[0.1em]">{rep.title}</p>
                   <button
                     onClick={() => downloadReportCSV(rep.name)}
-                    className="px-4 py-2 bg-[#171717] text-[#FFFFFF] text-[10px] uppercase tracking-[0.12em] inline-flex items-center gap-1.5"
+                    className="px-4 py-2 bg-brand-primary text-brand-white text-[10px] uppercase tracking-[0.12em] inline-flex items-center gap-1.5"
                   >
                     <Download className="w-3.5 h-3.5" /> Download CSV
                   </button>
@@ -1424,26 +1441,26 @@ export default function App() {
           )}
 
           {activeTab === 'notifications' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 max-w-2xl space-y-3 text-[12px]">
+            <div className="bg-brand-surface border border-brand-border p-6 max-w-2xl space-y-3 text-[12px]">
               <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">Admin Alerts</h2>
-              <div className="p-3.5 bg-[#F8F6F2] border border-[#EAEAEA]">
+              <div className="p-3.5 bg-brand-bg border border-brand-border">
                 {pendingVendors.length} vendor applications awaiting GST/PAN verification.
               </div>
-              <div className="p-3.5 bg-[#F8F6F2] border border-[#EAEAEA]">
+              <div className="p-3.5 bg-brand-bg border border-brand-border">
                 {pendingProducts.length} new products submitted for catalog review.
               </div>
             </div>
           )}
 
           {activeTab === 'website-settings' && (
-            <div className="bg-[#FFFFFF] border border-[#EAEAEA] p-6 max-w-2xl space-y-4 text-[12px]">
+            <div className="bg-brand-surface border border-brand-border p-6 max-w-2xl space-y-4 text-[12px]">
               <h2 className="text-[12px] uppercase tracking-[0.12em] font-semibold">
                 Website &amp; Supabase Admin Permissions
               </h2>
-              <p className="text-[#777777]">
-                Current Role: <strong className="text-[#171717]">{adminRole}</strong>. Admin-only
+              <p className="text-brand-muted">
+                Current Role: <strong className="text-brand-ink">{adminRole}</strong>. Admin-only
                 Supabase RLS policies restrict vendor approvals, commission overrides, and payout
-                settlements to authenticated <code className="text-[#171717]">role = 'admin'</code>{' '}
+                settlements to authenticated <code className="text-brand-ink">role = 'admin'</code>{' '}
                 sessions.
               </p>
             </div>
@@ -1455,8 +1472,8 @@ export default function App() {
       {/* MODALS: REJECT / REQUEST DOCS, ORDER DETAILS, VENDOR INSPECT         */}
       {/* ==================================================================== */}
       {rejectModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#171717]/50">
-          <form onSubmit={handleModalSubmit} className="bg-[#FFFFFF] border border-[#171717] max-w-md w-full p-6 space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-primary/50">
+          <form onSubmit={handleModalSubmit} className="bg-brand-surface border border-brand-primary max-w-md w-full p-6 space-y-4">
             <h3 className="text-[13px] font-semibold uppercase tracking-[0.12em]">
               {rejectModal.mode === 'docs' ? 'Request Additional Documents' : 'Provide Rejection Reason'}
             </h3>
@@ -1466,17 +1483,17 @@ export default function App() {
               value={reasonText}
               onChange={(e) => setReasonText(e.target.value)}
               placeholder="Enter clear reason or required document details..."
-              className="w-full p-3 border border-[#EAEAEA] text-[12px]"
+              className="w-full p-3 border border-brand-border text-[12px]"
             />
             <div className="flex justify-end gap-2">
               <button
                 type="button"
                 onClick={() => setRejectModal(null)}
-                className="px-4 py-2 border border-[#EAEAEA] text-[11px] uppercase"
+                className="px-4 py-2 border border-brand-border text-[11px] uppercase"
               >
                 Cancel
               </button>
-              <button type="submit" className="px-4 py-2 bg-[#171717] text-[#FFFFFF] text-[11px] uppercase">
+              <button type="submit" className="px-4 py-2 bg-brand-primary text-brand-white text-[11px] uppercase">
                 Confirm
               </button>
             </div>
@@ -1485,9 +1502,9 @@ export default function App() {
       )}
 
       {selectedOrder && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-[#171717]/40">
-          <div className="w-full max-w-md bg-[#FFFFFF] h-full border-l border-[#EAEAEA] p-6 space-y-5">
-            <div className="flex justify-between items-center pb-3 border-b border-[#EAEAEA]">
+        <div className="fixed inset-0 z-50 flex justify-end bg-brand-primary/40">
+          <div className="w-full max-w-md bg-brand-surface h-full border-l border-brand-border p-6 space-y-5">
+            <div className="flex justify-between items-center pb-3 border-b border-brand-border">
               <h3 className="font-semibold">{selectedOrder.orderNumber}</h3>
               <button onClick={() => setSelectedOrder(null)}>
                 <X className="w-5 h-5" />
@@ -1499,13 +1516,13 @@ export default function App() {
               <p>Amount: {formatINR(selectedOrder.amount)}</p>
             </div>
             <div className="space-y-2">
-              <label className="block text-[10px] uppercase tracking-[0.12em] text-[#777777]">
+              <label className="block text-[10px] uppercase tracking-[0.12em] text-brand-muted">
                 Override Order Status
               </label>
               <select
                 value={selectedOrder.status}
                 onChange={(e) => updateOrderStatus(selectedOrder.id, e.target.value as OrderStatus)}
-                className="w-full px-3 py-2 border border-[#EAEAEA] bg-[#FFFFFF] text-[12px]"
+                className="w-full px-3 py-2 border border-brand-border bg-brand-surface text-[12px]"
               >
                 {['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled', 'Refunded'].map((s) => (
                   <option key={s} value={s}>{s}</option>
@@ -1517,9 +1534,9 @@ export default function App() {
       )}
 
       {inspectVendor && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#171717]/50">
-          <div className="bg-[#FFFFFF] border border-[#171717] max-w-md w-full p-6 space-y-4 text-[12px]">
-            <div className="flex justify-between items-center pb-2 border-b border-[#EAEAEA]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-primary/50">
+          <div className="bg-brand-surface border border-brand-primary max-w-md w-full p-6 space-y-4 text-[12px]">
+            <div className="flex justify-between items-center pb-2 border-b border-brand-border">
               <h3 className="font-semibold uppercase tracking-[0.1em]">{inspectVendor.name}</h3>
               <button onClick={() => setInspectVendor(null)}>
                 <X className="w-4 h-4" />
@@ -1535,8 +1552,8 @@ export default function App() {
 
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 flex lg:hidden">
-          <div className="fixed inset-0 bg-[#171717]/40" onClick={() => setMobileMenuOpen(false)} />
-          <div className="relative z-10 w-64 bg-[#171717] text-[#FFFFFF] h-full p-4 overflow-y-auto space-y-2">
+          <div className="fixed inset-0 bg-brand-primary/40" onClick={() => setMobileMenuOpen(false)} />
+          <div className="relative z-10 w-64 bg-brand-primary text-brand-white h-full p-4 overflow-y-auto space-y-2">
             {SIDEBAR_GROUPS.flatMap((g) => g.items).map((item) => (
               <button
                 key={item.id}
@@ -1545,7 +1562,7 @@ export default function App() {
                   setMobileMenuOpen(false);
                 }}
                 className={`w-full flex items-center gap-2 px-3 py-2 text-[12px] ${
-                  activeTab === item.id ? 'bg-[#B89B72]' : ''
+                  activeTab === item.id ? 'bg-brand-primary-hover' : ''
                 }`}
               >
                 {item.icon} {item.title}
@@ -1557,7 +1574,7 @@ export default function App() {
 
       <div className="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none">
         {toasts.map((t) => (
-          <div key={t.id} className="bg-[#171717] text-[#FFFFFF] px-4 py-2.5 text-[11px] uppercase tracking-[0.1em] shadow-md">
+          <div key={t.id} className="bg-brand-primary text-brand-white px-4 py-2.5 text-[11px] uppercase tracking-[0.1em] shadow-md">
             {t.text}
           </div>
         ))}
