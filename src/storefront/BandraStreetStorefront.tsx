@@ -140,27 +140,6 @@ const CATEGORY_CARDS = [
   { title: 'Accessories', subtitle: 'Leather Bags & Footwear', filter: 'Accessories', img: IMG_ACC_BAG },
 ];
 
-const CURATED_COLLECTIONS = [
-  {
-    title: 'The Cashmere Edit',
-    subtitle: 'Grade-A Mongolian Cashmere & Merino',
-    img: IMG_W_KNIT,
-    filter: 'Women',
-  },
-  {
-    title: 'Architectural Tailoring',
-    subtitle: 'Virgin Wool Suits & Unstructured Blazers',
-    img: IMG_M_SUIT,
-    filter: 'Men',
-  },
-  {
-    title: 'Florentine Leather & Objet',
-    subtitle: 'Box Calfskin Bags, Loafers & Como Silk',
-    img: IMG_ACC_LOAFER,
-    filter: 'Accessories',
-  },
-];
-
 const PRODUCTS: Product[] = [
   {
     id: 'mm-01',
@@ -1869,41 +1848,6 @@ export default function App() {
               </div>
             </section>
 
-            {/* 9. Curated Fashion Collections */}
-            <section className="max-w-[1600px] mx-auto px-4 sm:px-8 pb-16 sm:pb-24">
-              <div className="mb-8">
-                <p className="font-sans-ed text-[11px] uppercase tracking-[0.14em] text-brand-muted mb-1">
-                  Seasonal Capsules
-                </p>
-                <h2 className="font-serif-ed text-3xl sm:text-4xl font-light">
-                  Curated Fashion Collections
-                </h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {CURATED_COLLECTIONS.map((col) => (
-                  <button
-                    key={col.title}
-                    onClick={() => navigateToShop(col.filter)}
-                    className="group border border-brand-border text-left bg-brand-surface overflow-hidden"
-                  >
-                    <div className="aspect-[4/3] overflow-hidden bg-brand-bg">
-                      <img
-                        src={col.img}
-                        alt={col.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                    </div>
-                    <div className="p-6 flex items-center justify-between">
-                      <div>
-                        <h3 className="font-serif-ed text-2xl font-light">{col.title}</h3>
-                        <p className="text-[12px] text-brand-muted mt-1">{col.subtitle}</p>
-                      </div>
-                      <ArrowRight className="w-4 h-4 text-brand-ink group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </section>
           </div>
         )}
 
